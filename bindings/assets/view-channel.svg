@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1412" width="960" height="1412" role="img" aria-label="BindJS View channel walkthrough">
+<rect x="0.5" y="0.5" width="959" height="1411" rx="10" fill="#ffffff" stroke="#d5dce0"/>
+<line x1="240" y1="140" x2="240" y2="1366" stroke="#d5dce0" stroke-width="1"/>
+<line x1="480" y1="140" x2="480" y2="1366" stroke="#d5dce0" stroke-width="1"/>
+<line x1="720" y1="140" x2="720" y2="1366" stroke="#d5dce0" stroke-width="1"/>
+<text x="28" y="42" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" letter-spacing="-0.2" fill="#a8461d">BindJS binding · View channel, every call</text>
+<text x="28" y="61" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="11.5" fill="#5c6771">What a host that advertises application/bindjs+json sends and receives, from initialize to the first render. Each step's JSON is in the walkthrough.</text>
+<rect x="198.0" y="84" width="84.0" height="26" rx="13" fill="#f5f7f8" stroke="#d5dce0"/>
+<text x="240" y="101" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" letter-spacing="0.9" fill="#12171c">VIEW</text>
+<text x="240" y="125" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10" fill="#5c6771">isolated JS context + native renderer</text>
+<rect x="438.0" y="84" width="84.0" height="26" rx="13" fill="#f5f7f8" stroke="#d5dce0"/>
+<text x="480" y="101" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" letter-spacing="0.9" fill="#12171c">HOST</text>
+<text x="480" y="125" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10" fill="#5c6771">any MCP Apps host that renders BindJS</text>
+<rect x="668.0" y="84" width="104.0" height="26" rx="13" fill="#f5f7f8" stroke="#d5dce0"/>
+<text x="720" y="101" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" letter-spacing="0.9" fill="#12171c">MCP SERVER</text>
+<text x="720" y="125" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10" fill="#5c6771">any server that serves BindJS Views</text>
+<text x="26" y="158" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.5" fill="#5c6771">1 · HANDSHAKE</text>
+<line x1="133.0" y1="154" x2="934" y2="154" stroke="#e4e9ec" stroke-width="1"/>
+<line x1="480" y1="198" x2="712" y2="198" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 198 L 712 193.8 L 712 202.2 Z" fill="#a8461d"/>
+<text x="600.0" y="189" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">initialize</text>
+<text x="600.0" y="213" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">mimeTypes: [&quot;application/bindjs+json&quot;, &quot;text/html;profile=mcp-app&quot;]</text>
+<line x1="720" y1="242" x2="488" y2="242" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 242 L 488 237.8 L 488 246.2 Z" fill="#a8461d"/>
+<text x="600.0" y="233" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">initialize result</text>
+<text x="600.0" y="257" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">server capabilities; nothing BindJS-specific</text>
+<text x="26" y="294" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.5" fill="#5c6771">2 · DISCOVERY</text>
+<line x1="133.0" y1="290" x2="934" y2="290" stroke="#e4e9ec" stroke-width="1"/>
+<line x1="480" y1="334" x2="712" y2="334" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 334 L 712 329.8 L 712 338.2 Z" fill="#a8461d"/>
+<text x="600.0" y="325" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">tools/list</text>
+<line x1="720" y1="368" x2="488" y2="368" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 368 L 488 363.8 L 488 372.2 Z" fill="#a8461d"/>
+<text x="600.0" y="359" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">product_card</text>
+<text x="600.0" y="383" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">inputSchema from the component's properties · _meta.ui.resourceUri</text>
+<line x1="480" y1="412" x2="712" y2="412" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 412 L 712 407.8 L 712 416.2 Z" fill="#a8461d"/>
+<text x="600.0" y="403" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">resources/list</text>
+<line x1="720" y1="446" x2="488" y2="446" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 446 L 488 441.8 L 488 450.2 Z" fill="#a8461d"/>
+<text x="600.0" y="437" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">the View and its package</text>
+<text x="600.0" y="461" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">ui://shop/views/product-card (bindjs+json) · ui://shop/packages/product-ui@12 (bindjs-package+json)</text>
+<text x="480" y="481" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">review before fetching</text>
+<text x="480" y="505" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">_meta.ui.bindjs: spec · component · package · sha256 · size · contentUrl; _meta.ui.csp</text>
+<text x="26" y="542" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.5" fill="#5c6771">3 · FETCH AND VERIFY</text>
+<line x1="182.0" y1="538" x2="934" y2="538" stroke="#e4e9ec" stroke-width="1"/>
+<line x1="480" y1="582" x2="712" y2="582" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 582 L 712 577.8 L 712 586.2 Z" fill="#a8461d"/>
+<text x="600.0" y="573" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">resources/read ui://shop/views/product-card</text>
+<line x1="720" y1="616" x2="488" y2="616" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 616 L 488 611.8 L 488 620.2 Z" fill="#a8461d"/>
+<text x="600.0" y="607" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">view document</text>
+<text x="600.0" y="631" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">{ spec, component }; package by reference in _meta</text>
+<line x1="480" y1="660" x2="712" y2="660" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 660 L 712 655.8 L 712 664.2 Z" fill="#a8461d"/>
+<text x="600.0" y="651" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">resources/read ui://shop/packages/product-ui@12</text>
+<line x1="720" y1="694" x2="488" y2="694" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 694 L 488 689.8 L 488 698.2 Z" fill="#a8461d"/>
+<text x="600.0" y="685" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">package document</text>
+<text x="600.0" y="709" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">{ name, version, spec, components, entry }</text>
+<text x="480" y="729" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">or GET contentUrl from the CDN</text>
+<text x="480" y="753" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">same bytes, edge-cached, shared across sessions and hosts</text>
+<text x="480" y="773" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">sha256 matches _meta · size matches</text>
+<text x="480" y="797" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">mismatch: do not execute. Held locally already: skip the fetch</text>
+<line x1="480" y1="826" x2="248" y2="826" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 240 826 L 248 821.8 L 248 830.2 Z" fill="#a8461d"/>
+<text x="360.0" y="817" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">create context · register package</text>
+<text x="360.0" y="841" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">no DOM, no fetch, no filesystem; timers and console only</text>
+<line x1="240" y1="870" x2="472" y2="870" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 480 870 L 472 865.8 L 472 874.2 Z" fill="#a8461d"/>
+<text x="360.0" y="861" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">ui/initialize</text>
+<text x="360.0" y="885" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">in-process transport; same JSON-RPC vocabulary</text>
+<line x1="480" y1="914" x2="248" y2="914" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 240 914 L 248 909.8 L 248 918.2 Z" fill="#a8461d"/>
+<text x="360.0" y="905" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">hostContext</text>
+<text x="360.0" y="929" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">theme → colorScheme · locale · containerDimensions → screen</text>
+<text x="26" y="966" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.5" fill="#5c6771">4 · CALL AND RENDER</text>
+<line x1="175.0" y1="962" x2="934" y2="962" stroke="#e4e9ec" stroke-width="1"/>
+<line x1="480" y1="1006" x2="712" y2="1006" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 720 1006 L 712 1001.8 L 712 1010.2 Z" fill="#a8461d"/>
+<text x="600.0" y="997" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">tools/call product_card(args)</text>
+<text x="600.0" y="1021" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">the model authored the arguments</text>
+<line x1="480" y1="1050" x2="248" y2="1050" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 240 1050 L 248 1045.8 L 248 1054.2 Z" fill="#a8461d"/>
+<text x="360.0" y="1041" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">ui/notifications/tool-input-partial</text>
+<text x="360.0" y="1065" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">props as they stream; components tolerate absent props</text>
+<line x1="720" y1="1094" x2="488" y2="1094" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 480 1094 L 488 1089.8 L 488 1098.2 Z" fill="#a8461d"/>
+<text x="600.0" y="1085" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">result</text>
+<text x="600.0" y="1109" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">text for the model</text>
+<line x1="480" y1="1138" x2="248" y2="1138" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 240 1138 L 248 1133.8 L 248 1142.2 Z" fill="#a8461d"/>
+<text x="360.0" y="1129" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">ui/notifications/tool-input</text>
+<text x="360.0" y="1153" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">final props, validated against inputSchema</text>
+<rect x="55.1" y="1168" width="369.8" height="30" rx="15" fill="#a8461d"/>
+<text x="240" y="1187.5" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" font-weight="600" letter-spacing="0.2" fill="#ffffff">ProductCard(props) · SwiftUI / Compose / React</text>
+<text x="26" y="1244" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.5" fill="#5c6771">5 · INTERACTION</text>
+<line x1="147.0" y1="1240" x2="934" y2="1240" stroke="#e4e9ec" stroke-width="1"/>
+<line x1="240" y1="1284" x2="472" y2="1284" stroke="#a8461d" stroke-width="1.25"/>
+<path d="M 480 1284 L 472 1279.8 L 472 1288.2 Z" fill="#a8461d"/>
+<text x="360.0" y="1275" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">tools/call · ui/message · ui/update-model-context · ui/open-link</text>
+<text x="360.0" y="1299" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">only through the bridge; subject to tool visibility</text>
+<line x1="480" y1="1328" x2="248" y2="1328" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
+<path d="M 240 1328 L 248 1323.8 L 248 1332.2 Z" fill="#a8461d"/>
+<text x="360.0" y="1319" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">ui/notifications/host-context-changed</text>
+<text x="360.0" y="1343" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">theme or size changes re-render through the environment</text>
+<line x1="28" y1="1388" x2="54" y2="1388" stroke="#5c6771"/><text x="62" y="1392" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="0.6" fill="#5c6771">REQUEST</text>
+<line x1="140" y1="1388" x2="166" y2="1388" stroke="#5c6771" stroke-dasharray="5 4"/><text x="174" y="1392" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="0.6" fill="#5c6771">RESPONSE</text>
+</svg>

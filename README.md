@@ -11,6 +11,7 @@ A BindJS component is written in JavaScript against a SwiftUI-shaped API. A runt
 | Path | Contents |
 |---|---|
 | `spec/` | The BindJS Specification 1.0: introduction and architecture, concepts, properties (including the agent contract), components and lookup, hooks, runtime globals and environment, component reference, modifier reference, AST and host SPI, packages, and the agent surfaces overview. |
+| `types/` | `bindjs.d.ts` — the authoring surface as TypeScript declarations, the normative machine-readable form of chapters 03 to 08. Every declaration carries `@tier` / `@module` / `@platform` / `@since` tags matching the frozen sets in `conformance/`. |
 | `bindings/mcp-apps.md` | The `application/bindjs+json` View content type for MCP Apps (SEP-1865): View and instance documents, `_meta.ui.bindjs`, package resources, the sandbox contract, the bridge binding. `bindings/mcp-apps-walkthrough.md` follows one tool through every call, with diagrams. |
 | `bindings/a2ui.md` | BindJS packages as A2UI catalogs: component contract, data binding, actions, the catalog manifest proposal. |
 | `conformance/` | What "BindJS 1.0" means for an implementation: the frozen Core sets, three conformance levels, the statement format, and the statements for the React, SwiftUI, and Jetpack Compose renderers. |

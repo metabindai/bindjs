@@ -1,0 +1,16 @@
+/* The app owns the viewport: nothing scrolls but the panes themselves. */
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Radix renders <Theme> as a div, which has to carry the height for the flex chain. */
+.radix-themes {
+    height: 100%;
+}

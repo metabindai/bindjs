@@ -1,0 +1,114 @@
+/*
+ * The grid is the app's ground, not one pane's decoration.
+ *
+ * Drawn with repeating gradients rather than an image so it stays crisp at any zoom and
+ * costs nothing to load. The chrome — sidebar, detail, bridge log — floats on it as cards;
+ * the rendered View sits on it directly, so the stage reads as the background continuing
+ * rather than as a fourth panel.
+ */
+.app {
+    --grid-line: rgba(0, 0, 0, 0.05);
+    --grid-line-strong: rgba(0, 0, 0, 0.09);
+    --grid-ground: var(--gray-2);
+    /* The pool of light sits under the View, off to the right, not behind the cards. */
+    --grid-glow: rgba(255, 255, 255, 0.8);
+
+    height: 100%;
+    background-color: var(--grid-ground);
+    background-image:
+        radial-gradient(ellipse 42% 55% at 76% 42%, var(--grid-glow), transparent 70%),
+        repeating-linear-gradient(to right, var(--grid-line-strong) 0 1px, transparent 1px 96px),
+        repeating-linear-gradient(to bottom, var(--grid-line-strong) 0 1px, transparent 1px 96px),
+        repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 12px),
+        repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 12px);
+    background-position: center center;
+}
+
+.dark .app,
+.dark-theme .app {
+    --grid-line: rgba(255, 255, 255, 0.04);
+    --grid-line-strong: rgba(255, 255, 255, 0.075);
+    --grid-glow: rgba(120, 150, 200, 0.12);
+}
+
+/* Chrome floats. Solid, so the grid does not read through the content. */
+.card {
+    background: var(--color-panel-solid);
+    border: 1px solid var(--gray-a4);
+    border-radius: var(--radius-6);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        0 8px 24px -10px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+}
+
+/* The rendered View: lifted off the grid so it reads as the subject, not as chrome. */
+.stage-frame {
+    width: min(420px, 100%);
+    border-radius: var(--radius-6);
+    background: var(--color-panel-solid);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.07),
+        0 18px 44px -12px rgba(0, 0, 0, 0.26);
+}
+
+.stage-empty {
+    max-width: 320px;
+    border: 1px dashed var(--gray-a6);
+    border-radius: var(--radius-6);
+    background: var(--color-panel-translucent);
+    backdrop-filter: blur(3px);
+}
+
+/* A row in the sidebar list. */
+.row {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-3);
+    padding: 8px 10px;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+}
+
+.row:hover {
+    background: var(--gray-a3);
+}
+
+.row[data-selected='true'] {
+    background: var(--accent-a3);
+    box-shadow: inset 0 0 0 1px var(--accent-a6);
+}
+
+/* A badge that navigates. Reset the button so only the badge inside is visible. */
+.pill-button {
+    display: inline-flex;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border-radius: 999px;
+}
+
+.pill-button:hover {
+    opacity: 0.75;
+}
+
+.pill-button:focus-visible {
+    outline: 2px solid var(--focus-8);
+    outline-offset: 2px;
+}
+
+.code-block {
+    background: var(--gray-a2);
+    border-radius: var(--radius-2);
+    font-family: var(--code-font-family);
+    font-size: 11px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+}

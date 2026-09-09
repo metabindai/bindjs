@@ -1,0 +1,79 @@
+[
+  {
+    "sku": "heritage-walnut-coffee-table",
+    "name": "Heritage Walnut Coffee Table",
+    "price": "789.00",
+    "colors": [
+      "#5a3a25",
+      "#7a4d30",
+      "#b08463",
+      "#cec7b8"
+    ],
+    "image": "heritage-walnut-coffee-table.jpg",
+    "description": "Low-slung walnut coffee table with softly rounded corners and four splayed, tapered solid-walnut legs. Mid-century modern in proportion with a rich, warm grain."
+  },
+  {
+    "sku": "savile-walnut-coffee-table",
+    "name": "Savile Walnut Coffee Table",
+    "price": "1190.00",
+    "colors": [
+      "#6a4530",
+      "#8a6040",
+      "#c9a45a",
+      "#cfc8b8"
+    ],
+    "image": "savile-walnut-coffee-table.jpg",
+    "description": "Walnut coffee table with brass inlay detailing along the top edges, a slatted walnut magazine shelf beneath, and tapered legs finished with polished brass sabots. Luxe mid-century styling, retail-grade catalogue piece."
+  },
+  {
+    "sku": "petal-boucle-accent-chair",
+    "name": "Petal Boucle Accent Chair",
+    "price": "1190.00",
+    "colors": [
+      "#ece6d4",
+      "#d9cfb8",
+      "#4a2f1e",
+      "#7a5438"
+    ],
+    "image": "petal-boucle-accent-chair.jpg",
+    "description": "Low-profile mid-century boucle wingback accent chair in textured ivory boucle, seated on four splayed solid walnut legs. Compact, sculptural occasional seating for lounges, reading corners and bedrooms."
+  },
+  {
+    "sku": "contour-lounge-chair",
+    "name": "Contour Lounge Chair",
+    "price": "949.00",
+    "colors": [
+      "#6b6c3f",
+      "#7a7b4a",
+      "#d9c9a3",
+      "#c9c0ae"
+    ],
+    "image": "contour-lounge-chair.jpg",
+    "description": "Contemporary lounge chair with a curved bent-ply natural birch frame and generous olive-green upholstered seat and back cushions. Sculptural, light and modern with a warm organic palette."
+  },
+  {
+    "sku": "musu-stoneware-bowls",
+    "name": "Musu Stoneware Bowls",
+    "price": "149.00",
+    "colors": [
+      "#d9cdb4",
+      "#b8ad94",
+      "#8a7c64",
+      "#3a3028"
+    ],
+    "image": "musu-stoneware-bowls.jpg",
+    "description": "Nested set of four hand-thrown stoneware bowls in a speckled oatmeal glaze with exposed sandy foot rings. Artisanal, imperfect forms for everyday serving and prep."
+  },
+  {
+    "sku": "woven-dusk-throw",
+    "name": "Woven Dusk Throw",
+    "price": "119.00",
+    "colors": [
+      "#ece3cf",
+      "#d8cdb6",
+      "#bfb39c"
+    ],
+    "image": "woven-dusk-throw.jpg",
+    "description": "Chunky waffle-knit throw blanket in soft cream cotton with a loose, tactile weave. Casual neutral layering piece for sofas and beds in Japandi, coastal and farmhouse schemes."
+  }
+]

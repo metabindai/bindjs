@@ -16,7 +16,7 @@ A BindJS component is written in JavaScript against a SwiftUI-shaped API. A runt
 | `conformance/` | What "BindJS 1.0" means for an implementation: the frozen Core sets, three conformance levels, the statement format, and the statements for the React, SwiftUI, and Jetpack Compose renderers. |
 | `registry/renderers.md` | Known runtimes, renderers, and hosts. |
 | `proposals/` | BindJS Enhancement Proposals (BEPs). BEP-0001 is the process; BEP-0002 is the first change. |
-| `examples/` | `quickstart` (one component, three platforms) and `mcp-server` (serve a BindJS View from any MCP server). Planned for the first release; see each folder's README. |
+| `examples/` | `mcp-server`: a working MCP server serving two BindJS Views, with each tool derived from its entry component, and a script that prints every message of the walkthrough. `mcp-client`: a browser MCP inspector for it — negotiation, `_meta.ui.bindjs`, digest verification, and running a tool from a schema-built form. `quickstart` (one component, three platforms) is planned for the first release. |
 
 ## Status
 

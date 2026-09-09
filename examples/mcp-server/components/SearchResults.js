@@ -90,6 +90,7 @@ exports.default = defineComponent({
         title: 'Search results',
         description: 'Search the catalogue and show the matches, each tappable to open its card.',
         category: 'Commerce',
+        annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
     },
     properties,
     body,

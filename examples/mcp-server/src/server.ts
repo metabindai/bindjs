@@ -75,6 +75,28 @@ const bindjs = buildPackage({ name: 'com.shop.product-ui', version: '12.0.0', sp
 const lookup: Lookup = (name) => bindjs.declarations.get(name)
 
 /**
+ * A View's `_meta.ui.bindjs` (binding section 3).
+ *
+ * It goes on the listing *and* on the `resources/read` content item, because a host can
+ * arrive either way: `resources/list`, or straight from a tool's `_meta.ui.resourceUri`
+ * to `resources/read`. Section 2.1 requires exactly one of an inline `package` or this
+ * `package` reference to be present, and the View document carries no inline package, so
+ * a read without this block would hand back a View whose package cannot be found.
+ *
+ * `sha256` and `size` describe the *package*, not the View. On the listing they duplicate
+ * what the package's own entry already says; on a read they are the only copy.
+ */
+function viewMeta(component: string) {
+    return {
+        spec: bindjs.spec,
+        component,
+        package: PACKAGE_URI,
+        sha256: bindjs.sha256,
+        size: bindjs.size,
+    }
+}
+
+/**
  * A View names an entry component (binding 2.1), so each rendering tool gets its own.
  * What they share is the package: both reference `ui://shop/packages/product-ui@12`, so a
  * host fetches and verifies those bytes once. The View is the entry point; the package is
@@ -183,13 +205,7 @@ export function createServer(): Server {
                               // it needs no origin here.
                               csp: { connectDomains: [API_ORIGIN], resourceDomains: [ASSET_ORIGIN] },
 
-                              bindjs: {
-                                  spec: bindjs.spec,
-                                  component: view.component,
-                                  package: PACKAGE_URI,
-                                  sha256: bindjs.sha256,
-                                  size: bindjs.size,
-                              },
+                              bindjs: viewMeta(view.component),
                           },
                       },
                   })),
@@ -228,6 +244,7 @@ export function createServer(): Server {
                         uri: view.uri,
                         mimeType: VIEW_MIME_TYPE,
                         text: JSON.stringify({ spec: bindjs.spec, component: view.component }),
+                        _meta: { ui: { bindjs: viewMeta(view.component) } },
                     },
                 ],
             }

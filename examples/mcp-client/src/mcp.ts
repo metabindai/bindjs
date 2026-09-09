@@ -96,16 +96,26 @@ export async function connect(declared: string[]): Promise<Connection> {
     }
 }
 
-/** Reads a resource and returns its single text body. */
-export async function readText(client: Client, uri: string): Promise<string> {
+/**
+ * Reads a resource, returning both halves of the content item.
+ *
+ * The body is not the whole story: a View document is `{ spec, component }` and says
+ * nothing about which package implements it. The package reference is in `_meta` beside
+ * the text, and binding 2.1 accepts either that or an inline `package` in the body, so a
+ * client that reads only `text` cannot resolve a View that uses the reference form.
+ */
+export async function readResource(
+    client: Client,
+    uri: string
+): Promise<{ text: string; meta: UiMeta | undefined; result: unknown }> {
     const result = await client.readResource({ uri })
-    const first = result.contents[0] as { text?: string } | undefined
+    const first = result.contents[0] as { text?: string; _meta?: unknown } | undefined
 
     if (typeof first?.text !== 'string') {
         throw new Error(`${uri} has no text body`)
     }
 
-    return first.text
+    return { text: first.text, meta: uiMeta(first), result }
 }
 
 /**

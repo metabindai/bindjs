@@ -36,7 +36,16 @@ import {
 import type { Resource, Tool } from '@modelcontextprotocol/sdk/types.js'
 
 import { BindJSView } from './BindJSView'
-import { connect, PACKAGE_MIME_TYPE, readText, sha256, uiMeta, VIEW_MIME_TYPE, type Connection } from './mcp'
+import {
+    connect,
+    PACKAGE_MIME_TYPE,
+    readResource,
+    sha256,
+    uiMeta,
+    VIEW_MIME_TYPE,
+    type Connection,
+    type UiMeta,
+} from './mcp'
 
 import { initialValues, ToolForm, toArguments, type FieldValues, type JsonSchema } from './ToolForm'
 
@@ -60,6 +69,31 @@ function Json({ value, maxHeight }: { value: unknown; maxHeight?: number }) {
 }
 
 type Pane = 'tools' | 'resources' | 'session'
+
+/**
+ * A read response, with an over-long `text` shortened.
+ *
+ * The package body is thirteen kilobytes of component source on one line, which buries the
+ * rest of the message. Everything else is left exactly as it arrived — including `text`
+ * being a *string*, because the digest is computed over those bytes and not over a
+ * re-serialization of the object inside them.
+ */
+function elideSources(result: unknown): unknown {
+    const contents = (result as { contents?: { text?: string }[] })?.contents
+
+    if (!Array.isArray(contents)) {
+        return result
+    }
+
+    return {
+        ...(result as object),
+        contents: contents.map((item) =>
+            typeof item.text === 'string' && item.text.length > 600
+                ? { ...item, text: `${item.text.slice(0, 600)}… (${item.text.length} chars)` }
+                : item
+        ),
+    }
+}
 
 /**
  * What the handshake settled, as inspectable entries.
@@ -128,6 +162,42 @@ function sessionEntries(connection: Connection, pkg: { body: string; verified: b
     return entries
 }
 
+/**
+ * What the digest on a resource actually claims.
+ *
+ * On a package resource, `sha256` is over that resource's own body, so reading it is a
+ * real integrity check (binding section 4). On a *View*, `sha256` describes the package
+ * the View references, not the View's own body — so hashing the body and comparing would
+ * always disagree. There the useful check is whether the View points at the package this
+ * client already fetched and verified.
+ */
+async function verdict(
+    resource: Resource,
+    body: string,
+    declared: UiMeta['bindjs'],
+    pkg: { body: string; verified: boolean } | null
+): Promise<{ ok: boolean | null; text: string }> {
+    if (!declared?.sha256) {
+        return { ok: null, text: 'no digest declared' }
+    }
+
+    if (resource.mimeType === PACKAGE_MIME_TYPE) {
+        const actual = await sha256(body)
+
+        return actual === declared.sha256
+            ? { ok: true, text: `sha256 matches (${actual.slice(0, 16)}…)` }
+            : { ok: false, text: 'sha256 MISMATCH — do not execute' }
+    }
+
+    if (!pkg) {
+        return { ok: null, text: `digest describes ${declared.package ?? 'the package'}, not this View` }
+    }
+
+    return (await sha256(pkg.body)) === declared.sha256
+        ? { ok: true, text: 'references the package this client holds, digest matches' }
+        : { ok: false, text: 'references a package digest this client does not hold' }
+}
+
 function Labelled({ label, children }: { label: string; children: React.ReactNode }) {
     return (
         <Box>
@@ -145,6 +215,13 @@ export function App() {
     const [error, setError] = useState<string | null>(null)
     const [busy, setBusy] = useState(true)
 
+    /*
+     * What is in flight, if anything. `busy` drives the spinner; this disables just the
+     * one control that started the request, so a slow connect cannot leave Read or Call
+     * permanently greyed out.
+     */
+    const [pending, setPending] = useState<'read' | 'call' | null>(null)
+
     const [pane, setPane] = useState<Pane>('tools')
     const [tool, setTool] = useState<Tool | null>(null)
     const [resource, setResource] = useState<Resource | null>(null)
@@ -152,7 +229,12 @@ export function App() {
 
     const [values, setValues] = useState<FieldValues>({})
     const [result, setResult] = useState<unknown>(null)
-    const [reading, setReading] = useState<{ uri: string; body: string; verified: string } | null>(null)
+    const [reading, setReading] = useState<{
+        uri: string
+        result: unknown
+        meta: UiMeta | undefined
+        verified: { ok: boolean | null; text: string }
+    } | null>(null)
 
     /** The verified package, and what to draw from it. */
     const [pkg, setPkg] = useState<{ body: string; verified: boolean } | null>(null)
@@ -189,7 +271,7 @@ export function App() {
             const entry = next.resources.find((candidate) => candidate.mimeType === PACKAGE_MIME_TYPE)
 
             if (entry) {
-                const body = await readText(next.client, entry.uri)
+                const { text: body } = await readResource(next.client, entry.uri)
                 const declared = uiMeta(entry)?.bindjs?.sha256
 
                 setPkg({ body, verified: declared === (await sha256(body)) })
@@ -199,6 +281,7 @@ export function App() {
             setError(cause instanceof Error ? cause.message : String(cause))
         } finally {
             setBusy(false)
+            setPending(null)
         }
     }, [])
 
@@ -231,6 +314,7 @@ export function App() {
         }
 
         setBusy(true)
+        setPending('call')
         setError(null)
 
         try {
@@ -253,6 +337,7 @@ export function App() {
             setError(cause instanceof Error ? cause.message : String(cause))
         } finally {
             setBusy(false)
+            setPending(null)
         }
     }
 
@@ -263,26 +348,26 @@ export function App() {
         }
 
         setBusy(true)
+        setPending('read')
         setError(null)
 
         try {
-            const body = await readText(connection.client, which.uri)
-            const declared = uiMeta(which)?.bindjs?.sha256
-            const actual = await sha256(body)
+            const { text: body, meta, result } = await readResource(connection.client, which.uri)
+
+            // The content item's own `_meta` wins over the listing's (binding section 3).
+            const declared = (meta ?? uiMeta(which))?.bindjs
 
             setReading({
                 uri: which.uri,
-                body,
-                verified: !declared
-                    ? 'no digest declared'
-                    : declared === actual
-                      ? `sha256 matches (${actual.slice(0, 16)}…)`
-                      : 'sha256 MISMATCH — do not execute',
+                result,
+                meta: meta ?? uiMeta(which),
+                verified: await verdict(which, body, declared, pkg),
             })
         } catch (cause) {
             setError(cause instanceof Error ? cause.message : String(cause))
         } finally {
             setBusy(false)
+            setPending(null)
         }
     }
 
@@ -474,10 +559,11 @@ export function App() {
                                         <Text as="p" size="2" color="gray" mt="1">
                                             {tool.description}
                                         </Text>
-                                        {/* The View this tool renders into, and a way to
-                                            go read it. */}
-                                        {uiMeta(tool)?.resourceUri && (
-                                            <Flex mt="2">
+                                        {/* The View this tool renders into and a way to go
+                                            read it, then the hints the server sent about
+                                            how the tool behaves. */}
+                                        <Flex mt="2" gap="2" wrap="wrap" align="center">
+                                            {uiMeta(tool)?.resourceUri && (
                                                 <button
                                                     className="pill-button"
                                                     title="Show this resource"
@@ -487,8 +573,22 @@ export function App() {
                                                         {uiMeta(tool)?.resourceUri}
                                                     </Badge>
                                                 </button>
-                                            </Flex>
-                                        )}
+                                            )}
+
+                                            {Object.entries(tool.annotations ?? {})
+                                                .filter(([, value]) => typeof value === 'boolean')
+                                                .map(([name, value]) => (
+                                                    <Badge
+                                                        key={name}
+                                                        size="1"
+                                                        variant="soft"
+                                                        radius="full"
+                                                        color={value ? undefined : 'gray'}
+                                                    >
+                                                        {value ? name : `not ${name}`}
+                                                    </Badge>
+                                                ))}
+                                        </Flex>
                                     </Box>
 
                                     <Separator size="4" />
@@ -501,7 +601,7 @@ export function App() {
                                         onChange={setValues}
                                     />
 
-                                    <Button onClick={() => void run()} disabled={busy}>
+                                    <Button onClick={() => void run()} disabled={pending === 'call'}>
                                         Call tool
                                     </Button>
 
@@ -511,8 +611,10 @@ export function App() {
                                         </Labelled>
                                     )}
 
-                                    <Labelled label="inputSchema">
-                                        <Json value={tool.inputSchema} maxHeight={220} />
+                                    {/* The listing entry as it arrived: schemas,
+                                        annotations and `_meta` in one payload. */}
+                                    <Labelled label="tools/list entry">
+                                        <Json value={tool} maxHeight={340} />
                                     </Labelled>
                                 </Flex>
                             ) : (
@@ -532,22 +634,39 @@ export function App() {
                                     </Text>
                                 </Box>
 
-                                {/* Everything a host can act on before it fetches anything. */}
-                                <Labelled label="_meta.ui">
-                                    <Json value={uiMeta(resource)} maxHeight={240} />
+                                {/* Everything a host can act on before it fetches
+                                    anything, `_meta.ui` included. */}
+                                <Labelled label="resources/list entry">
+                                    <Json value={resource} maxHeight={300} />
                                 </Labelled>
 
-                                <Button variant="soft" onClick={() => void read(resource)} disabled={busy}>
+                                <Button variant="soft" onClick={() => void read(resource)} disabled={pending === 'read'}>
                                     Read resource
                                 </Button>
 
                                 {reading?.uri === resource.uri && (
                                     <>
-                                        <Badge color={reading.verified.includes('MISMATCH') ? 'red' : 'grass'}>
-                                            {reading.verified}
-                                        </Badge>
-                                        <Labelled label="body">
-                                            <Json value={JSON.parse(reading.body)} maxHeight={360} />
+                                        <Flex>
+                                            <Badge
+                                                color={
+                                                    reading.verified.ok === null
+                                                        ? 'gray'
+                                                        : reading.verified.ok
+                                                          ? 'grass'
+                                                          : 'red'
+                                                }
+                                            >
+                                                {reading.verified.text}
+                                            </Badge>
+                                        </Flex>
+
+                                        {/* The whole response, as it came back. `_meta`
+                                            and `text` sit side by side in `contents[0]`,
+                                            which is the thing worth seeing: a View
+                                            document names its component and nothing else,
+                                            and the package it needs is in `_meta`. */}
+                                        <Labelled label="resources/read">
+                                            <Json value={elideSources(reading.result)} maxHeight={420} />
                                         </Labelled>
                                     </>
                                 )}

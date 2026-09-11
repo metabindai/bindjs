@@ -1,17 +1,17 @@
-# BindJS Specification 1.0, chapter 08: Modifiers Reference
+# BindJS Specification 1.0, chapter 09: Modifiers reference
 
-> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs (`proposals/`).
+> [!NOTE]
+> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs ([`proposals/`](../proposals/)).
 
-## Modifiers Reference
-
-This chapter covers BindJS animation and the modifier surface attached to every component. Hooks (`useState`, `useStore`, `useEnvironment`, `useNavigate`, `useAction`, `useMCPHost`) are documented in chapter 5; runtime globals are in chapter 6.
+This chapter covers BindJS animation and the modifier surface attached to every component. Hooks (`useState`, `useStore`, `useEnvironment`, `useNavigate`, `useAction`, `useMCPHost`) are documented in [chapter 06](06-hooks.md); runtime globals are in [chapter 07](07-runtime.md).
 
 The reference is split into two sections:
 
-- **Core** — modifiers every conforming runtime SHOULD implement. Cross-platform by design.
-- **Platform Extensions** — modifiers scoped to a specific host platform's UI vocabulary (today, all iOS / SwiftUI). Authoring code that uses these is non-portable.
+- **Core**: modifiers every conforming runtime SHOULD implement. Cross-platform by design.
+- **Platform extensions**: modifiers scoped to a specific host platform's UI vocabulary (today, all iOS / SwiftUI). Authoring code that uses these is non-portable.
 
-> The per-platform implementation status of each modifier lives in chapter 9.
+> [!NOTE]
+> The per-platform implementation status of each modifier lives in the [conformance statements](../conformance/statements/).
 
 ---
 
@@ -34,8 +34,8 @@ All animation builders return an `AnimationComponent` that supports chainable ti
 |---|---|
 | `Spring({ response, dampingFraction, blendDuration })` | Default-feel spring |
 | `InterpolatingSpring({ stiffness, damping, mass })` | Physical spring |
-| `EaseIn({ duration })` | Slow → fast |
-| `EaseOut({ duration })` | Fast → slow |
+| `EaseIn({ duration })` | Slow to fast |
+| `EaseOut({ duration })` | Fast to slow |
 | `EaseInOut({ duration })` | Slow on both ends |
 | `Linear({ duration })` | Constant speed |
 | `Bouncy({ duration, extraBounce })` | Spring with extra bounce |
@@ -57,25 +57,25 @@ withAnimation(anim, () => setAnimatedValue(100))
 
 ## Core
 
-Every component supports the universal modifier set below. Some modifiers only have effect on specific component types — for example, `.font()` and `.bold()` apply to `Text`, while `.resizable()` only applies to `Image`.
+Every component supports the universal modifier set below. Some modifiers only have effect on specific component types. For example, `.font()` and `.bold()` apply to `Text`, while `.resizable()` only applies to `Image`.
 
-## Identity
+### Identity
 
 | Modifier | Purpose |
 |---|---|
 | `.id(value)` | Stable identity for diffing and animations |
-| `.tag(value)` | Tag for selection contexts (e.g. `Picker` items) |
+| `.tag(value)` | Tag for selection contexts (for example, `Picker` items) |
 
-## Lifecycle
+### Lifecycle
 
 ```javascript
 .onAppear(() => loadData())
 .onDisappear(() => cleanup())
 ```
 
-`.onAppear` is the canonical place for fetch-on-mount — see `useMCPHost` in chapter 5 for the combined pattern with `useState`.
+`.onAppear` is the canonical place for fetch-on-mount; see `useMCPHost` in [chapter 06](06-hooks.md) for the combined pattern with `useState`.
 
-## Layout — Frame
+### Layout: frame
 
 ```javascript
 .frame({ width: 200, height: 100 })
@@ -85,7 +85,7 @@ Every component supports the universal modifier set below. Some modifiers only h
          alignment: 'center' })
 ```
 
-## Layout — Container-Relative Frame
+### Layout: container-relative frame
 
 Sizes a component relative to its nearest container.
 
@@ -95,7 +95,7 @@ Sizes a component relative to its nearest container.
 .containerRelativeFrame({ axes: 'horizontal', fraction: 0.8 })           // fractional
 ```
 
-## Layout — Padding, Offset, Stacking
+### Layout: padding, offset, and stacking
 
 ```javascript
 .padding(16)
@@ -106,7 +106,7 @@ Sizes a component relative to its nearest container.
 .layoutPriority(1)
 ```
 
-## Layout — Sizing
+### Layout: sizing
 
 ```javascript
 .aspectRatio(16 / 9, 'fit')
@@ -115,7 +115,7 @@ Sizes a component relative to its nearest container.
 .fixedSize({ horizontal: true, vertical: false })
 ```
 
-## Transforms
+### Transforms
 
 ```javascript
 .scaleEffect(1.5)
@@ -125,7 +125,7 @@ Sizes a component relative to its nearest container.
 .transformEffect({ a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 })
 ```
 
-## Appearance — Color and Style
+### Appearance: color and style
 
 ```javascript
 .opacity(0.5)
@@ -140,7 +140,7 @@ Sizes a component relative to its nearest container.
 .shadow({ radius: 10, x: 0, y: 5, color: Color('black').opacity(0.3) })
 ```
 
-## Appearance — Effects
+### Appearance: effects
 
 ```javascript
 .blur(10)
@@ -152,14 +152,14 @@ Sizes a component relative to its nearest container.
 .blendMode('multiply')                        // and screen, overlay, hue, …
 ```
 
-## Appearance — Color Scheme & Type Size
+### Appearance: color scheme and type size
 
 ```javascript
 .colorScheme('dark')
 .dynamicTypeSize('accessibility1')
 ```
 
-## Typography
+### Typography
 
 ```javascript
 .font('headline')                             // semantic style
@@ -179,7 +179,7 @@ Sizes a component relative to its nearest container.
 .multilineTextAlignment('leading')            // 'leading' | 'center' | 'trailing'
 ```
 
-## Layering — Overlay, Background
+### Layering: overlay and background
 
 ```javascript
 .overlay(Text('Badge').padding(4).background(Color('red')))
@@ -189,7 +189,7 @@ Sizes a component relative to its nearest container.
 .background({ alignment: 'bottomTrailing' }, Image({ systemName: 'star.fill' }))
 ```
 
-## Clipping & Masking
+### Clipping and masking
 
 ```javascript
 .clipped()
@@ -198,7 +198,7 @@ Sizes a component relative to its nearest container.
 .mask(Image({ name: 'gradient-mask' }))
 ```
 
-## Safe Area
+### Safe area
 
 ```javascript
 .ignoresSafeArea()                        // all regions, all edges
@@ -206,7 +206,7 @@ Sizes a component relative to its nearest container.
 .ignoresSafeArea('all', ['top', 'bottom'])
 ```
 
-## Visibility & Interaction
+### Visibility and interaction
 
 ```javascript
 .hidden()
@@ -215,7 +215,7 @@ Sizes a component relative to its nearest container.
 .textSelection('enabled')
 ```
 
-## Gestures
+### Gestures
 
 ```javascript
 .onTapGesture((location) => console.log(location))
@@ -234,7 +234,7 @@ Sizes a component relative to its nearest container.
 .onHover((isHovering) => setHovered(isHovering))
 ```
 
-## Visual Effects (geometry-aware)
+### Visual effects (geometry-aware)
 
 ```javascript
 Text('Scroll effect')
@@ -249,13 +249,13 @@ Text('Scroll effect')
 
 The builder supports `.blur(radius)`, `.opacity(amount)`, `.offset({x,y})`, `.scale(value | {x,y})`, `.transform(matrix)`, `.translation({x,y})`, `.rotation(degrees | {degrees} | {radians})`.
 
-## Context Menu
+### Context menu
 
 ```javascript
 .contextMenu([Button('Copy', () => {}), Button('Delete', () => {})])
 ```
 
-## Controls
+### Controls
 
 ```javascript
 .controlSize('large')                     // 'mini' | 'small' | 'regular' | 'large' | 'extraLarge'
@@ -263,7 +263,7 @@ The builder supports `.blur(radius)`, `.opacity(amount)`, `.offset({x,y})`, `.sc
 .buttonStyle(MyButtonStyle())
 ```
 
-## Text Input
+### Text input
 
 ```javascript
 .keyboardType('emailAddress')
@@ -276,7 +276,7 @@ const [focused, setFocused] = useState(false)
 TextField({ text, setText }).focused({ isFocused: focused, setIsFocused: setFocused })
 ```
 
-## Value Observation
+### Value observation
 
 ```javascript
 .onChange(name, ([newVal, oldVal]) => {
@@ -284,7 +284,7 @@ TextField({ text, setText }).focused({ isFocused: focused, setIsFocused: setFocu
 })
 ```
 
-## Accessibility
+### Accessibility
 
 ```javascript
 .accessibilityLabel('Play button')
@@ -295,7 +295,7 @@ TextField({ text, setText }).focused({ isFocused: focused, setIsFocused: setFocu
 
 Accessibility traits: `'isButton'`, `'isLink'`, `'isSearchField'`, `'isImage'`, `'isSelected'`, `'playsSound'`, `'isKeyboardKey'`, `'isStaticText'`, `'isSummaryElement'`, `'updatesFrequently'`, `'startsMediaSession'`, `'allowsDirectInteraction'`, `'causesPageTurn'`, `'isModal'`, `'isHeader'`.
 
-## Transitions
+### Transitions
 
 ```javascript
 .transition('opacity')
@@ -305,7 +305,7 @@ Accessibility traits: `'isButton'`, `'isLink'`, `'isSearchField'`, `'isImage'`, 
 .transition({ combined: ['opacity', 'slide'] })
 ```
 
-## Environment
+### Environment
 
 ```javascript
 .environment('colorScheme', 'dark')
@@ -318,11 +318,11 @@ Set arbitrary keys to pass context down the tree; descendants read them with `us
 
 ---
 
-## Component-specific modifiers (Core)
+### Component-specific modifiers (Core)
 
 These modifiers are only valid on specific component subclasses; they appear in the type definitions on the corresponding interface.
 
-### `Image`
+#### `Image`
 
 ```javascript
 Image({ url: '…' })
@@ -334,7 +334,7 @@ Image({ url: '…' })
   .imageScale('large')
 ```
 
-### `Shape` (Circle, Rectangle, RoundedRectangle, Ellipse, Capsule, Path)
+#### `Shape` (Circle, Rectangle, RoundedRectangle, Ellipse, Capsule, Path)
 
 ```javascript
 Circle().fill(Color('blue'))
@@ -342,7 +342,7 @@ Circle().stroke(Color('red'), 2)
 Circle().stroke({ style: LinearGradient({ colors: [Color('a'), Color('b')] }), lineWidth: 4 })
 ```
 
-### `Color`
+#### `Color`
 
 ```javascript
 Color('blue').opacity(0.5)
@@ -350,13 +350,13 @@ Color('blue').opacity(0.5)
 
 ---
 
-## Platform Extensions
+## Platform extensions
 
-These modifiers are scoped to a specific host platform's UI vocabulary. Authoring code that uses them is non-portable — guard with environment checks if you need the same component to work cross-platform.
+These modifiers are scoped to a specific host platform's UI vocabulary. Authoring code that uses them is non-portable; guard with environment checks if you need the same component to work cross-platform.
 
-## iOS / SwiftUI
+### iOS / SwiftUI
 
-### Presentation — Sheet, Cover, Detents, Quick Look
+#### Presentation: sheet, cover, detents, and Quick Look
 
 ```javascript
 const [showSheet, setShowSheet] = useState(false)
@@ -382,7 +382,7 @@ VStack([…]).quickLookPreview({
 })
 ```
 
-### Navigation Chrome
+#### Navigation chrome
 
 ```javascript
 VStack([Button('Details', () => setShowDetail(true))])
@@ -397,7 +397,7 @@ VStack([Button('Details', () => setShowDetail(true))])
 .navigationBarTitleDisplayMode('inline')   // 'large' | 'inline' | 'automatic'
 ```
 
-### Toolbar
+#### Toolbar
 
 ```javascript
 .toolbar(ToolbarItemGroup({ placement: 'topBarTrailing' }, [
@@ -408,7 +408,7 @@ VStack([Button('Details', () => setShowDetail(true))])
 .toolbarVisibility('hidden', ['navigationBar', 'tabBar'])
 ```
 
-### List Chrome
+#### List chrome
 
 ```javascript
 .listStyle('insetGrouped')               // 'automatic' | 'plain' | 'insetGrouped' | 'grouped' | 'inset' | 'sidebar'
@@ -416,7 +416,7 @@ VStack([Button('Details', () => setShowDetail(true))])
 .listRowSeparator('hidden')
 ```
 
-### Scroll Chrome
+#### Scroll chrome
 
 ```javascript
 .scrollContentBackground('hidden')
@@ -436,9 +436,9 @@ ScrollView([
 .scrollIndicators({ visibility: 'hidden', axes: 'vertical' })
 ```
 
-### Grid Cells
+#### Grid cells
 
-For use with the `Grid` Platform-Extension component (chapter 7).
+For use with the `Grid` platform extension component ([chapter 08](08-components-reference.md)).
 
 ```javascript
 GridRow([Text('Full width').gridCellColumns(3)])
@@ -447,28 +447,28 @@ GridRow([Text('Full width').gridCellColumns(3)])
 .gridCellUnsizedAxes('horizontal')
 ```
 
-### Safe Area Insets
+#### Safe area insets
 
 ```javascript
 .safeAreaInset({ edge: 'bottom' }, Toolbar(…))
 ```
 
-(`.ignoresSafeArea()` is Core; `.safeAreaInset()` — adding content alongside the safe-area boundary — is iOS-specific.)
+`.ignoresSafeArea()` is Core; `.safeAreaInset()`, which adds content alongside the safe-area boundary, is iOS-specific.
 
-### Hit-Testing Shape
+#### Hit-testing shape
 
 ```javascript
 .contentShape(Circle())                       // hit-testing shape
 ```
 
-### Liquid Glass
+#### Liquid Glass
 
 ```javascript
 .glassEffect()
 .glassEffect({ interactive: true, tint: Color('blue') })
 ```
 
-### Sensory Feedback
+#### Sensory feedback
 
 ```javascript
 .sensoryFeedback({ feedback: 'success', trigger: didSucceed })
@@ -476,7 +476,7 @@ GridRow([Text('Full width').gridCellColumns(3)])
 
 Sensory feedback values: `'impact'`, `'selection'`, `'success'`, `'warning'`, `'error'`, `'light'`, `'medium'`, `'heavy'`, `'increase'`, `'decrease'`.
 
-### Apple Accessibility Refinements
+#### Apple accessibility refinements
 
 ```javascript
 .accessibilityHint('Double tap to start playback')
@@ -484,9 +484,9 @@ Sensory feedback values: `'impact'`, `'selection'`, `'success'`, `'warning'`, `'
 .accessibilityAddTraits(['isButton', 'isHeader'])
 ```
 
-(`.accessibilityLabel`, `.accessibilityValue`, `.accessibilityHidden`, `.accessibilityRemoveTraits` are Core.)
+`.accessibilityLabel`, `.accessibilityValue`, `.accessibilityHidden`, and `.accessibilityRemoveTraits` are Core.
 
-### Text Refinements
+#### Text refinements
 
 ```javascript
 .minimumScaleFactor(0.5)        // shrink text up to 50% before truncating
@@ -498,22 +498,22 @@ Sensory feedback values: `'impact'`, `'selection'`, `'success'`, `'warning'`, `'
 .contentTransition({ countsDown: true })
 ```
 
-### Preview Naming
+#### Preview naming
 
 ```javascript
 .previewName('Default')
 ```
 
-Display name for a `previews[]` entry, used by gallery / design tools.
+Display name for a `previews[]` entry, used by gallery and design tools.
 
 ---
 
-## Top-Level Utility Functions
+## Top-level utility functions
 
 | Function | Purpose |
 |---|---|
 | `Self(props?, children?)` | Self-reference; props inferred from the component's own `properties`. |
-| `getComponentData(builder)` | `{ name, props }` — extracts the underlying component info from a builder, unwrapping modifiers. |
+| `getComponentData(builder)` | Extracts `{ name, props }` from a builder, unwrapping modifiers. |
 | `OpenURLAction(callback)` | Intercept URL-opening requests; set as an environment value. |
 | `setTimeout(cb, delayMs)` | Schedule a deferred callback. Returns an id. |
 | `clearTimeout(id)` | Cancel a pending `setTimeout`. |
@@ -521,7 +521,7 @@ Display name for a `previews[]` entry, used by gallery / design tools.
 
 ---
 
-## Complete Example: Profile Card
+## Complete example: profile card
 
 ```javascript
 const properties = {

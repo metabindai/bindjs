@@ -1,49 +1,48 @@
-# BindJS Specification 1.0, chapter 04: Components, Composition, and Lookup
+# BindJS Specification 1.0, chapter 05: Components, composition, and lookup
 
-> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs (`proposals/`).
-
-## Components, Composition, and Lookup
+> [!NOTE]
+> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs ([`proposals/`](../proposals/)).
 
 This chapter describes how component identifiers are resolved at runtime, how components compose with each other, and how content data flows into a component tree.
 
-### Component Name Lookup
+## Component name lookup
 
 A BindJS runtime maintains a name-to-implementation map that the JS surface uses to construct component instances. When component code calls `Text(...)`, `VStack(...)`, or `MyCustomCard(...)`, the runtime looks the name up in that map and returns a component builder that participates in the AST.
 
 The spec requires three things from the lookup:
 
-1. **Built-in components are always available.** Every name in the BindJS type definitions (`metabind.d.ts`) — `VStack`, `HStack`, `Text`, `Image`, `Button`, etc. — is registered before any user code runs.
-2. **The host can register additional names.** A runtime exposes a registration function (e.g. `registerComponent(name, impl)`) so the host can add user-authored components to the lookup.
-3. **Unknown names are recoverable.** Calling an unregistered name MUST NOT crash the runtime; it should render as a placeholder and surface a diagnostic to the host.
+1. **Built-in components are always available.** Every name in the BindJS type definitions (`metabind.d.ts`), such as `VStack`, `HStack`, `Text`, `Image`, and `Button`, is registered before any user code runs.
+2. **The host can register additional names.** A runtime exposes a registration function (for example, `registerComponent(name, impl)`) so the host can add user-authored components to the lookup.
+3. **Unknown names are recoverable.** Calling an unregistered name MUST NOT crash the runtime; it MUST render nothing, and the runtime SHOULD surface a diagnostic to the host (see chapter 10, unknown names).
 
-**How user-authored components reach the lookup is implementation-defined.** A simple host might `registerComponent` from a static bundle. A platform host might version components into immutable *packages* (a snapshot of components at a specific version, with declared dependencies on other packages) and resolve the lookup against the active package set. *Packages* are how the MCP Apps binding distributes components (`bindings/mcp-apps.md`, section 2.2); the core language does not require them.
+**How user-authored components reach the lookup is implementation-defined.** A simple host might `registerComponent` from a static bundle. A platform host might version components into immutable *packages* (a snapshot of components at a specific version, with declared dependencies on other packages) and resolve the lookup against the active package set. *Packages* are how the MCP Apps binding distributes components ([chapter 11](11-packages.md); [`bindings/mcp-apps.md`, section 2.3](../bindings/mcp-apps.md#23-package-resource)); the core language does not require them.
 
-### Built-in Component Registration
+## Built-in component registration
 
 A reference runtime registers built-in components at construction:
 
 ```javascript
-// Conceptual — every runtime has its own registry shape
+// Conceptual; every runtime has its own registry shape
 const componentsMap = {
-    HStack,
-    VStack,
-    ZStack,
-    Text,
-    Button,
-    Image,
-    // ...
+  HStack,
+  VStack,
+  ZStack,
+  Text,
+  Button,
+  Image,
+  // ...
 }
 
 const modifiersMap = {
-    padding: Padding,
-    foregroundStyle: ForegroundStyle,
-    background: Background,
-    font: Font,
-    // ...
+  padding: Padding,
+  foregroundStyle: ForegroundStyle,
+  background: Background,
+  font: Font,
+  // ...
 }
 ```
 
-### Custom Component Registration
+## Custom component registration
 
 The runtime exposes a registration function the host calls before component code runs:
 
@@ -53,11 +52,11 @@ registerComponent('MyCustomComponent', MyCustomComponent)
 
 Once registered, `MyCustomComponent({...})` is callable from any component body.
 
-### Component Composition
+## Component composition
 
-#### Direct Usage
+### Direct usage
 
-Components are composed by calling them inside another component's body:
+You compose components by calling them inside another component's body:
 
 ```javascript
 const body = (props, children) =>
@@ -67,7 +66,7 @@ const body = (props, children) =>
   ])
 ```
 
-#### Self-Reference
+### Self-reference
 
 Use `Self({...})` inside a component's body to recursively render itself with different props. `Self`'s prop types are inferred from the component's own `properties` schema:
 
@@ -97,9 +96,9 @@ const body = (props, children) =>
 export default defineComponent({ properties, body })
 ```
 
-#### Environment-Based Conditional Rendering
+### Environment-based conditional rendering
 
-A component can adapt its output based on the current environment. Read the environment with `useEnvironment()` (see chapter 5):
+A component can adapt its output based on the current environment. Read the environment with `useEnvironment()` (see [chapter 06](06-hooks.md)):
 
 ```javascript
 const body = (props, children) => {
@@ -119,14 +118,14 @@ const body = (props, children) => {
 
 ---
 
-## Props, State, and Environment
+## Props, state, and environment
 
-### Environment and Context Flow
+### Environment and context flow
 
-BindJS uses environment values to pass context down the component tree. A parent sets values via `.environment(key, value)`; descendants read them via `useEnvironment()`.
+BindJS uses environment values to pass context down the component tree. A parent sets values with `.environment(key, value)`; descendants read them with `useEnvironment()`.
 
 ```javascript
-// Parent — set values for the subtree
+// Parent: set values for the subtree
 export default defineComponent({
   body: (props, children) =>
     VStack(children)
@@ -135,7 +134,7 @@ export default defineComponent({
       .environment('preview', 'thumbnail'),
 })
 
-// Child — read them
+// Child: read them
 export default defineComponent({
   properties: { title: PropertyString({}) },
   body: (props, children) => {
@@ -150,7 +149,7 @@ export default defineComponent({
 })
 ```
 
-### State and Interaction Flow
+### State and interaction flow
 
 Components manage local state with `useState` and handle interactions with built-in hooks:
 
@@ -175,7 +174,7 @@ export default defineComponent({
 })
 ```
 
-### Asset Props
+### Asset props
 
 A `PropertyAsset` resolves to an object containing exactly one of `image`, `video`, or `model`. Each variant carries `url`, `dimensions`, `mimeType`, and a host-supplied `id`:
 
@@ -191,5 +190,3 @@ export default defineComponent({
       : AssetPlaceholder(),
 })
 ```
-
----

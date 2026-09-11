@@ -2,7 +2,7 @@
 
 - Implementation: `ai.metabind:bindjs-android` 0.0.20 (minSdk 26, compileSdk 36, Compose UI 1.10.4, Material3 1.4.0)
 - Specification: BindJS 1.0
-- Level: Partial (nine Core components and fifteen Core modifiers unsupported; target for Core with declared gaps: [date, owner])
+- Level: Partial (nine Core components and 15 Core modifiers unsupported). Target: Core with declared gaps by the BindJS 1.0 release, owned by the Android maintainer; progress is tracked in the repository's conformance-gap issues.
 - Charts module: provided
 - Checked: 2026-09-06 against `GsonProvider.kt` (47 registered types, 87 modifiers) and `BindJSView.kt`
 

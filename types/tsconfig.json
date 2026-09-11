@@ -1,0 +1,10 @@
+{
+  "//": "Typecheck the BindJS authoring definitions in isolation. lib.dom is excluded deliberately: BindJS injects Text, Image and Body as runtime globals, which collide with the DOM lib but are correct in a BindJS execution context.",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2020"],
+    "types": [],
+    "strict": false
+  },
+  "files": ["bindjs.d.ts"]
+}

@@ -11,12 +11,13 @@ You write a BindJS component in JavaScript against a SwiftUI-shaped API. A runti
 | Path | Contents |
 |---|---|
 | [`spec/`](spec/README.md) | The BindJS Specification 1.0: introduction and architecture, concepts, properties (including the agent contract), components and lookup, hooks, runtime globals and environment, component reference, modifier reference, AST and host SPI, packages, and the agent surfaces overview. |
+| [`types/`](types/bindjs.d.ts) | `bindjs.d.ts`: the authoring surface as TypeScript declarations, the machine-readable form of chapters 04 to 09. Every declaration carries `@tier`, `@module`, `@platform`, and `@since` tags matching the frozen sets in [`conformance/`](conformance/README.md). |
 | [`bindings/mcp-apps.md`](bindings/mcp-apps.md) | The `application/bindjs+json` View content type for MCP Apps (SEP-1865): View and instance documents, `_meta.ui.bindjs`, package resources, the sandbox contract, and the bridge binding. [`bindings/mcp-apps-walkthrough.md`](bindings/mcp-apps-walkthrough.md) follows one tool through every call, with diagrams. |
 | [`bindings/a2ui.md`](bindings/a2ui.md) | BindJS packages as A2UI catalogs: component contract, data binding, actions, and the catalog manifest proposal. |
 | [`conformance/`](conformance/README.md) | What "BindJS 1.0" means for an implementation: the frozen Core sets, three conformance levels, the statement format, and the statements for the React, SwiftUI, and Jetpack Compose renderers. |
 | [`registry/renderers.md`](registry/renderers.md) | Known runtimes, renderers, and hosts. |
 | [`proposals/`](proposals/) | BindJS Enhancement Proposals (BEPs). [BEP-0001](proposals/BEP-0001-process.md) is the process; [BEP-0002](proposals/BEP-0002-version-and-bridge-parity.md) is the first change. |
-| [`examples/`](examples/) | [`quickstart`](examples/quickstart/README.md) (one component, three platforms) and [`mcp-server`](examples/mcp-server/README.md) (serve a BindJS View from any MCP server). Planned for the first release; see each folder's README. |
+| [`examples/`](examples/) | [`mcp-server`](examples/mcp-server/README.md): a working MCP server serving two BindJS Views, with each tool derived from its entry component, and a script that prints every message of the walkthrough. [`mcp-client`](examples/mcp-client/README.md): a browser MCP inspector for it: negotiation, `_meta.ui.bindjs`, digest verification, and running a tool from a schema-built form. [`quickstart`](examples/quickstart/README.md) (one component, three platforms) is planned for the first release. |
 
 ## Status
 

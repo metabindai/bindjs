@@ -19,7 +19,7 @@
 <line x1="480" y1="198" x2="712" y2="198" stroke="#a8461d" stroke-width="1.25"/>
 <path d="M 720 198 L 712 193.8 L 712 202.2 Z" fill="#a8461d"/>
 <text x="600.0" y="189" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">initialize</text>
-<text x="600.0" y="213" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">mimeTypes: [&quot;application/bindjs+json&quot;, &quot;text/html;profile=mcp-app&quot;]</text>
+<text x="600.0" y="213" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif" font-size="10.5" fill="#5c6771">mimeTypes: [&quot;application/bindjs+json;version=1.0&quot;, &quot;text/html;profile=mcp-app&quot;]</text>
 <line x1="720" y1="242" x2="488" y2="242" stroke="#a8461d" stroke-width="1.25" stroke-dasharray="5 4"/>
 <path d="M 480 242 L 488 237.8 L 488 246.2 Z" fill="#a8461d"/>
 <text x="600.0" y="233" text-anchor="middle" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#12171c">initialize result</text>

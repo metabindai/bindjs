@@ -1,34 +1,34 @@
-# BindJS Specification 1.0, chapter 03: Properties System
+# BindJS Specification 1.0, chapter 04: Properties system
 
-> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs (`proposals/`).
+> [!NOTE]
+> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs ([`proposals/`](../proposals/)).
 
-## Properties System
-
-### Overview
+## Overview
 
 The properties system declares what configurable inputs a component accepts. The same schema drives three things: type-safe props for the component body, validation at runtime, and form-control generation in editors that integrate BindJS.
 
-Components declare their inputs in the `properties` field of `defineComponent`. The value is a record where each key is a property name and each value is created using a property helper function (`PropertyString`, `PropertyNumber`, etc.). The helpers are also available as a callable `properties` factory `() => { ... }` for cases where the schema needs runtime context.
+Components declare their inputs in the `properties` field of `defineComponent`. The value is a record where each key is a property name and each value is created using a property helper function (`PropertyString`, `PropertyNumber`, and so on). The helpers are also available as a callable `properties` factory `() => { ... }` for cases where the schema needs runtime context.
 
-> The list of helpers, options, and inspector fields documented here mirrors the canonical TypeScript declarations (`metabind.d.ts`) — keep the two in sync.
+> [!NOTE]
+> The list of helpers, options, and inspector fields documented here mirrors the canonical TypeScript declarations (`metabind.d.ts`); keep the two in sync.
 
 These property definitions serve multiple purposes:
 
-1. **Type Generation** — Automatically generates the typed props for the body function
-2. **Validation** — Defines validation rules for property values
-3. **Form Generation** — Editors integrating BindJS use the schema to generate input controls
-4. **Documentation** — Provides descriptions and examples
+1. **Type generation.** Generates the typed props for the body function.
+2. **Validation.** Defines validation rules for property values.
+3. **Form generation.** Editors integrating BindJS use the schema to generate input controls.
+4. **Documentation.** Provides descriptions and examples.
 
-The system automatically generates TypeScript types from these definitions, so the body function receives properly typed props without requiring manual interface definitions.
+The system generates TypeScript types from these definitions, so the body function receives properly typed props without requiring manual interface definitions.
 
-### How Properties Work
+## How properties work
 
-1. **Property definition** — A component declares a `properties` schema in its `defineComponent` call.
-2. **Runtime resolution** — At render time the runtime resolves the schema and produces a typed props object that the body function receives.
-3. **Editor integration** — Editors integrating BindJS read the schema to render input controls; updates flow back through the runtime as new prop values.
-4. **Re-render** — When props change, the body re-runs with the new values.
+1. **Property definition.** A component declares a `properties` schema in its `defineComponent` call.
+2. **Runtime resolution.** At render time the runtime resolves the schema and produces a typed props object that the body function receives.
+3. **Editor integration.** Editors integrating BindJS read the schema to render input controls; updates flow back through the runtime as new prop values.
+4. **Re-render.** When props change, the body re-runs with the new values.
 
-### Property Schema Structure
+## Property schema structure
 
 A component's `properties` field is a record (or a function returning a record) of property definitions:
 
@@ -78,9 +78,9 @@ const properties = {
 export default defineComponent({ properties, body })
 ```
 
-### Property Helper Functions
+## Property helper functions
 
-#### PropertyString
+### PropertyString
 
 For text input fields with optional validation and formatting:
 
@@ -126,7 +126,7 @@ PropertyString({
 
 For source code, use `inspector.control: 'code'`.
 
-#### PropertyNumber
+### PropertyNumber
 
 For numeric input (any real number) with optional constraints:
 
@@ -146,9 +146,9 @@ PropertyNumber({
 })
 ```
 
-#### PropertyInteger
+### PropertyInteger
 
-Same shape as `PropertyNumber`, but restricted to integer values. Emits `{ type: "integer" }` in the underlying JSON Schema — useful when downstream consumers need to declare an integer type explicitly (for example, an OpenAPI path parameter typed as `integer`).
+Same shape as `PropertyNumber`, but restricted to integer values. Emits `{ type: "integer" }` in the underlying JSON Schema, which is useful when downstream consumers need to declare an integer type explicitly (for example, an OpenAPI path parameter typed as `integer`).
 
 ```javascript
 PropertyInteger({
@@ -162,25 +162,25 @@ PropertyInteger({
 
 Use `PropertyNumber` when any real number is acceptable; use `PropertyInteger` when the consumer needs an integer guarantee at the schema level.
 
-#### PropertyBoolean
+### PropertyBoolean
 
-For toggle/switch controls:
+For toggle or switch controls:
 
 ```javascript
 PropertyBoolean({
-    title: 'Enabled',
-    description: 'Whether the feature is enabled',
-    defaultValue: true,
-    
-    inspector: {
-        showLabel: true,
-        visible: true,
-        helpDescription: 'Toggle to enable or disable this feature'
-    }
+  title: 'Enabled',
+  description: 'Whether the feature is enabled',
+  defaultValue: true,
+
+  inspector: {
+    showLabel: true,
+    visible: true,
+    helpDescription: 'Toggle to enable or disable this feature'
+  }
 })
 ```
 
-#### PropertyEnum
+### PropertyEnum
 
 For selection from a predefined set of options. Options can be plain strings or numbers, or objects with `value` plus `label` (for text labels) or `value` plus `icon` (for icon-only segmented controls).
 
@@ -218,181 +218,182 @@ PropertyEnum({
 })
 ```
 
-#### PropertyAsset
+### PropertyAsset
 
 For media file selection:
 
 ```javascript
 PropertyAsset({
-    title: 'Background Image',
-    description: 'Image to use as background',
-    assetTypes: ['image'], // Can include 'video', 'audio', etc.
-    required: false,
-    
-    inspector: {
-        showLabel: true,
-        helpDescription: 'Recommended size: 1920x1080px',
-        visible: true
-    }
+  title: 'Background Image',
+  description: 'Image to use as background',
+  assetTypes: ['image'], // Can include 'video', 'audio', etc.
+  required: false,
+
+  inspector: {
+    showLabel: true,
+    helpDescription: 'Recommended size: 1920x1080px',
+    visible: true
+  }
 })
 ```
 
-#### PropertyArray
+### PropertyArray
 
 For lists of values:
 
 ```javascript
 // Simple array of strings
 PropertyArray({
-    title: 'Tags',
-    description: 'Tags for categorization',
-    defaultValue: ['new', 'featured'],
-    
-    valueType: PropertyString({
-        title: 'Tag',
-        validation: {
-            maxLength: 20
-        }
-    }),
-    
+  title: 'Tags',
+  description: 'Tags for categorization',
+  defaultValue: ['new', 'featured'],
+
+  valueType: PropertyString({
+    title: 'Tag',
     validation: {
-        minItems: 1,
-        maxItems: 10
-    },
-    
-    inspector: {
-        helpDescription: 'Add up to 10 tags',
-        showLabel: true
+      maxLength: 20
     }
+  }),
+
+  validation: {
+    minItems: 1,
+    maxItems: 10
+  },
+
+  inspector: {
+    helpDescription: 'Add up to 10 tags',
+    showLabel: true
+  }
 })
 
 // Array of components
 PropertyArray({
-    title: 'Gallery Images',
-    description: 'Images to display in the gallery',
-    
-    valueType: PropertyComponent({
-        title: 'Image',
-        environment: {
-            gallery: true
-        }
-    }),
-    
-    validation: {
-        maxItems: 20
+  title: 'Gallery Images',
+  description: 'Images to display in the gallery',
+
+  valueType: PropertyComponent({
+    title: 'Image',
+    environment: {
+      gallery: true
     }
+  }),
+
+  validation: {
+    maxItems: 20
+  }
 })
 ```
 
-#### PropertyComponent
+### PropertyComponent
 
 For embedding child components:
 
 ```javascript
 PropertyComponent({
-    title: 'Header Component',
-    description: 'Custom header component',
-    
-    environment: {
-        theme: 'dark',
-        context: 'header'
-    },
-    
-    inspector: {
-        showLabel: true,
-        visible: true
-    }
+  title: 'Header Component',
+  description: 'Custom header component',
+
+  environment: {
+    theme: 'dark',
+    context: 'header'
+  },
+
+  inspector: {
+    showLabel: true,
+    visible: true
+  }
 })
 ```
 
-#### PropertyContent
+### PropertyContent
 
 For referencing content items:
 
 ```javascript
 PropertyContent({
-    title: 'Related Article',
-    description: 'Link to a related article',
-    required: false,
-    
-    inspector: {
-        showLabel: true,
-        helpDescription: 'Select an article to link'
-    }
+  title: 'Related Article',
+  description: 'Link to a related article',
+  required: false,
+
+  inspector: {
+    showLabel: true,
+    helpDescription: 'Select an article to link'
+  }
 })
 ```
 
-#### PropertyDate
+### PropertyDate
 
 For date selection:
 
 ```javascript
 PropertyDate({
-    title: 'Publish Date',
-    description: 'When to publish the content',
-    defaultValue: '2024-01-01',
-    
-    validation: {
-        minDate: '2024-01-01',
-        maxDate: '2025-12-31'
-    },
-    
-    inspector: {
-        placeholder: 'Select date...',
-        showLabel: true,
-        helpDescription: 'Must be within the current year'
-    }
+  title: 'Publish Date',
+  description: 'When to publish the content',
+  defaultValue: '2024-01-01',
+
+  validation: {
+    minDate: '2024-01-01',
+    maxDate: '2025-12-31'
+  },
+
+  inspector: {
+    placeholder: 'Select date...',
+    showLabel: true,
+    helpDescription: 'Must be within the current year'
+  }
 })
 ```
 
-#### PropertyGroup
+### PropertyGroup
 
 For grouping related properties:
 
 ```javascript
 PropertyGroup({
-    title: 'Author Information',
-    description: 'Details about the content author',
-    
-    properties: {
-        name: PropertyString({
-            title: 'Name',
-            required: true,
-            validation: {
-                maxLength: 50
-            }
-        }),
-        email: PropertyString({
-            title: 'Email',
-            validation: {
-                format: 'email'
-            }
-        }),
-        bio: PropertyString({
-            title: 'Biography',
-            inspector: {
-                control: 'multiline',
-                numberOfLines: 3
-            }
-        }),
-        avatar: PropertyAsset({
-            title: 'Profile Picture',
-            assetTypes: ['image']
-        })
-    },
-    
-    inspector: {
-        showLabel: true,
-        visible: true
-    }
+  title: 'Author Information',
+  description: 'Details about the content author',
+
+  properties: {
+    name: PropertyString({
+      title: 'Name',
+      required: true,
+      validation: {
+        maxLength: 50
+      }
+    }),
+    email: PropertyString({
+      title: 'Email',
+      validation: {
+        format: 'email'
+      }
+    }),
+    bio: PropertyString({
+      title: 'Biography',
+      inspector: {
+        control: 'multiline',
+        numberOfLines: 3
+      }
+    }),
+    avatar: PropertyAsset({
+      title: 'Profile Picture',
+      assetTypes: ['image']
+    })
+  },
+
+  inspector: {
+    showLabel: true,
+    visible: true
+  }
 })
 ```
 
-#### Slots of Child Components
+### Slots of child components
 
 Layout components declare where children can be placed by combining `PropertyComponent` (single slot) or `PropertyArray` of `PropertyComponent` (list slot) with the `allowedComponents` option.
 
-**Single Section Example (Default)**
+#### Single section (default)
+
 ```javascript
 const properties = {
   title: PropertyString({ title: 'Page Title', required: true }),
@@ -409,7 +410,8 @@ const properties = {
 }
 ```
 
-**Multi-Section Example**
+#### Multiple sections
+
 ```javascript
 const properties = {
   sidebar: PropertyArray({
@@ -430,7 +432,8 @@ const properties = {
 }
 ```
 
-**Domain-Specific Naming Example**
+#### Domain-specific naming
+
 ```javascript
 // FAQ Layout
 const properties = {
@@ -468,33 +471,33 @@ header: PropertyComponent({
 }),
 ```
 
-### Property Structure Reference
+## Property structure reference
 
-#### Base Fields (All Property Types)
+### Base fields (all property types)
 
 All property helper functions accept these base fields:
 
 ```javascript
 {
-    title: string,              // Display name in the UI
-    description: string,        // Detailed description for documentation
-    required: boolean,          // Whether the field is required
-    defaultValue: any,          // Type-specific default value
-    examples: array,            // Example values for documentation
-    
-    inspector: {                // UI configuration
-        showLabel: boolean,     // Show field label
-        visible: boolean,       // Field visibility
-        helpDescription: string // Additional help text
-    },
-    
-    validation: {              // Type-specific validation rules
-        // See individual property types for available rules
-    }
+  title: string,              // Display name in the UI
+  description: string,        // Detailed description for documentation
+  required: boolean,          // Whether the field is required
+  defaultValue: any,          // Type-specific default value
+  examples: array,            // Example values for documentation
+
+  inspector: {                // UI configuration
+    showLabel: boolean,     // Show field label
+    visible: boolean,       // Field visibility
+    helpDescription: string // Additional help text
+  },
+
+  validation: {              // Type-specific validation rules
+    // See individual property types for available rules
+  }
 }
 ```
 
-#### Inspector Configuration
+### Inspector configuration
 
 The `inspector` object controls how the property appears in editors that render the schema as form controls:
 
@@ -504,7 +507,7 @@ inspector: {
   showLabel: boolean,         // Whether to show the field label
   showDivider: boolean,       // Whether to show a divider below the field
   helpDescription: string,    // Tooltip / info text
-  visible: (props) => boolean, // Dynamic visibility — return false to hide
+  visible: (props) => boolean, // Dynamic visibility; return false to hide
 
   // String-specific
   placeholder: string,
@@ -527,7 +530,7 @@ inspector: {
 
 `visible` is a function: it receives the current resolved props and returns a boolean. Use it to conditionally show fields based on the value of another property (for example, only show a `customColor` field when `colorMode === 'custom'`).
 
-#### Validation Rules
+### Validation rules
 
 The `validation` object contains type-specific validation rules:
 
@@ -559,27 +562,28 @@ validation: {
 }
 ```
 
-### Property Type Reference
+## Property type reference
 
 The full set of property helpers, in the order they're documented above:
 
 | Helper | Runtime type | JSON Schema type | Notes |
 |---|---|---|---|
-| `PropertyString` | `string` | `string` | Text, with `singleline`/`multiline`/`code` controls |
+| `PropertyString` | `string` | `string` | Text, with `singleline`, `multiline`, or `code` controls |
 | `PropertyNumber` | `number` | `number` | Real numbers; `input` or `slider` control |
 | `PropertyInteger` | `integer` | `integer` | Integer-only; same shape as `PropertyNumber` |
 | `PropertyBoolean` | `boolean` | `boolean` | Toggle |
-| `PropertyEnum` | `enum` | `string`/`number` enum | `segmented` or `dropdown` control |
+| `PropertyEnum` | `enum` | `string` or `number` enum | `segmented` or `dropdown` control |
 | `PropertyDate` | `date` | `string` (ISO 8601) | Date picker |
 | `PropertyArray` | `array` | `array` | Repeatable list, item type set by `valueType` |
 | `PropertyGroup` | `group` | nested `object` | Nested fields under one collapsible section |
-| `PropertyAsset` | `asset` | host-defined | Image / video / audio / 3D model picker; resolved by the host's asset system |
+| `PropertyAsset` | `asset` | host-defined | Image, video, audio, or 3D model picker; resolved by the host's asset system |
 | `PropertyContent` | `content` | host-defined | Reference to another content item; resolved by the host's content system |
 | `PropertyComponent` | `component` | n/a | Embedded child component, with `allowedComponents` constraint |
 
-### Real-World Examples from Story Components
+## Real-world examples: Story components
 
-#### StoryPhoto Properties
+### StoryPhoto properties
+
 ```javascript
 const properties = {
   asset: PropertyAsset({
@@ -609,7 +613,8 @@ const properties = {
 }
 ```
 
-#### StoryPhotoGallery Properties
+### StoryPhotoGallery properties
+
 ```javascript
 const properties = {
   title: PropertyString({
@@ -638,21 +643,21 @@ const properties = {
 
 ---
 
-### Schema Generation and LLM Understanding
+## Schema generation and LLM understanding
 
-Every property helper has a deterministic mapping to JSON Schema. A consumer — an inspector form, a validator, an agent — can read a component's `properties` schema and know exactly what a valid props object for that component looks like, without having to execute the body. This is the contract that makes BindJS usable as a target for editor-driven and agent-generated UI, and it is normative in 1.0: a conforming implementation that publishes a schema for a component MUST derive it by the rules in this section, so that every host presents the same interface for the same component. (The derivation is also called the *agent contract*; see chapter 11.)
+Every property helper has a deterministic mapping to JSON Schema. A consumer (an inspector form, a validator, an agent) can read a component's `properties` schema and know exactly what a valid props object for that component looks like, without having to execute the body. This is the contract that makes BindJS usable as a target for editor-driven and agent-generated UI, and it is normative in 1.0: a conforming implementation that publishes a schema for a component MUST derive it by the rules in this section, so that every host presents the same interface for the same component. (The derivation is also called the *agent contract*; see [chapter 02](02-agent-surfaces.md).)
 
-#### What flows into the generated schema
+### What flows into the generated schema
 
-- **Type structure** — `PropertyString`, `PropertyNumber`, `PropertyInteger`, `PropertyBoolean`, `PropertyEnum`, `PropertyDate`, `PropertyArray`, `PropertyGroup`, `PropertyAsset`, `PropertyContent`, and `PropertyComponent` each emit a corresponding JSON Schema fragment (`{ type: "string" }`, `{ type: "integer" }`, `{ type: "array", items: ... }`, etc.). Nested helpers (e.g. `PropertyArray({ valueType: PropertyGroup({...}) })`) compose into nested schema.
-- **`title`** — included as the schema's `title`. Used as the field label in editors and as a human-readable identifier for LLM consumers.
-- **`description`** — included as the schema's `description`. This is where you write the natural-language explanation an LLM (or a developer reading the schema) needs to understand the field's intent. Treat it as the primary documentation surface — it is what an LLM sees when reasoning about whether and how to populate the field.
-- **`required` / `defaultValue`** — included as schema's `required` array entries and `default` values.
-- **`validation`** — `minLength`, `maxLength`, `min`, `max`, `pattern`, `minItems`, `maxItems`, `uniqueItems` flow through as the equivalent JSON Schema constraints.
-- **`examples`** — included as the schema's `examples` array, which both editors and LLMs use as concrete guidance.
-- **`inspector` hints** — host-specific (control type, placeholder, help text). Editors that adopt them get richer forms; consumers that don't can ignore them.
+- **Type structure**: `PropertyString`, `PropertyNumber`, `PropertyInteger`, `PropertyBoolean`, `PropertyEnum`, `PropertyDate`, `PropertyArray`, `PropertyGroup`, `PropertyAsset`, `PropertyContent`, and `PropertyComponent` each emit a corresponding JSON Schema fragment (`{ type: "string" }`, `{ type: "integer" }`, `{ type: "array", items: ... }`, and so on). Nested helpers (for example, `PropertyArray({ valueType: PropertyGroup({...}) })`) compose into nested schema.
+- **`title`**: included as the schema's `title`. Used as the field label in editors and as a human-readable identifier for large language model (LLM) consumers.
+- **`description`**: included as the schema's `description`. This is where you write the natural-language explanation an LLM (or a developer reading the schema) needs to understand the field's intent. Treat it as the primary documentation surface; it is what an LLM sees when reasoning about whether and how to populate the field.
+- **`required` and `defaultValue`**: included as the schema's `required` array entries and `default` values.
+- **`validation`**: `minLength`, `maxLength`, `min`, `max`, `pattern`, `minItems`, `maxItems`, and `uniqueItems` flow through as the equivalent JSON Schema constraints.
+- **`examples`**: included as the schema's `examples` array, which both editors and LLMs use as concrete guidance.
+- **`inspector` hints**: host-specific (control type, placeholder, help text). Editors that adopt them get richer forms; consumers that don't can ignore them.
 
-#### Recursive component schemas via `allowedComponents`
+### Recursive component schemas via `allowedComponents`
 
 `PropertyComponent` declares a slot for a nested component, optionally constrained to a specific set of component types via `allowedComponents`:
 
@@ -663,11 +668,11 @@ PropertyComponent({
 })
 ```
 
-A schema generator can recursively walk this — look up each name in `allowedComponents`, generate a schema for that component's own `properties`, and emit the full set as a `oneOf` (or equivalent) in the parent's schema. Walk repeatedly and you get a schema for an entire component subtree, rooted at any starting component.
+A schema generator can recursively walk this: look up each name in `allowedComponents`, generate a schema for that component's own `properties`, and emit the full set as a `oneOf` (or equivalent) in the parent's schema. Walk repeatedly and you get a schema for an entire component subtree, rooted at any starting component.
 
-The same applies to `PropertyArray({ valueType: PropertyComponent({ allowedComponents: [...] }) })` — the array's `items` schema is the recursive expansion.
+The same applies to `PropertyArray({ valueType: PropertyComponent({ allowedComponents: [...] }) })`: the array's `items` schema is the recursive expansion.
 
-#### Component instances in props (normative)
+### Component instances in props (normative)
 
 A `PropertyComponent` slot (or an array of them) is filled in a props object by a **component instance**: a JSON object whose discriminator fields name the component, followed by that component's own props.
 
@@ -685,10 +690,8 @@ A `PropertyComponent` slot (or an array of them) is filled in a props object by 
 - **Streaming tolerance.** An object whose `_type` is a strict prefix of `"ComponentInstance"`, or whose `_component` is absent or not yet resolvable, MUST render as nothing and MUST NOT be passed to a component. This is what lets a host render tool input progressively while an agent is still emitting it.
 - `_id` SHOULD be unique among siblings; the runtime uses it to key hook state so a re-rendered instance keeps its state across updates.
 
-#### Why this matters
+### Why this matters
 
-The combination — typed properties, `description` as natural-language documentation, and `allowedComponents` as a navigable component graph — means a single root component carries enough information for an LLM to generate a valid invocation of the whole subtree, or for a host to validate an LLM's output against the schema before rendering. The BindJS spec defines what each helper contributes; how a host consumes it (inspector forms, MCP tool input validation, LLM prompt augmentation) is implementation-specific.
+The combination of typed properties, `description` as natural-language documentation, and `allowedComponents` as a navigable component graph means a single root component carries enough information for an LLM to generate a valid invocation of the whole subtree, or for a host to validate an LLM's output against the schema before rendering. The BindJS spec defines what each helper contributes; how a host consumes it (inspector forms, MCP tool input validation, LLM prompt augmentation) is implementation-specific.
 
-For one such consumer, an MCP server that generates a tool `inputSchema` from a component's `properties` and validates tool input against it before rendering, see `bindings/mcp-apps.md`, section 2.4, and chapter 11.
-
----
+For one such consumer, an MCP server that generates a tool `inputSchema` from a component's `properties` and validates tool input against it before rendering, see [`bindings/mcp-apps.md`, section 2.4](../bindings/mcp-apps.md#24-tool-input-as-props), and [chapter 02](02-agent-surfaces.md).

@@ -1,8 +1,8 @@
 # BindJS on MCP Apps: a walkthrough of every call
 
-Informative companion to `mcp-apps.md`. It follows one tool, `product_card`, from `initialize` to the first render on a host that advertises `application/bindjs+json`, then shows the content channel with a second tool, `product_search`. Every message below is the wire shape a host implementer or a reviewer would check. Normative statements live in the binding; this document only illustrates them.
+Informative companion to the [MCP Apps binding](mcp-apps.md). It follows one tool, `product_card`, from `initialize` to the first render on a host that advertises `application/bindjs+json`, then shows the content channel with a second tool, `product_search`. Every message below is the wire shape a host implementer or a reviewer would check. Normative statements live in the binding; this document only illustrates them.
 
-![View channel](assets/view-channel.svg)
+![Sequence diagram of the View channel between a View, a host, and an MCP server, in five steps: handshake, discovery, fetch and verify, call and render, and interaction. Each step names the MCP Apps messages exchanged.](assets/view-channel.svg)
 
 ## 1. Handshake
 
@@ -11,17 +11,17 @@ The host says what it renders. Listing the HTML type as well keeps every other t
 ```jsonc
 // initialize (host)
 { "method": "initialize", "params": { "capabilities": { "extensions": {
-  "io.modelcontextprotocol/ui": { "mimeTypes": ["application/bindjs+json", "text/html;profile=mcp-app"] }
+  "io.modelcontextprotocol/ui": { "mimeTypes": ["application/bindjs+json;version=1.0", "text/html;profile=mcp-app"] }
 } } } }
 ```
 
-Nothing in the server's `initialize` result is BindJS-specific.
+The `version` parameter says the host renders BindJS 1.x up to 1.0; a host that implemented 1.2 would say `version=1.2` and still render every 1.0 and 1.1 View. Nothing in the server's `initialize` result is BindJS-specific.
 
 ## 2. Discovery
 
 ### 2.1 `tools/list`
 
-The tool definition is derived from the entry component (binding 2.5): `inputSchema` from its `properties`, `title` and `description` from its `metadata`, annotations from `metadata.annotations` when declared. The `_meta.ui.resourceUri` is the ordinary SEP-1865 marker.
+The tool definition is derived from the entry component ([binding, section 2.5](mcp-apps.md#25-tool-definition-derived-from-the-component)): `inputSchema` from its `properties`, `title` and `description` from its `metadata`, annotations from `metadata.annotations` when declared. The `_meta.ui.resourceUri` is the ordinary SEP-1865 marker.
 
 ```jsonc
 { "name": "product_card",
@@ -42,7 +42,7 @@ The tool definition is derived from the entry component (binding 2.5): `inputSch
   "_meta": { "ui": { "resourceUri": "ui://shop/views/product-card" } } }
 ```
 
-The `badges` slot is a `PropertyComponent` array with `allowedComponents: ["SaleBadge", "NewBadge"]`; the discriminated union is the specification's component-instance encoding (chapter 03).
+The `badges` slot is a `PropertyComponent` array with `allowedComponents: ["SaleBadge", "NewBadge"]`; the discriminated union is the specification's component-instance encoding ([chapter 04](../spec/04-properties.md#component-instances-in-props-normative)).
 
 ### 2.2 `resources/list`
 
@@ -68,9 +68,9 @@ Two entries matter: the View, in the type the host declared, and the package it 
                                  "contentUrl": "https://cdn.shop.example/packages/product-ui@12.json" } } } }
 ```
 
-What the host can decide here, before any fetch: the specification major it supports (`spec`), the network allowlist it will enforce (`csp`), whether it already holds `com.shop.product-ui` 12.0.0 with that digest (then it skips both reads below), and whether it accepts packages it did not bundle at all.
+What the host can decide here, before any fetch: whether the View's `spec` (its minimum required version) is within what the host declared, the network allowlist it will enforce (`csp`), whether it already holds `com.shop.product-ui` 12.0.0 with that digest (then it skips both reads below), and whether it accepts packages it did not bundle at all.
 
-The same View is listed as `text/html;profile=mcp-app` to a host that advertised only HTML. Nothing else changes.
+The same View is listed as `text/html;profile=mcp-app` to a host that advertised only HTML, and, by the developer's default policy, to a host whose declared `version` is below the View's `spec`. Nothing else changes.
 
 ## 3. Fetch and verify
 
@@ -117,7 +117,7 @@ Host checks, in order: the SHA-256 of the `text` bytes (or the CDN body) equals 
 { "jsonrpc": "2.0", "id": 1, "result": { "hostContext": { "theme": "dark", "locale": "en-US", "containerDimensions": { "width": 390 }, "displayMode": "inline" } } }
 ```
 
-The runtime maps `theme` to the `colorScheme` environment key, `locale` to `locale`, and `containerDimensions` to `screen` (binding 5.2).
+The runtime maps `theme` to the `colorScheme` environment key, `locale` to `locale`, and `containerDimensions` to `screen` ([binding, section 5.2](mcp-apps.md#52-host-context-mapping)).
 
 ## 4. Call and render
 
@@ -135,7 +135,7 @@ While the model is still writing, the host forwards what it has:
 { "params": { "arguments": { "title": "Acme Runner", "price": "$120", "badges": [ { "_type": "ComponentInsta" } ] } } }
 ```
 
-The runtime renders the prefix and renders nothing for the half-formed badge (chapter 03, streaming tolerance). When the call completes:
+The runtime renders the prefix and renders nothing for the half-formed badge ([chapter 04, streaming tolerance](../spec/04-properties.md#component-instances-in-props-normative)). When the call completes:
 
 ```jsonc
 // tools/call result (server → host): only the model's side of the transcript
@@ -161,7 +161,7 @@ Interaction goes only through the bridge, with the same vocabulary as the iframe
 
 ## 5. The content channel: instance documents
 
-![Content channel](assets/content-channel.svg)
+![Sequence diagram of the content channel between a mounted View, a host, and an MCP server: the precondition (View mounted, package loaded), the tool call, the render of the instance document, and interaction through the bridge.](assets/content-channel.svg)
 
 The View above declared `contentMimeTypes: ["application/bindjs+json"]`, so a tool whose output is the UI's data can hand it to a component in the same package without the model re-emitting it.
 
@@ -184,4 +184,4 @@ The host delivers the marked resource to the View in `ui/notifications/tool-resu
 
 ## 6. What the host never does
 
-It never executes anything it did not read from a `ui://` resource it listed (or hold locally with a matching digest). It never exposes `fetch`, a DOM, or a filesystem to the context. It never lets a View reach a tool the iframe path could not reach. It never loads an asset from a domain outside `csp.resourceDomains` or a tool endpoint outside `csp.connectDomains`. Everything a View can do is in the bridge table in binding section 5.
+It never executes anything it did not read from a `ui://` resource it listed (or hold locally with a matching digest). It never exposes `fetch`, a DOM, or a filesystem to the context. It never lets a View reach a tool the iframe path could not reach. It never loads an asset from a domain outside `csp.resourceDomains` or a tool endpoint outside `csp.connectDomains`. Everything a View can do is in the bridge table in [binding, section 5](mcp-apps.md#5-bridge-binding).

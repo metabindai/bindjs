@@ -8,11 +8,11 @@ A2UI is a protocol for an agent to drive UI: messages name components from a cat
 
 The chain in `a2ui-bindjs`: A2UI messages arrive; the A2UI interpreter (TypeScript, bundled into the same JavaScript context as the BindJS runtime) maintains surfaces and the data model, resolves bindings, and calls the BindJS component for each A2UI component with resolved props; the BindJS runtime emits the view tree; the platform renderer draws it. On the web that is `@metabindai/a2ui-bindjs-react`; on iOS `A2UIHost` and `A2UISurfaceView`; on Android `ai.metabind.a2ui.A2UIHost` and `A2UISurfaceView`.
 
-With MCP in the picture, A2UI travels on the content channel (typed payloads in tool results, per PR #699) and BindJS Views travel on the View channel (predeclared resources). A host that renders both shares one runtime and one package format between them. That is the unification: not one wire format, but one component implementation serving both.
+With MCP in the picture, A2UI travels on the content channel (typed payloads in tool results, per ext-apps [PR #699](https://github.com/modelcontextprotocol/ext-apps/pull/699)) and BindJS Views travel on the View channel (predeclared resources). A host that renders both shares one runtime and one package format between them. That is the unification: not one wire format, but one component implementation serving both.
 
 ## 2. Catalog package
 
-A catalog is a BindJS package (MCP Apps binding, section 2.3) with:
+A catalog is a BindJS package ([MCP Apps binding, section 2.3](mcp-apps.md#23-package-resource)) with:
 
 - `components` keyed by A2UI component name (`Text`, `Card`, `Row`, `Column`, `Button`, `Image`, `List`, `Modal`, `Tabs`, `CheckBox`, `ChoicePicker`, `DateTimeInput`, `Slider`, `TextField`, `Divider`, `Icon`, `AudioPlayer`, `Video`, plus any custom names).
 - A `catalogId` matching the id A2UI surfaces reference (`beginRendering.catalogId`). The basic catalog id is the one A2UI defines for the version in use.

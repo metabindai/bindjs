@@ -1,10 +1,10 @@
 # BindJS binding for MCP Apps
 
-Version 1.0 (draft). Defines the registered View content type `application/bindjs+json` for MCP Apps (SEP-1865) and the follow-up proposal "Native rendering of registered View content types." This document is the governing specification the MCP Apps registry entry points at. It satisfies the five requirements a governing specification must meet: content, metadata, executable code, bridge binding, versioning.
+Version 1.0 (draft). Defines the registered View content type `application/bindjs+json` for MCP Apps (SEP-1865) and the follow-up proposal "Native rendering of registered View content types." This document is the governing specification the MCP Apps registry entry points at. It satisfies the five requirements a governing specification must meet: content, metadata, executable code, bridge binding, and versioning.
 
 ## 1. Overview
 
-A worked example of every call and response, with diagrams, is in `mcp-apps-walkthrough.md` (informative).
+A worked example of every call and response, with diagrams, is in the [MCP Apps walkthrough](mcp-apps-walkthrough.md) (informative).
 
 A BindJS View is a component package executed by a BindJS runtime in an isolated JavaScript context. The runtime emits a JSON view tree; the host's renderer draws it with SwiftUI, Jetpack Compose, or React. The renderer never receives code, only the tree. Everything a View does beyond drawing goes through the MCP Apps bridge.
 
@@ -34,7 +34,7 @@ Exactly one of the inline `package` or the `_meta.ui.bindjs.package` reference M
 
 ### 2.2 Instance document (content channel)
 
-`mimeType`: `application/bindjs+json`, carried as a marked embedded resource (`_meta.ui.content`) per PR #699:
+`mimeType`: `application/bindjs+json`, carried as a marked embedded resource (`_meta.ui.content`) per ext-apps [PR #699](https://github.com/modelcontextprotocol/ext-apps/pull/699):
 
 ```jsonc
 {
@@ -53,7 +53,7 @@ Use the content channel when the tool's output, not its input, is the UI's data 
 
 ### 2.3 Package resource
 
-The package document is defined in the specification, chapter 10. On MCP Apps a package is a `ui://` resource with `mimeType: application/bindjs-package+json` whose body is that document:
+The package document is defined in the specification, [chapter 11](../spec/11-packages.md). On MCP Apps a package is a `ui://` resource with `mimeType: application/bindjs-package+json` whose body is that document:
 
 ```jsonc
 {
@@ -66,7 +66,7 @@ The package document is defined in the specification, chapter 10. On MCP Apps a 
 ```
 
 - On this surface, a `dependencies[].package` reference is a `ui://` resource URI; the host resolves dependencies with `resources/read` before rendering, MAY prefetch them at connection time, and caches them by digest.
-- The allowlist, naming, immutability, integrity, and local-holding rules of chapter 10 apply unchanged.
+- The allowlist, naming, immutability, integrity, and local-holding rules of chapter 11 apply unchanged.
 
 ### 2.4 Tool input as props
 
@@ -78,9 +78,9 @@ When a server exposes a BindJS View as an MCP tool, the tool definition SHOULD b
 
 | Tool field | Source |
 |---|---|
-| `inputSchema` | The entry component's `properties`, derived per the specification, chapter 03 (including component-instance unions for slots). |
+| `inputSchema` | The entry component's `properties`, derived per the specification, [chapter 04](../spec/04-properties.md#schema-generation-and-llm-understanding) (including component-instance unions for slots). |
 | `title` | `metadata.title`, unless the server overrides it. |
-| `description` | `metadata.description`, written for the agent (chapter 11). |
+| `description` | `metadata.description`, written for the agent ([chapter 02](../spec/02-agent-surfaces.md)). |
 | `annotations` | `metadata.annotations` when present (`readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`), else the server's defaults. |
 | `name` | The server's choice; BindJS does not constrain it. |
 
@@ -88,11 +88,11 @@ A server MAY override any of these per deployment; the component's declarations 
 
 ## 3. Metadata: `_meta.ui.bindjs`
 
-The `bindjs` key is owned by this specification. On a View resource (listing or content item; content item wins):
+The `bindjs` key is reserved for this type by its registry entry in MCP Apps. On a View resource (listing or content item; content item wins):
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
-| `spec` | string | yes | BindJS specification version, e.g. `"1.0"`. A host that does not support the major version MUST NOT render the View and SHOULD fall back to another negotiated type. |
+| `spec` | string | yes | The minimum BindJS specification version the View requires, `major.minor`, for example `"1.1"` for a View that uses a component added in 1.1. A host MUST NOT execute a View whose major it does not support. When the host's declared minor is below the requirement, the server decides what to list (section 6); a host that receives such a View renders it with the language's degradation rules. |
 | `component` | string | yes | Entry component name. Duplicates the body field so hosts can decide before reading. |
 | `package` | string (URI) | when not inline | `ui://` URI of the package resource. |
 | `sha256` | string | recommended | Hex SHA-256 of the package resource body (canonical: the `text` field bytes as served). |
@@ -102,7 +102,7 @@ On a package resource:
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
-| `spec` | string | yes | |
+| `spec` | string | yes | The BindJS specification version the package targets (`major.minor`). |
 | `name`, `version` | string | yes | Duplicate the body for listing-time review. |
 | `sha256`, `size` | | recommended | As above. |
 | `contentUrl` | string (URL) | no | Alternate fetch location for the same bytes (typically a CDN). MUST be `https`. A host that uses it MUST verify `sha256` and `size` before executing, exactly as for `resources/read`; a mismatch MUST fall back to `resources/read` or fail. |
@@ -144,7 +144,7 @@ Hosts remain free to add restrictions, for example refusing any package they did
 | instance documents | `ui/notifications/tool-result` (marked embedded resources) | host to View |
 | `useEnvironment()` keys | `ui/initialize` result, `ui/notifications/host-context-changed` | host to View |
 
-A dedicated hook for `tool-result` beyond instance documents is proposed in BEP-0002.
+A dedicated hook for `tool-result` beyond instance documents is proposed in [BEP-0002](../proposals/BEP-0002-version-and-bridge-parity.md).
 
 ### 5.2 Host context mapping
 
@@ -156,7 +156,7 @@ A dedicated hook for `tool-result` beyond instance documents is proposed in BEP-
 | `displayMode` | proposed key `displayMode` (BEP-0002); until then, not exposed |
 | `platform` | `platform` |
 
-Standardized theme variables (colors, fonts) have no environment mapping in 1.0. BEP-0004 proposes one.
+Standardized theme variables (colors, fonts) have no environment mapping in 1.0. A future BEP will propose one.
 
 ### 5.3 Transports (informative)
 
@@ -170,10 +170,12 @@ The message vocabulary and authorization rules are identical on all three.
 
 `ui/notifications/size-changed` on hosts that lay out the View natively. Everything else in SEP-1865 applies.
 
-## 6. Versioning
+## 6. Versioning and negotiation
 
 - `spec` follows the BindJS Specification version scheme (`MAJOR.MINOR`, additive minors).
-- The MIME strings are stable across specification versions; hosts negotiate the specification major through `_meta.ui.bindjs.spec` and the document's `spec` field. The two media type names are not yet registered with IANA.
+- **What the host declares.** At `initialize` a host lists, for each major it renders, one string carrying the highest minor it implements: `application/bindjs+json;version=1.2`. A string without the parameter means `version=1.0`. The parameter name is `version` because that is the media-type convention; it is a different thing from a package's `version` and from the `spec` a document requires.
+- **What the server compares.** Resources carry the bare type (`application/bindjs+json`) and state their requirement in `_meta.ui.bindjs.spec`. A server lists a View as BindJS when the host declared the View's major and a minor at or above the requirement. Otherwise the server applies the developer's fallback policy for that View: list the HTML representation (the default; no new component support is needed on the iframe path) or list the native View anyway and let unknown components render as nothing. The policy belongs to the MCP App developer, because only the developer knows what a missing component means for that product; the host only declares truthfully and renders what it is given.
+- The MIME strings are stable across specification versions. The two media type names are not yet registered with IANA.
 - Packages are immutable per `version`; a new package version is a new resource URI (`...@13`) or a new `version` with a new digest.
 
 ## 7. Security considerations

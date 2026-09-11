@@ -2,12 +2,12 @@
 
 An MCP inspector: session, resources, tools, and the View rendered.
 
-```sh
+```bash
 cd ../mcp-server && npm install && npm run serve   # :8787/mcp
 npm install && npm run dev                         # :5185
 ```
 
-Sidebar switches between tools, resources and the session. The middle pane shows the
+The sidebar switches between tools, resources, and the session. The middle pane shows the
 selected item, and builds a form from a tool's `inputSchema`. The right pane renders the
 View, over a bridge log.
 
@@ -28,7 +28,7 @@ leaves the tools.
 
 ## Not a sandbox
 
-The runtime runs in this page — component sources are evaluated with `new Function` in this
+The runtime runs in this page: component sources are evaluated with `new Function` in this
 document and share its globals. Binding section 4 requires an isolated context per View, on
 the web the sandboxed iframe of SEP-1865. Do not read `BindJSView.tsx` as the sandbox
 reference.

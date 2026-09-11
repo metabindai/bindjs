@@ -1,25 +1,25 @@
-# BindJS Specification 1.0, chapter 07: Component Reference
+# BindJS Specification 1.0, chapter 08: Component reference
 
-> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs (`proposals/`).
+> [!NOTE]
+> Part of the BindJS Specification (`metabindai/bindjs`). Normative unless marked informative. Changes go through BEPs ([`proposals/`](../proposals/)).
 
-## BindJS Component Reference
-
-This reference lists every component declared in the BindJS type definitions. Each entry shows the canonical signature plus a short example. Modifiers are covered in the next chapter.
+This reference lists every component declared in the BindJS type definitions. Each entry shows the canonical signature plus a short example. Modifiers are covered in [chapter 09](09-modifiers-reference.md).
 
 The reference is split into two sections:
 
-- **Core** — components every conforming runtime SHOULD implement. Cross-platform by design.
-- **Platform Extensions** — components scoped to a specific host platform's UI vocabulary (today, all iOS / SwiftUI). Authoring code that uses these is non-portable.
+- **Core**: components every conforming runtime SHOULD implement. Cross-platform by design.
+- **Platform extensions**: components scoped to a specific host platform's UI vocabulary (today, all iOS / SwiftUI). Authoring code that uses these is non-portable.
 
-> The per-platform implementation status of each component lives in chapter 9.
+> [!NOTE]
+> The per-platform implementation status of each component lives in the [conformance statements](../conformance/statements/).
 
 ---
 
 ## Core
 
-## Layout — Stacks
+### Layout: stacks
 
-### `VStack`, `HStack`, `ZStack`
+#### `VStack`, `HStack`, `ZStack`
 
 Vertical, horizontal, and overlay stacks.
 
@@ -32,11 +32,11 @@ ZStack({ alignment: 'bottomTrailing' }, [
 ])
 ```
 
-All three accept either `(children)` or `(props, children)`. `VStack` / `LazyVStack` use `HorizontalAlignment`; `HStack` / `LazyHStack` use `VerticalAlignment`; `ZStack` uses `Alignment`.
+All three accept either `(children)` or `(props, children)`. `VStack` and `LazyVStack` use `HorizontalAlignment`; `HStack` and `LazyHStack` use `VerticalAlignment`; `ZStack` uses `Alignment`.
 
-### `LazyVStack`, `LazyHStack`
+#### `LazyVStack`, `LazyHStack`
 
-Lazy variants — only render visible children. Use inside `ScrollView` for large lists.
+Lazy variants that only render visible children. Use them inside `ScrollView` for large lists.
 
 ```javascript
 ScrollView([
@@ -46,7 +46,7 @@ ScrollView([
 
 `pinnedViews` accepts `'sectionHeaders'`, `'sectionFooters'`, or `'all'`.
 
-### `Group`
+#### `Group`
 
 Groups multiple components without adding layout. Useful for conditional rendering or applying modifiers to a set of components at once. Accepts a `subviews` form for view decomposition:
 
@@ -58,9 +58,9 @@ Group(VStack([a, b, c]), (subviews) =>
 )
 ```
 
-### `Section`
+#### `Section`
 
-Groups content with optional header / footer. Used inside `List` and `Form`.
+Groups content with an optional header or footer. Used inside `List` and `Form`.
 
 ```javascript
 Section({ header: Text('Settings').font('headline') }, [
@@ -68,9 +68,9 @@ Section({ header: Text('Settings').font('headline') }, [
 ])
 ```
 
-## Layout — Adaptive
+### Layout: adaptive
 
-### `GeometryReader`
+#### `GeometryReader`
 
 Provides the parent container's geometry to a builder function.
 
@@ -80,11 +80,11 @@ GeometryReader((geometry) =>
 )
 ```
 
-The `geometry` argument is a `GeometryProxy` — it exposes `size`, `safeAreaInsets`, `containerCornerInsets`, and `frame(coordinateSpace)`.
+The `geometry` argument is a `GeometryProxy`: it exposes `size`, `safeAreaInsets`, `containerCornerInsets`, and `frame(coordinateSpace)`.
 
-## Scrolling and Lists
+### Scrolling and lists
 
-### `ScrollView`
+#### `ScrollView`
 
 Scrollable container.
 
@@ -96,7 +96,7 @@ ScrollView({ axis: 'horizontal', showsIndicators: false }, [
 
 `axis` is `'horizontal'`, `'vertical'` (default), or `'both'`.
 
-### `List`
+#### `List`
 
 A scrollable list with optional selection tracking.
 
@@ -109,9 +109,9 @@ List({ selection, setSelection }, items.map(item =>
 ))
 ```
 
-### `ForEach`
+#### `ForEach`
 
-Iterates over data to produce components. The callback is `(item, index)` — positional arguments, not destructured:
+Iterates over data to produce components. The callback is `(item, index)`: positional arguments, not destructured:
 
 ```javascript
 ForEach(items, (item, index) => Text(`${index + 1}. ${item.name}`))
@@ -123,9 +123,9 @@ Also iterates over subviews for view decomposition:
 ForEach(subviews, ({ subview }) => subview.padding(8))
 ```
 
-## Text and Markdown
+### Text and Markdown
 
-### `Text`
+#### `Text`
 
 Plain text or inline markdown.
 
@@ -134,7 +134,7 @@ Text('Hello, world!')
 Text({ markdown: '**Bold** and *italic*' })
 ```
 
-### `Markdown`
+#### `Markdown`
 
 Renders a full markdown document (headings, paragraphs, lists, code blocks). Use `Text({ markdown })` for inline formatting only.
 
@@ -142,9 +142,9 @@ Renders a full markdown document (headings, paragraphs, lists, code blocks). Use
 Markdown('# Welcome\n\nThis is a **paragraph** with formatting.')
 ```
 
-## Text Input
+### Text input
 
-### `TextField`
+#### `TextField`
 
 Single-line text input.
 
@@ -156,7 +156,7 @@ TextField({ placeholder: 'Email', text, setText: setText })
   .onSubmit(() => handleSubmit())
 ```
 
-### `SecureField`
+#### `SecureField`
 
 Single-line input that obscures its contents (passwords).
 
@@ -164,7 +164,7 @@ Single-line input that obscures its contents (passwords).
 SecureField({ placeholder: 'Password', text, setText })
 ```
 
-### `TextEditor`
+#### `TextEditor`
 
 Multi-line text editing area.
 
@@ -173,9 +173,9 @@ TextEditor({ text, setText })
   .frame({ minHeight: 120 })
 ```
 
-## Controls
+### Controls
 
-### `Button`
+#### `Button`
 
 ```javascript
 Button('Save', () => handleSave())
@@ -183,16 +183,16 @@ Button({ label: HStack([Image({ systemName: 'checkmark' }), Text('Save')]),
          action: () => handleSave() })
 ```
 
-Style with `.buttonStyle(MyButtonStyle)` — see `defineButtonStyle` in chapter 1.
+Style with `.buttonStyle(MyButtonStyle)`; see `defineButtonStyle` in [chapter 01](01-introduction.md).
 
-### `Toggle`
+#### `Toggle`
 
 ```javascript
 const [isOn, setIsOn] = useState(false)
 Toggle({ label: 'Enabled', isOn, setIsOn })
 ```
 
-### `Slider`
+#### `Slider`
 
 ```javascript
 Slider({
@@ -206,9 +206,9 @@ Slider({
 })
 ```
 
-`range: [lo, hi]` is the convenient form; `lowerBound` / `upperBound` work too.
+`range: [lo, hi]` is the convenient form; `lowerBound` and `upperBound` work too.
 
-### `Picker`
+#### `Picker`
 
 A selection control. Style it with `.pickerStyle()`.
 
@@ -223,9 +223,9 @@ Picker('Size', [size, setSize], [
 
 `pickerStyle` values: `'automatic'`, `'segmented'`, `'inline'`, `'menu'`, `'navigationlink'`, `'palette'`, `'radiogroup'`, `'wheel'`.
 
-### `Menu`
+#### `Menu`
 
-A dropdown of actions.
+A drop-down list of actions.
 
 ```javascript
 Menu({ label: Button('Options', () => {}) }, [
@@ -234,33 +234,33 @@ Menu({ label: Button('Options', () => {}) }, [
 ])
 ```
 
-### `Label`
+#### `Label`
 
-Standard title + icon row.
+Standard title and icon row.
 
 ```javascript
 Label({ title: 'Favorites', systemImage: 'star.fill' })
 Label({ title: 'Profile', icon: Image({ url: 'avatar.png' }) })
 ```
 
-### `ProgressView`
+#### `ProgressView`
 
 ```javascript
 ProgressView()                          // indeterminate spinner
 ProgressView({ value: 0.7, total: 1 })  // 70% bar
 ```
 
-## Empty States and Spacers
+### Empty states and spacers
 
-### `Empty`
+#### `Empty`
 
-Renders nothing. Use for conditional rendering.
+Renders nothing. Use it for conditional rendering.
 
 ```javascript
 showContent ? Text('Hello') : Empty()
 ```
 
-### `Spacer` and `Divider`
+#### `Spacer` and `Divider`
 
 ```javascript
 HStack([Text('Left'), Spacer(), Text('Right')])
@@ -268,9 +268,9 @@ HStack([Text('Top'), Spacer({ minLength: 20 }), Text('Bottom')])
 VStack({ spacing: 0 }, [Text('Above'), Divider(), Text('Below')])
 ```
 
-## Media
+### Media
 
-### `Image`
+#### `Image`
 
 ```javascript
 Image({ url: 'https://example.com/photo.jpg' })
@@ -280,9 +280,9 @@ Image({ image: 'data:image/png;base64,…' })
 Image({ svg: '<svg>…</svg>' })
 ```
 
-Image-specific modifiers: `.resizable()`, `.renderingMode('original'|'template')`, `.interpolation('none'|'low'|'medium'|'high')`, `.antialiased()`, `.symbolRenderingMode('monochrome'|'hierarchical'|'palette'|'multicolor')`, `.imageScale('small'|'medium'|'large')`. Most callers also use the universal `.aspectRatio()` and `.scaledToFit()` / `.scaledToFill()`.
+Image-specific modifiers: `.resizable()`, `.renderingMode('original'|'template')`, `.interpolation('none'|'low'|'medium'|'high')`, `.antialiased()`, `.symbolRenderingMode('monochrome'|'hierarchical'|'palette'|'multicolor')`, `.imageScale('small'|'medium'|'large')`. Most callers also use the universal `.aspectRatio()` and `.scaledToFit()` or `.scaledToFill()`.
 
-### `Video`
+#### `Video`
 
 ```javascript
 Video({
@@ -291,7 +291,7 @@ Video({
 }).frame({ height: 300 })
 ```
 
-### `Model3D`
+#### `Model3D`
 
 Displays a 3D model from a URL. iOS uses `iOSURL` for a USDZ override.
 
@@ -305,9 +305,9 @@ Model3D({
 })
 ```
 
-## Shapes
+### Shapes
 
-### Built-in
+#### Built-in
 
 ```javascript
 Rectangle().fill(Color('blue')).frame({ width: 100, height: 50 })
@@ -319,7 +319,7 @@ Capsule().fill(Color('orange')).frame({ width: 80, height: 40 })
 
 Shape-specific modifiers: `.fill(Style)`, `.stroke(Style | { style, lineWidth })`.
 
-### `Path`
+#### `Path`
 
 Custom vector shape from path commands.
 
@@ -334,9 +334,9 @@ Path((path) => {
 
 The `PathBuilder` exposes `move`, `line`, `quadCurve`, `curve`, `arc`, `addRect`, `addRoundedRect`, `addEllipse`, `addLines`, `close`.
 
-## Color, Material, Gradients
+### Color, material, and gradients
 
-### `Color`
+#### `Color`
 
 ```javascript
 Color('blue')                       // named
@@ -347,11 +347,11 @@ Color('primary')                    // semantic, adapts to color scheme
 Color('blue').opacity(0.5)
 ```
 
-The `ColorProps` union accepts named colors, RGB / HSL objects, hex strings, and ARGB integers.
+The `ColorProps` union accepts named colors, RGB or HSL objects, hex strings, and ARGB integers.
 
-### `Material`
+#### `Material`
 
-Translucent blur effect ("frosted glass"). Use as a background.
+Translucent blur effect ("frosted glass"). Use it as a background.
 
 ```javascript
 Text('Over blurred background').background(Material('thin'))
@@ -360,7 +360,7 @@ Material({ type: 'regular', opacity: 0.8, blurRadius: 10 })
 
 Types: `'ultraThin'`, `'thin'`, `'regular'`, `'thick'`, `'bar'`, `'chrome'`, `'titlebar'`, `'toolbarMaterial'`.
 
-### Gradients
+#### Gradients
 
 ```javascript
 LinearGradient({ colors: [Color('blue'), Color('purple')], startPoint: 'leading', endPoint: 'trailing' })
@@ -369,11 +369,11 @@ RadialGradient({ colors: ['white', 'black'], center: 'center', startRadius: 0, e
 EllipticalGradient({ colors: [Color('yellow'), Color('orange'), Color('red')], startRadius: 0, endRadius: 100 })
 ```
 
-`startPoint` / `endPoint` / `center` accept a `UnitPoint` — either `{x, y}` (0–1 range) or one of `'top'`, `'bottom'`, `'leading'`, `'trailing'`, `'topLeading'`, `'topTrailing'`, `'bottomLeading'`, `'bottomTrailing'`, `'center'`, `'zero'`.
+`startPoint`, `endPoint`, and `center` accept a `UnitPoint`: either `{x, y}` (0–1 range) or one of `'top'`, `'bottom'`, `'leading'`, `'trailing'`, `'topLeading'`, `'topTrailing'`, `'bottomLeading'`, `'bottomTrailing'`, `'center'`, `'zero'`.
 
-## Custom Fonts
+### Custom fonts
 
-### `CustomFont`
+#### `CustomFont`
 
 ```javascript
 Text('Custom').font(CustomFont({
@@ -384,9 +384,9 @@ Text('Custom').font(CustomFont({
 }))
 ```
 
-## Navigation
+### Navigation
 
-### `NavigationLink`
+#### `NavigationLink`
 
 Triggers navigation to a destination view when tapped. Inside a `NavigationStack` on iOS; resolved by the host on web and Android via `useNavigate()`.
 
@@ -398,11 +398,11 @@ NavigationLink(
 )
 ```
 
-For programmatic navigation, attach `.navigationDestination({ isPresented, setIsPresented, destination })` to a parent view (see chapter 8 — `navigationDestination` is an iOS Platform Extension modifier).
+For programmatic navigation, attach `.navigationDestination({ isPresented, setIsPresented, destination })` to a parent view (see [chapter 09](09-modifiers-reference.md); `navigationDestination` is an iOS platform extension modifier).
 
-## Host Integration
+### Host integration
 
-### `Placeholder`
+#### `Placeholder`
 
 A bridge to native platform components. The host application registers native views by name; at runtime, BindJS resolves the `name` against that registry. The children render as a fallback when no native component is registered for the current platform.
 
@@ -441,17 +441,17 @@ VStack([Markdown(props.content)]).environment('openURL', OpenURLAction((url) => 
 
 ---
 
-## Platform Extensions
+## Platform extensions
 
-These components are scoped to a specific host platform's UI vocabulary. They render natively on the platform they belong to and have no portable equivalent on others. Authoring code that uses them is non-portable — guard with environment checks if you need the same component to work cross-platform.
+These components are scoped to a specific host platform's UI vocabulary. They render natively on the platform they belong to and have no portable equivalent on others. Authoring code that uses them is non-portable; guard with environment checks if you need the same component to work cross-platform.
 
-## iOS / SwiftUI
+### iOS / SwiftUI
 
-### Layout — Grids and Adaptive
+#### Layout: grids and adaptive
 
-#### `Grid`, `GridRow`
+##### `Grid`, `GridRow`
 
-Two-dimensional grid layout — SwiftUI `Grid`.
+Two-dimensional grid layout (SwiftUI `Grid`).
 
 ```javascript
 Grid({ horizontalSpacing: 12, verticalSpacing: 8 }, [
@@ -460,7 +460,7 @@ Grid({ horizontalSpacing: 12, verticalSpacing: 8 }, [
 ])
 ```
 
-#### `ViewThatFits`
+##### `ViewThatFits`
 
 Picks the first child that fits in the available space.
 
@@ -473,9 +473,9 @@ ViewThatFits([
 
 Optionally accepts `{ axes: 'horizontal' | 'vertical' | 'both' }`.
 
-### Empty States
+#### Empty states
 
-#### `ContentUnavailableView`
+##### `ContentUnavailableView`
 
 SwiftUI's native empty-state view with icon, title, description, and optional actions.
 
@@ -489,9 +489,9 @@ ContentUnavailableView({
 ])
 ```
 
-### Navigation
+#### Navigation
 
-#### `NavigationStack`
+##### `NavigationStack`
 
 A SwiftUI container for hierarchical navigation. On other platforms, navigation is delegated to the host application via `useNavigate()`.
 
@@ -503,9 +503,9 @@ NavigationStack([
 ])
 ```
 
-### Toolbar
+#### Toolbar
 
-#### `ToolbarItem`
+##### `ToolbarItem`
 
 A single toolbar item with optional placement. Used inside `.toolbar()`.
 
@@ -515,7 +515,7 @@ ToolbarItem({ placement: 'topBarTrailing' }, [
 ])
 ```
 
-#### `ToolbarItemGroup`
+##### `ToolbarItemGroup`
 
 Groups multiple toolbar items with shared placement.
 
@@ -530,11 +530,11 @@ VStack([…]).toolbar(
 
 `ToolbarItemPlacement` includes semantic values (`'primaryAction'`, `'cancellationAction'`, `'confirmationAction'`, `'destructiveAction'`, `'principal'`, `'navigation'`, `'status'`) and positional values (`'topBarLeading'`, `'topBarTrailing'`, `'bottomBar'`, `'navigationBarLeading'`, `'navigationBarTrailing'`, `'bottomOrnament'`, `'keyboard'`, `'subtitle'`, `'title'`, `'largeSubtitle'`).
 
-## Web
+### Web
 
-### Effects
+#### Effects
 
-#### `Shader`
+##### `Shader`
 
 Custom GPU effect rendered via WebGL. Web-only today.
 
@@ -550,7 +550,7 @@ Shader({
 
 ---
 
-## Complete Example: Interactive Card
+## Complete example: interactive card
 
 ```javascript
 const properties = {

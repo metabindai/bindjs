@@ -2,7 +2,7 @@
 
 An MCP inspector: session, resources, tools, and the View rendered.
 
-```sh
+```bash
 cd ../mcp-server && npm install && npm run serve   # :8787/mcp
 npm install && npm run dev                         # :5185
 ```

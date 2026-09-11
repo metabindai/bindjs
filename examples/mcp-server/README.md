@@ -3,7 +3,7 @@
 A TypeScript MCP server with two `ui://` Views of type `application/bindjs+json`, each
 tool derived whole from its View's entry component.
 
-```sh
+```bash
 npm install
 npm run walkthrough    # prints every message, in order
 npm start              # stdio, for a host to launch

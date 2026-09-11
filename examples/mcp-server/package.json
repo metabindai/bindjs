@@ -1,0 +1,23 @@
+{
+    "name": "@metabindai/bindjs-example-mcp-server",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Serving a BindJS View from an MCP server: the View channel, the content channel, and host negotiation",
+    "license": "Apache-2.0",
+    "scripts": {
+        "start": "tsx src/index.ts",
+        "serve": "tsx src/http.ts",
+        "walkthrough": "tsx src/walkthrough.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.30.0",
+        "zod": "^4.4.3"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.5",
+        "tsx": "^4.19.2",
+        "typescript": "~5.6.2"
+    }
+}

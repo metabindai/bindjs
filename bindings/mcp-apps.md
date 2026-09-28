@@ -184,4 +184,4 @@ Beyond section 4: the bridge is host-mediated, so a View cannot call a tool the 
 
 ## 8. Conformance
 
-A host conforms to this binding when it implements sections 2 through 5 for at least one platform renderer at BindJS 1.0 "Core with declared gaps" or better, and publishes which renderer and statement it ships. The Metabind hosts (`metabind-apple`, `metabind-android`, `metabind-web`) are the reference implementations; the Metabind hosted MCP server serves this type today.
+A host conforms to this binding when it implements sections 2 through 5 for at least one platform renderer at BindJS 1.0 "Core with declared gaps" or better, and publishes which renderer and statement it ships. The Metabind hosted MCP server serves this type today. The Metabind host SDKs do not implement this binding yet: `metabind-apple` and `metabind-android` render the server's pre-specification type natively, and `metabind-web` renders HTML Views only. [`registry/renderers.md`](../registry/renderers.md) lists each host's status.

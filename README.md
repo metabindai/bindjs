@@ -37,7 +37,7 @@ You write a BindJS component in JavaScript against a SwiftUI-shaped API. A runti
 | [`metabindai/bindjs-android`](https://github.com/metabindai/bindjs-android) | Jetpack Compose rendering engine (`ai.metabind:bindjs-android`) | [Jetpack Compose statement](conformance/statements/compose.md) |
 | [`metabindai/a2ui-bindjs`](https://github.com/metabindai/a2ui-bindjs) | A2UI renderer on BindJS: the A2UI interpreter, the basic catalog as BindJS source, React, iOS, and Android hosts | [A2UI binding](bindings/a2ui.md) |
 
-Hosts that implement the MCP Apps binding: [`metabind-apple`](https://github.com/metabindai/metabind-apple), [`metabind-android`](https://github.com/metabindai/metabind-android), and [`metabind-web`](https://github.com/metabindai/metabind-web).
+Metabind's host SDKs: [`metabind-apple`](https://github.com/metabindai/metabind-apple) and [`metabind-android`](https://github.com/metabindai/metabind-android) embed the SwiftUI and Compose renderers but do not implement the MCP Apps binding yet; [`metabind-web`](https://github.com/metabindai/metabind-web) renders MCP Apps as HTML in sandboxed iframes and embeds no BindJS renderer. Details are in [`registry/renderers.md`](registry/renderers.md).
 
 Tutorials, the API reference, a playground, and the hosted tooling (Metabind Studio, the hosted MCP server) live at [metabind.ai](https://metabind.ai) and [docs.metabind.ai/bindjs](https://docs.metabind.ai/bindjs/introduction). Where they and this repository disagree, this repository is normative.
 

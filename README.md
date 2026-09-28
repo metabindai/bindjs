@@ -1,10 +1,20 @@
-# BindJS
+# BindJS: MCP Apps UI in SwiftUI, Jetpack Compose, and React
 
-**Write a UI component once, with its logic. BindJS renders it as native SwiftUI, Jetpack Compose, and React, wherever an agent renders UI: as an [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) View, as an A2UI catalog, or inside an in-app assistant.** A custom component needs no per-platform renderer.
+**Write a UI component once, with its logic. BindJS renders it as native SwiftUI and Jetpack Compose, with no WebView, and as React on the web.** As an [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) View, the same component runs in Claude and ChatGPT inside the standard sandboxed iframe, and natively inside iOS and Android apps through the Metabind Assistant SDK. A custom component needs no per-platform renderer.
 
-BindJS is the open component language for agent UI. It is an open specification, Apache 2.0, stewarded by [Metabind](https://metabind.ai). Authors: Trevor Stout, Ollie Wagner, Dave Fumberger, Emory Al-Imam (see [`AUTHORS.md`](AUTHORS.md)).
+BindJS is the open component language for agent UI, with bindings for MCP Apps and A2UI. It is an open specification, Apache 2.0, stewarded by [Metabind](https://metabind.ai). Authors: Trevor Stout, Ollie Wagner, Dave Fumberger, Emory Al-Imam (see [`AUTHORS.md`](AUTHORS.md)).
 
 You write a BindJS component in JavaScript against a SwiftUI-shaped API. A runtime executes it in an isolated context and emits a JSON view tree; a renderer on each platform draws that tree with real platform widgets. The renderer never sees code, only data. That boundary is what makes one definition portable across three platforms, and it is what lets a host bound what BindJS content can do: the runtime executes with no ambient authority, and only a view tree reaches the platform.
+
+| Platform | JavaScript runtime | Renderer |
+|---|---|---|
+| Apple platforms | JavaScriptCore (`JSContext`) | SwiftUI |
+| Android | `androidx.javascriptengine` (`JavaScriptIsolate`) | Jetpack Compose |
+| Web, including MCP hosts | The browser's engine, in the host page or a sandboxed iframe | React |
+
+<p><img src=".github/readme/spending-card.png" width="420" alt="Spending card from a Metabind demo MCP App with sample data: last month's spending as a stacked bar and a list of nine categories, drawn by the BindJS React renderer"></p>
+
+<sub>A BindJS component from Metabind's banking demo MCP App (sample data), drawn by the React renderer inside an MCP Apps View and captured in the MCP Apps reference web host.</sub>
 
 ## What is in this repository
 

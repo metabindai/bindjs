@@ -57,5 +57,6 @@ New in 1.0, required by publication: the runtime MUST expose `BindJS.spec` (the 
 - [`statements/react.md`](statements/react.md): `@metabindai/bindjs-runtime` 1.0.9 and `@metabindai/bindjs-react` 1.0.5
 - [`statements/swiftui.md`](statements/swiftui.md): `bindjs-apple` 1.2.0
 - [`statements/compose.md`](statements/compose.md): `bindjs-android` 0.0.20
+- [`statements/metabind-mcp.md`](statements/metabind-mcp.md): the Metabind hosted MCP server, [MCP Apps binding](../bindings/mcp-apps.md) server side
 
 Each statement lists Core items that are unsupported, aliased, partial, or no-op, and the platform extensions it provides. Each gap gets a tracking issue when the repository is published.

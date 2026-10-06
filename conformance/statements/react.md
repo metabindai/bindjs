@@ -20,7 +20,8 @@
 
 | Status | Items |
 |---|---|
-| Unsupported (ignored) | `clipped`, `tint`, `coordinateSpace`, `contextMenu`, `pickerStyle`, `layoutPriority`, `transition`, `autocorrectionDisabled`, `keyboardType`, `focused`, `onSubmit`, `textFieldStyle`, `submitLabel`, `accessibilityHidden`, `accessibilityRemoveTraits`, and the `Image` modifiers `renderingMode`, `interpolation`, `antialiased`, `symbolRenderingMode`, `imageScale` |
+| Supported after fix | `clipped` (metabindai/bindjs-runtime#14; ignored until it ships) |
+| Unsupported (ignored) | `tint`, `coordinateSpace`, `contextMenu`, `pickerStyle`, `layoutPriority`, `transition`, `autocorrectionDisabled`, `keyboardType`, `focused`, `onSubmit`, `textFieldStyle`, `submitLabel`, `accessibilityHidden`, `accessibilityRemoveTraits`, and the `Image` modifiers `renderingMode`, `interpolation`, `antialiased`, `symbolRenderingMode`, `imageScale` |
 | Supported | the remaining 65, including `onHover`, `visualEffect`, `containerRelativeFrame`, `controlSize`, `onChange`, `dynamicTypeSize`, `accessibilityLabel`, `accessibilityValue` |
 
 ## Runtime

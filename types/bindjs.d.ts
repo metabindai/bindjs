@@ -422,72 +422,94 @@ type ComponentProperties = Record<string, PropertyField>;
 
 // -- Property Constructor Functions --
 
-/** Creates a string property definition. *
-/** Creates a string property definition. * @tier core
-/** Creates a string property definition. * @kind property
-/** Creates a string property definition. * @since 1.0
-/** Creates a string property definition. */
+/**
+ * Creates a string property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyString(options: PropertyStringOptions): PropertyString;
-/** Creates a boolean property definition. *
-/** Creates a boolean property definition. * @tier core
-/** Creates a boolean property definition. * @kind property
-/** Creates a boolean property definition. * @since 1.0
-/** Creates a boolean property definition. */
+/**
+ * Creates a boolean property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyBoolean(options: PropertyBooleanOptions): PropertyBoolean;
-/** Creates an enum (select) property definition. *
-/** Creates an enum (select) property definition. * @tier core
-/** Creates an enum (select) property definition. * @kind property
-/** Creates an enum (select) property definition. * @since 1.0
-/** Creates an enum (select) property definition. */
+/**
+ * Creates an enum (select) property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyEnum(options: PropertyEnumOptions): PropertyEnum;
-/** Creates a number property definition. *
-/** Creates a number property definition. * @tier core
-/** Creates a number property definition. * @kind property
-/** Creates a number property definition. * @since 1.0
-/** Creates a number property definition. */
+/**
+ * Creates a number property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyNumber(options: PropertyNumberOptions): PropertyNumber;
-/** Creates an integer property definition. Same shape as number but emits
- *  `{type: "integer"}` in JSON Schema. *
- *  `{type: "integer"}` in JSON Schema. * @tier core
- *  `{type: "integer"}` in JSON Schema. * @kind property
- *  `{type: "integer"}` in JSON Schema. * @since 1.0
- *  `{type: "integer"}` in JSON Schema. */
+/**
+ * Creates an integer property definition. Same shape as number but emits
+ * `{type: "integer"}` in JSON Schema.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyInteger(options: PropertyIntegerOptions): PropertyInteger;
-/** Creates an array property definition. *
-/** Creates an array property definition. * @tier core
-/** Creates an array property definition. * @kind property
-/** Creates an array property definition. * @since 1.0
-/** Creates an array property definition. */
+/**
+ * Creates an array property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyArray(options: PropertyArrayOptions): PropertyArray;
-/** Creates a component slot property definition. *
-/** Creates a component slot property definition. * @tier core
-/** Creates a component slot property definition. * @kind property
-/** Creates a component slot property definition. * @since 1.0
-/** Creates a component slot property definition. */
+/**
+ * Creates a component slot property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyComponent(options?: PropertyComponentOptions): PropertyComponent;
-/** Creates an asset property definition. *
-/** Creates an asset property definition. * @tier core
-/** Creates an asset property definition. * @kind property
-/** Creates an asset property definition. * @since 1.0
-/** Creates an asset property definition. */
+/**
+ * Creates an asset property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyAsset(options: PropertyAssetOptions): PropertyAsset;
-/** Creates a content reference property definition. *
-/** Creates a content reference property definition. * @tier core
-/** Creates a content reference property definition. * @kind property
-/** Creates a content reference property definition. * @since 1.0
-/** Creates a content reference property definition. */
+/**
+ * Creates a content reference property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyContent(options: PropertyContentOptions): PropertyContent;
-/** Creates a group property definition with nested fields. *
-/** Creates a group property definition with nested fields. * @tier core
-/** Creates a group property definition with nested fields. * @kind property
-/** Creates a group property definition with nested fields. * @since 1.0
-/** Creates a group property definition with nested fields. */
+/**
+ * Creates a group property definition with nested fields.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyGroup(options: PropertyGroupOptions): PropertyGroup;
-/** Creates a date property definition. *
-/** Creates a date property definition. * @tier core
-/** Creates a date property definition. * @kind property
-/** Creates a date property definition. * @since 1.0
-/** Creates a date property definition. */
+/**
+ * Creates a date property definition.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyDate(options: PropertyDateOptions): PropertyDate;
 
 // =============================================================================
@@ -819,53 +841,69 @@ interface AnimationComponent {
     repeatForever(_: boolean | { autoreverses: boolean }): AnimationComponent;
 }
 
-/** A spring animation with response and damping parameters. *
-/** A spring animation with response and damping parameters. * @tier core
-/** A spring animation with response and damping parameters. * @kind animation
-/** A spring animation with response and damping parameters. * @since 1.0
-/** A spring animation with response and damping parameters. */
+/**
+ * A spring animation with response and damping parameters.
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function Spring(options?: SpringAnimationOptions): AnimationComponent;
-/** A spring animation defined by physical stiffness, damping, and mass. *
-/** A spring animation defined by physical stiffness, damping, and mass. * @tier core
-/** A spring animation defined by physical stiffness, damping, and mass. * @kind animation
-/** A spring animation defined by physical stiffness, damping, and mass. * @since 1.0
-/** A spring animation defined by physical stiffness, damping, and mass. */
+/**
+ * A spring animation defined by physical stiffness, damping, and mass.
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function InterpolatingSpring(options?: InterpolatingSpringAnimationOptions): AnimationComponent;
-/** An ease-in timing curve (starts slow, ends fast). *
-/** An ease-in timing curve (starts slow, ends fast). * @tier core
-/** An ease-in timing curve (starts slow, ends fast). * @kind animation
-/** An ease-in timing curve (starts slow, ends fast). * @since 1.0
-/** An ease-in timing curve (starts slow, ends fast). */
+/**
+ * An ease-in timing curve (starts slow, ends fast).
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function EaseIn(options?: EaseAnimationOptions): AnimationComponent;
-/** An ease-in-out timing curve (starts and ends slow). *
-/** An ease-in-out timing curve (starts and ends slow). * @tier core
-/** An ease-in-out timing curve (starts and ends slow). * @kind animation
-/** An ease-in-out timing curve (starts and ends slow). * @since 1.0
-/** An ease-in-out timing curve (starts and ends slow). */
+/**
+ * An ease-in-out timing curve (starts and ends slow).
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function EaseInOut(options?: EaseAnimationOptions): AnimationComponent;
-/** An ease-out timing curve (starts fast, ends slow). *
-/** An ease-out timing curve (starts fast, ends slow). * @tier core
-/** An ease-out timing curve (starts fast, ends slow). * @kind animation
-/** An ease-out timing curve (starts fast, ends slow). * @since 1.0
-/** An ease-out timing curve (starts fast, ends slow). */
+/**
+ * An ease-out timing curve (starts fast, ends slow).
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function EaseOut(options?: EaseAnimationOptions): AnimationComponent;
-/** A linear timing curve (constant speed). *
-/** A linear timing curve (constant speed). * @tier core
-/** A linear timing curve (constant speed). * @kind animation
-/** A linear timing curve (constant speed). * @since 1.0
-/** A linear timing curve (constant speed). */
+/**
+ * A linear timing curve (constant speed).
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function Linear(options?: EaseAnimationOptions): AnimationComponent;
-/** A spring with extra bounce. *
-/** A spring with extra bounce. * @tier core
-/** A spring with extra bounce. * @kind animation
-/** A spring with extra bounce. * @since 1.0
-/** A spring with extra bounce. */
+/**
+ * A spring with extra bounce.
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function Bouncy(options?: BouncyAnimationOptions): AnimationComponent;
-/** A spring with snappy feel (higher damping). *
-/** A spring with snappy feel (higher damping). * @tier core
-/** A spring with snappy feel (higher damping). * @kind animation
-/** A spring with snappy feel (higher damping). * @since 1.0
-/** A spring with snappy feel (higher damping). */
+/**
+ * A spring with snappy feel (higher damping).
+ *
+ * @tier core
+ * @kind animation
+ * @since 1.0
+ */
 declare function Snappy(options?: SnappyAnimationOptions): AnimationComponent;
 
 interface Spring extends SpringAnimationOptions { }
@@ -1117,11 +1155,13 @@ interface Component {
     /** Call signature — components are callable for composition. */
     (): Component;
 
-    /** Sets a stable identity for diffing and animations. *
-    /** Sets a stable identity for diffing and animations. * @tier core
-    /** Sets a stable identity for diffing and animations. * @kind modifier
-    /** Sets a stable identity for diffing and animations. * @since 1.0
-    /** Sets a stable identity for diffing and animations. */
+    /**
+     * Sets a stable identity for diffing and animations.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     id(value: string | number): Component;
 
     /**
@@ -1170,11 +1210,13 @@ interface Component {
      * @since 1.0
      */
     onAppear(action: () => void): Component;
-    /** Runs an action when the component is removed from the screen. *
-    /** Runs an action when the component is removed from the screen. * @tier core
-    /** Runs an action when the component is removed from the screen. * @kind modifier
-    /** Runs an action when the component is removed from the screen. * @since 1.0
-    /** Runs an action when the component is removed from the screen. */
+    /**
+     * Runs an action when the component is removed from the screen.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     onDisappear(action: () => void): Component;
 
     // -- Environment --
@@ -1264,44 +1306,56 @@ interface Component {
      */
     padding(edges?: EdgeSet, length?: number): Component;
     padding(length: number): Component;
-    /** Offsets the component's position without affecting layout. *
-    /** Offsets the component's position without affecting layout. * @tier core
-    /** Offsets the component's position without affecting layout. * @kind modifier
-    /** Offsets the component's position without affecting layout. * @since 1.0
-    /** Offsets the component's position without affecting layout. */
+    /**
+     * Offsets the component's position without affecting layout.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     offset(_: { x?: number; y?: number }): Component;
-    /** Controls stacking order in a ZStack. Higher values render on top. *
-    /** Controls stacking order in a ZStack. Higher values render on top. * @tier core
-    /** Controls stacking order in a ZStack. Higher values render on top. * @kind modifier
-    /** Controls stacking order in a ZStack. Higher values render on top. * @since 1.0
-    /** Controls stacking order in a ZStack. Higher values render on top. */
+    /**
+     * Controls stacking order in a ZStack. Higher values render on top.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     zIndex(_: number): Component;
-    /** Scales the component. Accepts a uniform number or per-axis values. *
-    /** Scales the component. Accepts a uniform number or per-axis values. * @tier core
-    /** Scales the component. Accepts a uniform number or per-axis values. * @kind modifier
-    /** Scales the component. Accepts a uniform number or per-axis values. * @since 1.0
-    /** Scales the component. Accepts a uniform number or per-axis values. */
+    /**
+     * Scales the component. Accepts a uniform number or per-axis values.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     scaleEffect(_: { x?: number; y?: number, anchor?: UnitPoint } | number): Component;
-    /** Rotates the component. Accepts degrees as a number or object. *
-    /** Rotates the component. Accepts degrees as a number or object. * @tier core
-    /** Rotates the component. Accepts degrees as a number or object. * @kind modifier
-    /** Rotates the component. Accepts degrees as a number or object. * @since 1.0
-    /** Rotates the component. Accepts degrees as a number or object. */
+    /**
+     * Rotates the component. Accepts degrees as a number or object.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     rotationEffect(_: { degrees: number, anchor?: UnitPoint } | number): Component;
-    /** Applies a 2D affine transform matrix. *
-    /** Applies a 2D affine transform matrix. * @tier core
-    /** Applies a 2D affine transform matrix. * @kind modifier
-    /** Applies a 2D affine transform matrix. * @since 1.0
-    /** Applies a 2D affine transform matrix. */
+    /**
+     * Applies a 2D affine transform matrix.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     transformEffect(_: { a: number; b: number; c: number; d: number; tx: number; ty: number }): Component;
 
     // -- Appearance --
 
-    /** Sets the component's opacity (0 = invisible, 1 = fully opaque). *
-    /** Sets the component's opacity (0 = invisible, 1 = fully opaque). * @tier core
-    /** Sets the component's opacity (0 = invisible, 1 = fully opaque). * @kind modifier
-    /** Sets the component's opacity (0 = invisible, 1 = fully opaque). * @since 1.0
-    /** Sets the component's opacity (0 = invisible, 1 = fully opaque). */
+    /**
+     * Sets the component's opacity (0 = invisible, 1 = fully opaque).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     opacity(_: number): Component;
 
     /**
@@ -1320,61 +1374,77 @@ interface Component {
     foregroundStyle(_: Style): Component;
     /** Chart mark color or series binding. Valid on chart marks inside Chart. */
     foregroundStyle(_: ChartForegroundStyleInput): Component;
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. *
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. * @tier core
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. * @module charts
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. * @kind modifier
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. * @since 1.0
-    /** Chart mark line width/dash. Valid on line, area, and rule marks inside Chart. */
+    /**
+     * Chart mark line width/dash. Valid on line, area, and rule marks inside Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     lineStyle(_: ChartLineStyleOptions): Component;
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. *
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. * @tier core
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. * @module charts
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. * @kind modifier
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. * @since 1.0
-    /** Chart mark interpolation method. Valid on line and area marks inside Chart. */
+    /**
+     * Chart mark interpolation method. Valid on line and area marks inside Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     interpolationMethod(_: ChartInterpolationMethod): Component;
-    /** Chart mark symbol. Valid on point marks inside Chart. *
-    /** Chart mark symbol. Valid on point marks inside Chart. * @tier core
-    /** Chart mark symbol. Valid on point marks inside Chart. * @module charts
-    /** Chart mark symbol. Valid on point marks inside Chart. * @kind modifier
-    /** Chart mark symbol. Valid on point marks inside Chart. * @since 1.0
-    /** Chart mark symbol. Valid on point marks inside Chart. */
+    /**
+     * Chart mark symbol. Valid on point marks inside Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     symbol(_: ChartSymbolName): Component;
-    /** Chart mark symbol size. Valid on point marks inside Chart. *
-    /** Chart mark symbol size. Valid on point marks inside Chart. * @tier core
-    /** Chart mark symbol size. Valid on point marks inside Chart. * @module charts
-    /** Chart mark symbol size. Valid on point marks inside Chart. * @kind modifier
-    /** Chart mark symbol size. Valid on point marks inside Chart. * @since 1.0
-    /** Chart mark symbol size. Valid on point marks inside Chart. */
+    /**
+     * Chart mark symbol size. Valid on point marks inside Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     symbolSize(_: number): Component;
-    /** Text annotation attached to a chart mark. *
-    /** Text annotation attached to a chart mark. * @tier core
-    /** Text annotation attached to a chart mark. * @module charts
-    /** Text annotation attached to a chart mark. * @kind modifier
-    /** Text annotation attached to a chart mark. * @since 1.0
-    /** Text annotation attached to a chart mark. */
+    /**
+     * Text annotation attached to a chart mark.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     annotation(_: ChartAnnotationOptions): Component;
 
-    /** Sets the tint color for interactive controls (buttons, toggles, links, etc.). *
-    /** Sets the tint color for interactive controls (buttons, toggles, links, etc.). * @tier core
-    /** Sets the tint color for interactive controls (buttons, toggles, links, etc.). * @kind modifier
-    /** Sets the tint color for interactive controls (buttons, toggles, links, etc.). * @since 1.0
-    /** Sets the tint color for interactive controls (buttons, toggles, links, etc.). */
+    /**
+     * Sets the tint color for interactive controls (buttons, toggles, links, etc.).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     tint(_: Color): Component;
 
-    /** Sets the picker display style. *
-    /** Sets the picker display style. * @tier core
-    /** Sets the picker display style. * @kind modifier
-    /** Sets the picker display style. * @since 1.0
-    /** Sets the picker display style. */
+    /**
+     * Sets the picker display style.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     pickerStyle(_: PickerStyle): Component;
 
-    /** Applies a custom button style. *
-    /** Applies a custom button style. * @tier core
-    /** Applies a custom button style. * @kind modifier
-    /** Applies a custom button style. * @since 1.0
-    /** Applies a custom button style. */
+    /**
+     * Applies a custom button style.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     buttonStyle(_: ButtonStyleComponent): Component;
 
     /**
@@ -1390,150 +1460,194 @@ interface Component {
      * @since 1.0
      */
     background(style?: Style): Component;
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. *
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. * @tier extension
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. * @platform ios
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. * @kind modifier
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. * @since 1.0
-    /** Adds a badge (count or text) to the component, typically for tab bars or list rows. */
+    /**
+     * Adds a badge (count or text) to the component, typically for tab bars or list rows.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     badge(_: number | string): Component;
-    /** Chart x-axis options. Valid on Chart. *
-    /** Chart x-axis options. Valid on Chart. * @tier core
-    /** Chart x-axis options. Valid on Chart. * @module charts
-    /** Chart x-axis options. Valid on Chart. * @kind modifier
-    /** Chart x-axis options. Valid on Chart. * @since 1.0
-    /** Chart x-axis options. Valid on Chart. */
+    /**
+     * Chart x-axis options. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartXAxis(_: ChartAxisOptions | "hidden"): Component;
-    /** Chart y-axis options. Valid on Chart. *
-    /** Chart y-axis options. Valid on Chart. * @tier core
-    /** Chart y-axis options. Valid on Chart. * @module charts
-    /** Chart y-axis options. Valid on Chart. * @kind modifier
-    /** Chart y-axis options. Valid on Chart. * @since 1.0
-    /** Chart y-axis options. Valid on Chart. */
+    /**
+     * Chart y-axis options. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartYAxis(_: ChartAxisOptions | "hidden"): Component;
-    /** Chart x-scale options. Valid on Chart. *
-    /** Chart x-scale options. Valid on Chart. * @tier core
-    /** Chart x-scale options. Valid on Chart. * @module charts
-    /** Chart x-scale options. Valid on Chart. * @kind modifier
-    /** Chart x-scale options. Valid on Chart. * @since 1.0
-    /** Chart x-scale options. Valid on Chart. */
+    /**
+     * Chart x-scale options. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartXScale(_: ChartScaleOptions): Component;
-    /** Chart y-scale options. Valid on Chart. *
-    /** Chart y-scale options. Valid on Chart. * @tier core
-    /** Chart y-scale options. Valid on Chart. * @module charts
-    /** Chart y-scale options. Valid on Chart. * @kind modifier
-    /** Chart y-scale options. Valid on Chart. * @since 1.0
-    /** Chart y-scale options. Valid on Chart. */
+    /**
+     * Chart y-scale options. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartYScale(_: ChartScaleOptions): Component;
-    /** Maps series values to colors. Valid on Chart. *
-    /** Maps series values to colors. Valid on Chart. * @tier core
-    /** Maps series values to colors. Valid on Chart. * @module charts
-    /** Maps series values to colors. Valid on Chart. * @kind modifier
-    /** Maps series values to colors. Valid on Chart. * @since 1.0
-    /** Maps series values to colors. Valid on Chart. */
+    /**
+     * Maps series values to colors. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartForegroundStyleScale(_: ChartForegroundStyleScale): Component;
-    /** Enables slice selection. Valid on PieChart. *
-    /** Enables slice selection. Valid on PieChart. * @tier core
-    /** Enables slice selection. Valid on PieChart. * @module charts
-    /** Enables slice selection. Valid on PieChart. * @kind modifier
-    /** Enables slice selection. Valid on PieChart. * @since 1.0
-    /** Enables slice selection. Valid on PieChart. */
+    /**
+     * Enables slice selection. Valid on PieChart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartSelection(_: PieSelectionOptions): Component;
-    /** Maps series values to finite symbols. Valid on Chart. *
-    /** Maps series values to finite symbols. Valid on Chart. * @tier core
-    /** Maps series values to finite symbols. Valid on Chart. * @module charts
-    /** Maps series values to finite symbols. Valid on Chart. * @kind modifier
-    /** Maps series values to finite symbols. Valid on Chart. * @since 1.0
-    /** Maps series values to finite symbols. Valid on Chart. */
+    /**
+     * Maps series values to finite symbols. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartSymbolScale(_: ChartSymbolScale): Component;
-    /** Enables x-axis selection. Valid on Chart. *
-    /** Enables x-axis selection. Valid on Chart. * @tier core
-    /** Enables x-axis selection. Valid on Chart. * @module charts
-    /** Enables x-axis selection. Valid on Chart. * @kind modifier
-    /** Enables x-axis selection. Valid on Chart. * @since 1.0
-    /** Enables x-axis selection. Valid on Chart. */
+    /**
+     * Enables x-axis selection. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartXSelection(_: ChartSelectionOptions): Component;
-    /** Enables y-axis selection. Valid on Chart. *
-    /** Enables y-axis selection. Valid on Chart. * @tier core
-    /** Enables y-axis selection. Valid on Chart. * @module charts
-    /** Enables y-axis selection. Valid on Chart. * @kind modifier
-    /** Enables y-axis selection. Valid on Chart. * @since 1.0
-    /** Enables y-axis selection. Valid on Chart. */
+    /**
+     * Enables y-axis selection. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartYSelection(_: ChartSelectionOptions): Component;
-    /** Chart legend options. Valid on Chart. *
-    /** Chart legend options. Valid on Chart. * @tier core
-    /** Chart legend options. Valid on Chart. * @module charts
-    /** Chart legend options. Valid on Chart. * @kind modifier
-    /** Chart legend options. Valid on Chart. * @since 1.0
-    /** Chart legend options. Valid on Chart. */
+    /**
+     * Chart legend options. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartLegend(_: ChartLegendOptions | "hidden"): Component;
-    /** Chart x-axis label. Valid on Chart. *
-    /** Chart x-axis label. Valid on Chart. * @tier core
-    /** Chart x-axis label. Valid on Chart. * @module charts
-    /** Chart x-axis label. Valid on Chart. * @kind modifier
-    /** Chart x-axis label. Valid on Chart. * @since 1.0
-    /** Chart x-axis label. Valid on Chart. */
+    /**
+     * Chart x-axis label. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartXAxisLabel(_: string): Component;
-    /** Chart y-axis label. Valid on Chart. *
-    /** Chart y-axis label. Valid on Chart. * @tier core
-    /** Chart y-axis label. Valid on Chart. * @module charts
-    /** Chart y-axis label. Valid on Chart. * @kind modifier
-    /** Chart y-axis label. Valid on Chart. * @since 1.0
-    /** Chart y-axis label. Valid on Chart. */
+    /**
+     * Chart y-axis label. Valid on Chart.
+     *
+     * @tier core
+     * @module charts
+     * @kind modifier
+     * @since 1.0
+     */
     chartYAxisLabel(_: string): Component;
-    /** Adds a border. Accepts a style with width, or just a color. *
-    /** Adds a border. Accepts a style with width, or just a color. * @tier core
-    /** Adds a border. Accepts a style with width, or just a color. * @kind modifier
-    /** Adds a border. Accepts a style with width, or just a color. * @since 1.0
-    /** Adds a border. Accepts a style with width, or just a color. */
+    /**
+     * Adds a border. Accepts a style with width, or just a color.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     border(_?: { style: Style; width?: number; } | Style | number): Component;
-    /** Rounds the component's corners. *
-    /** Rounds the component's corners. * @tier core
-    /** Rounds the component's corners. * @kind modifier
-    /** Rounds the component's corners. * @since 1.0
-    /** Rounds the component's corners. */
+    /**
+     * Rounds the component's corners.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     cornerRadius(_: number): Component;
-    /** Adds a drop shadow. *
-    /** Adds a drop shadow. * @tier core
-    /** Adds a drop shadow. * @kind modifier
-    /** Adds a drop shadow. * @since 1.0
-    /** Adds a drop shadow. */
+    /**
+     * Adds a drop shadow.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     shadow(props?: { radius: number; x?: number; y?: number, color?: Color | ColorProps }): Component;
-    /** Applies a Gaussian blur. *
-    /** Applies a Gaussian blur. * @tier core
-    /** Applies a Gaussian blur. * @kind modifier
-    /** Applies a Gaussian blur. * @since 1.0
-    /** Applies a Gaussian blur. */
+    /**
+     * Applies a Gaussian blur.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     blur(radius: number): Component;
-    /** Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated). *
-    /** Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated). * @tier core
-    /** Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated). * @kind modifier
-    /** Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated). * @since 1.0
-    /** Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated). */
+    /**
+     * Adjusts color saturation (0 = grayscale, 1 = original, >1 = oversaturated).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     saturation(_: number): Component;
-    /** Adjusts brightness (-1 to 1, where 0 is original). *
-    /** Adjusts brightness (-1 to 1, where 0 is original). * @tier core
-    /** Adjusts brightness (-1 to 1, where 0 is original). * @kind modifier
-    /** Adjusts brightness (-1 to 1, where 0 is original). * @since 1.0
-    /** Adjusts brightness (-1 to 1, where 0 is original). */
+    /**
+     * Adjusts brightness (-1 to 1, where 0 is original).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     brightness(_: number): Component;
-    /** Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast). *
-    /** Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast). * @tier core
-    /** Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast). * @kind modifier
-    /** Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast). * @since 1.0
-    /** Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast). */
+    /**
+     * Adjusts contrast (0 = flat gray, 1 = original, >1 = higher contrast).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     contrast(_: number): Component;
-    /** Applies a grayscale filter (0 = full color, 1 = fully desaturated). *
-    /** Applies a grayscale filter (0 = full color, 1 = fully desaturated). * @tier core
-    /** Applies a grayscale filter (0 = full color, 1 = fully desaturated). * @kind modifier
-    /** Applies a grayscale filter (0 = full color, 1 = fully desaturated). * @since 1.0
-    /** Applies a grayscale filter (0 = full color, 1 = fully desaturated). */
+    /**
+     * Applies a grayscale filter (0 = full color, 1 = fully desaturated).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     grayscale(_?: number): Component;
-    /** Sets the blend mode for compositing with content behind this component. *
-    /** Sets the blend mode for compositing with content behind this component. * @tier core
-    /** Sets the blend mode for compositing with content behind this component. * @kind modifier
-    /** Sets the blend mode for compositing with content behind this component. * @since 1.0
-    /** Sets the blend mode for compositing with content behind this component. */
+    /**
+     * Sets the blend mode for compositing with content behind this component.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     blendMode(_: BlendMode): Component;
     /**
      * Controls how content changes are animated within a view.
@@ -1548,25 +1662,31 @@ interface Component {
      * @since 1.0
      */
     contentTransition(_: ContentTransitionType | { countsDown: boolean }): Component;
-    /** Inverts all colors in the component. *
-    /** Inverts all colors in the component. * @tier core
-    /** Inverts all colors in the component. * @kind modifier
-    /** Inverts all colors in the component. * @since 1.0
-    /** Inverts all colors in the component. */
+    /**
+     * Inverts all colors in the component.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     colorInvert(): Component;
-    /** Applies a Liquid Glass visual effect. *
-    /** Applies a Liquid Glass visual effect. * @tier extension
-    /** Applies a Liquid Glass visual effect. * @platform ios
-    /** Applies a Liquid Glass visual effect. * @kind modifier
-    /** Applies a Liquid Glass visual effect. * @since 1.0
-    /** Applies a Liquid Glass visual effect. */
+    /**
+     * Applies a Liquid Glass visual effect.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     glassEffect(style?: string | { interactive?: boolean; tint?: Color }): Component;
 
-    /** Forces a specific color scheme for this component subtree. *
-    /** Forces a specific color scheme for this component subtree. * @tier core
-    /** Forces a specific color scheme for this component subtree. * @kind modifier
-    /** Forces a specific color scheme for this component subtree. * @since 1.0
-    /** Forces a specific color scheme for this component subtree. */
+    /**
+     * Forces a specific color scheme for this component subtree.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     colorScheme(_: "light" | "dark"): Component;
     /**
      * Overrides the dynamic type size for this component subtree.
@@ -1594,24 +1714,30 @@ interface Component {
      * @since 1.0
      */
     font(_?: TextStyle | number | CustomFont): Component;
-    /** Sets the font weight (e.g. "bold", "semibold", "light"). *
-    /** Sets the font weight (e.g. "bold", "semibold", "light"). * @tier core
-    /** Sets the font weight (e.g. "bold", "semibold", "light"). * @kind modifier
-    /** Sets the font weight (e.g. "bold", "semibold", "light"). * @since 1.0
-    /** Sets the font weight (e.g. "bold", "semibold", "light"). */
+    /**
+     * Sets the font weight (e.g. "bold", "semibold", "light").
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     fontWeight(_: FontWeight): Component;
-    /** Sets the font design (e.g. "rounded", "monospaced", "serif"). *
-    /** Sets the font design (e.g. "rounded", "monospaced", "serif"). * @tier core
-    /** Sets the font design (e.g. "rounded", "monospaced", "serif"). * @kind modifier
-    /** Sets the font design (e.g. "rounded", "monospaced", "serif"). * @since 1.0
-    /** Sets the font design (e.g. "rounded", "monospaced", "serif"). */
+    /**
+     * Sets the font design (e.g. "rounded", "monospaced", "serif").
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     fontDesign(_: FontDesign): Component;
-    /** Sets the font width (e.g. "condensed", "expanded"). *
-    /** Sets the font width (e.g. "condensed", "expanded"). * @tier extension
-    /** Sets the font width (e.g. "condensed", "expanded"). * @platform ios
-    /** Sets the font width (e.g. "condensed", "expanded"). * @kind modifier
-    /** Sets the font width (e.g. "condensed", "expanded"). * @since 1.0
-    /** Sets the font width (e.g. "condensed", "expanded"). */
+    /**
+     * Sets the font width (e.g. "condensed", "expanded").
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     fontWidth(_: FontWidth): Component;
     /**
      * Limits text to a maximum number of lines. Excess text is truncated with an ellipsis.
@@ -1625,65 +1751,83 @@ interface Component {
      * @since 1.0
      */
     lineLimit(_?: number): Component;
-    /** Sets horizontal text alignment within the component's frame. *
-    /** Sets horizontal text alignment within the component's frame. * @tier core
-    /** Sets horizontal text alignment within the component's frame. * @kind modifier
-    /** Sets horizontal text alignment within the component's frame. * @since 1.0
-    /** Sets horizontal text alignment within the component's frame. */
+    /**
+     * Sets horizontal text alignment within the component's frame.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     multilineTextAlignment(_: TextAlignment): Component;
-    /** Makes text bold. Pass `false` to disable. *
-    /** Makes text bold. Pass `false` to disable. * @tier core
-    /** Makes text bold. Pass `false` to disable. * @kind modifier
-    /** Makes text bold. Pass `false` to disable. * @since 1.0
-    /** Makes text bold. Pass `false` to disable. */
+    /**
+     * Makes text bold. Pass `false` to disable.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     bold(isActive?: boolean): Component;
-    /** Makes text italic. Pass `false` to disable. *
-    /** Makes text italic. Pass `false` to disable. * @tier core
-    /** Makes text italic. Pass `false` to disable. * @kind modifier
-    /** Makes text italic. Pass `false` to disable. * @since 1.0
-    /** Makes text italic. Pass `false` to disable. */
+    /**
+     * Makes text italic. Pass `false` to disable.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     italic(isActive?: boolean): Component;
-    /** Adds a strikethrough to text. *
-    /** Adds a strikethrough to text. * @tier core
-    /** Adds a strikethrough to text. * @kind modifier
-    /** Adds a strikethrough to text. * @since 1.0
-    /** Adds a strikethrough to text. */
+    /**
+     * Adds a strikethrough to text.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     strikethrough(isActive?: boolean): Component;
-    /** Adds an underline to text. *
-    /** Adds an underline to text. * @tier core
-    /** Adds an underline to text. * @kind modifier
-    /** Adds an underline to text. * @since 1.0
-    /** Adds an underline to text. */
+    /**
+     * Adds an underline to text.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     underline(isActive?: boolean): Component;
-    /** Uses a monospaced font variant. *
-    /** Uses a monospaced font variant. * @tier core
-    /** Uses a monospaced font variant. * @kind modifier
-    /** Uses a monospaced font variant. * @since 1.0
-    /** Uses a monospaced font variant. */
+    /**
+     * Uses a monospaced font variant.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     monospaced(isActive?: boolean): Component;
     /**
-     * Adjusts letter spacing in milli-em units (1000 = 1em).
+     * Adds space after each character, in points. Negative values tighten.
+     * The spacing does not scale with the user's text size setting.
      *
      * ```js
-     * Text("SPACED").tracking(500) // 0.5em letter spacing
+     * Text("SPACED").tracking(2) // 2pt between characters
+     * Text("EYEBROW").font(12).tracking(1.5)
      * ```
      *
      * @tier core
      * @kind modifier
      * @since 1.0
      */
-    tracking(_: MilliEm): Component;
-    /** Adjusts spacing between lines of text (in points). *
-    /** Adjusts spacing between lines of text (in points). * @tier core
-    /** Adjusts spacing between lines of text (in points). * @kind modifier
-    /** Adjusts spacing between lines of text (in points). * @since 1.0
-    /** Adjusts spacing between lines of text (in points). */
+    tracking(_: number): Component;
+    /**
+     * Adjusts spacing between lines of text (in points).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     lineSpacing(_: number): Component;
-    /** Transforms text case: "uppercase" or "lowercase". *
-    /** Transforms text case: "uppercase" or "lowercase". * @tier core
-    /** Transforms text case: "uppercase" or "lowercase". * @kind modifier
-    /** Transforms text case: "uppercase" or "lowercase". * @since 1.0
-    /** Transforms text case: "uppercase" or "lowercase". */
+    /**
+     * Transforms text case: "uppercase" or "lowercase".
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     textCase(_: TextCase): Component;
 
     // -- Sizing --
@@ -1702,33 +1846,42 @@ interface Component {
     fixedSize(_: { horizontal?: boolean; vertical?: boolean }): Component;
 
     /**
-     * Sets the aspect ratio for the component's content.
+     * Sizes the content to a width-to-height ratio within the space its parent
+     * offers: "fit" takes the largest size of that ratio inside the space,
+     * "fill" the smallest size that covers it (and can overflow; add
+     * `.clipped()` to crop). Content with a fixed or intrinsic size keeps it.
      *
      * ```js
-     * Image({ url: "photo.jpg" }).resizable().aspectRatio(16/9, "fit")
+     * Image({ url: "photo.jpg" }).resizable().aspectRatio(16 / 9, "fit")
+     * Color("#eee").aspectRatio(1, "fit")                    // a square as wide as its parent
+     * Image({ url: "photo.jpg" }).resizable().aspectRatio(null, "fill").frame({ height: 120 }).clipped()
      * ```
      *
-     * @param aspectRatio The width-to-height ratio (e.g. 1.0 for square). Omit to use the content's intrinsic ratio.
-     * @param contentMode How content fills the frame: "fit" (letterbox) or "fill" (crop).
+     * @param aspectRatio The width-to-height ratio (e.g. 1 for square). Pass `null` or omit to use the content's own: a resizable image's pixel ratio, otherwise 1.
+     * @param contentMode "fit" (default) or "fill".
      *
      * @tier core
      * @kind modifier
      * @since 1.0
      */
-    aspectRatio(aspectRatio?: number, contentMode?: "fit" | "fill"): Component;
+    aspectRatio(aspectRatio?: number | null, contentMode?: "fit" | "fill"): Component;
 
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. *
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @tier core
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @kind modifier
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @since 1.0
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. */
+    /**
+     * Same as `.aspectRatio(null, "fit")`: scales a resizable image to fit the space, preserving its ratio.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     scaledToFit(): Component;
 
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. *
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @tier core
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @kind modifier
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @since 1.0
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. */
+    /**
+     * Same as `.aspectRatio(null, "fill")`: scales a resizable image to cover the space, preserving its ratio. May overflow; add `.clipped()` to crop.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     scaledToFill(): Component;
 
     /**
@@ -1745,12 +1898,14 @@ interface Component {
      */
     minimumScaleFactor(_: number): Component;
 
-    /** Allows text to tighten character spacing to fit available space before truncating. *
-    /** Allows text to tighten character spacing to fit available space before truncating. * @tier extension
-    /** Allows text to tighten character spacing to fit available space before truncating. * @platform ios
-    /** Allows text to tighten character spacing to fit available space before truncating. * @kind modifier
-    /** Allows text to tighten character spacing to fit available space before truncating. * @since 1.0
-    /** Allows text to tighten character spacing to fit available space before truncating. */
+    /**
+     * Allows text to tighten character spacing to fit available space before truncating.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     allowsTightening(isEnabled?: boolean): Component;
 
     /**
@@ -1765,11 +1920,13 @@ interface Component {
 
     // -- Overlays & Backgrounds --
 
-    /** Layers content on top of this component. *
-    /** Layers content on top of this component. * @tier core
-    /** Layers content on top of this component. * @kind modifier
-    /** Layers content on top of this component. * @since 1.0
-    /** Layers content on top of this component. */
+    /**
+     * Layers content on top of this component.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     overlay(content: Component): Component;
     /** Layers content on top with specific alignment. */
     overlay(props: { alignment: Alignment }, content: Component): Component;
@@ -1792,11 +1949,18 @@ interface Component {
 
     // -- Clipping & Masking --
 
-    /** Clips content to the component's bounds. *
-    /** Clips content to the component's bounds. * @tier core
-    /** Clips content to the component's bounds. * @kind modifier
-    /** Clips content to the component's bounds. * @since 1.0
-    /** Clips content to the component's bounds. */
+    /**
+     * Clips the content to this component's frame. Offsets and transforms
+     * inside are cut at the frame edge.
+     *
+     * ```js
+     * Image({ url: "photo.jpg" }).resizable().scaledToFill().frame({ width: 80, height: 80 }).clipped()
+     * ```
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     clipped(): Component;
     /**
      * Clips to a specific shape.
@@ -1818,59 +1982,73 @@ interface Component {
      * @since 1.0
      */
     mask(image: Image): Component;
-    /** Defines the hit-testing shape for tap gestures. *
-    /** Defines the hit-testing shape for tap gestures. * @tier extension
-    /** Defines the hit-testing shape for tap gestures. * @platform ios
-    /** Defines the hit-testing shape for tap gestures. * @kind modifier
-    /** Defines the hit-testing shape for tap gestures. * @since 1.0
-    /** Defines the hit-testing shape for tap gestures. */
+    /**
+     * Defines the hit-testing shape for tap gestures.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     contentShape(_: Shape): Component;
 
     // -- Visibility & Interaction --
 
-    /** Hides the component while preserving its layout space. *
-    /** Hides the component while preserving its layout space. * @tier core
-    /** Hides the component while preserving its layout space. * @kind modifier
-    /** Hides the component while preserving its layout space. * @since 1.0
-    /** Hides the component while preserving its layout space. */
+    /**
+     * Hides the component while preserving its layout space.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     hidden(): Component;
-    /** Controls whether the component receives touch/click events. *
-    /** Controls whether the component receives touch/click events. * @tier core
-    /** Controls whether the component receives touch/click events. * @kind modifier
-    /** Controls whether the component receives touch/click events. * @since 1.0
-    /** Controls whether the component receives touch/click events. */
+    /**
+     * Controls whether the component receives touch/click events.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     allowsHitTesting(_: boolean): Component;
-    /** Disables interaction and dims the component. *
-    /** Disables interaction and dims the component. * @tier core
-    /** Disables interaction and dims the component. * @kind modifier
-    /** Disables interaction and dims the component. * @since 1.0
-    /** Disables interaction and dims the component. */
+    /**
+     * Disables interaction and dims the component.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     disabled(_: boolean): Component;
 
     // -- Gestures --
 
-    /** Runs an action on tap, with the tap location in the component's coordinate space. *
-    /** Runs an action on tap, with the tap location in the component's coordinate space. * @tier core
-    /** Runs an action on tap, with the tap location in the component's coordinate space. * @kind modifier
-    /** Runs an action on tap, with the tap location in the component's coordinate space. * @since 1.0
-    /** Runs an action on tap, with the tap location in the component's coordinate space. */
+    /**
+     * Runs an action on tap, with the tap location in the component's coordinate space.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     onTapGesture(action: (locationInView: Point) => void): Component;
     /** Runs an action after the specified number of taps. */
     onTapGesture(props: { count: number }, action: (locationInView: Point) => void): Component;
 
-    /** Tracks drag gestures with translation and velocity. *
-    /** Tracks drag gestures with translation and velocity. * @tier core
-    /** Tracks drag gestures with translation and velocity. * @kind modifier
-    /** Tracks drag gestures with translation and velocity. * @since 1.0
-    /** Tracks drag gestures with translation and velocity. */
+    /**
+     * Tracks drag gestures with translation and velocity.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     onDragGesture(action: (state: DragGestureState) => void): Component;
     onDragGesture(props: { minimumDistance?: number }, action: (state: DragGestureState) => void): Component;
 
-    /** Tracks long press gestures. *
-    /** Tracks long press gestures. * @tier core
-    /** Tracks long press gestures. * @kind modifier
-    /** Tracks long press gestures. * @since 1.0
-    /** Tracks long press gestures. */
+    /**
+     * Tracks long press gestures.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     onLongPressGesture(action: (state: GestureState) => void): Component;
     onLongPressGesture(props: { minimumDuration?: number; maximumDistance?: number }, action: (state: GestureState) => void): Component;
 
@@ -1940,12 +2118,14 @@ interface Component {
      */
     sheet(props: { isPresented: boolean, setIsPresented: (value: boolean) => void, content: () => Component, onDismiss?: () => void }): Component;
 
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. *
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. * @tier extension
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. * @platform ios
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. * @kind modifier
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. * @since 1.0
-    /** Presents a full-screen modal cover. Same API as `.sheet()`. */
+    /**
+     * Presents a full-screen modal cover. Same API as `.sheet()`.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     fullScreenCover(props: { isPresented: boolean, setIsPresented: (value: boolean) => void, content: () => Component, onDismiss?: () => void }): Component;
 
     /**
@@ -1960,12 +2140,14 @@ interface Component {
     gallery(detail: (id: string) => Component): Component;
     gallery(options: { zoomEnabled?: boolean }, detail: (id: string) => Component): Component;
 
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. *
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. * @tier extension
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. * @platform ios
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. * @kind modifier
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. * @since 1.0
-    /** Registers this component as a gallery item. Must be inside a `.gallery()` modifier. */
+    /**
+     * Registers this component as a gallery item. Must be inside a `.gallery()` modifier.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     galleryItem(id: string): Component;
 
     /**
@@ -1988,54 +2170,66 @@ interface Component {
      */
     navigationDestination(props: { isPresented: boolean, setIsPresented: (value: boolean) => void, destination: () => Component }): Component;
 
-    /** Sets the available sheet size detents (snap points). *
-    /** Sets the available sheet size detents (snap points). * @tier extension
-    /** Sets the available sheet size detents (snap points). * @platform ios
-    /** Sets the available sheet size detents (snap points). * @kind modifier
-    /** Sets the available sheet size detents (snap points). * @since 1.0
-    /** Sets the available sheet size detents (snap points). */
+    /**
+     * Sets the available sheet size detents (snap points).
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     presentationDetents(detents: PresentationDetents): Component;
 
-    /** Presents a Quick Look preview for a file URL. *
-    /** Presents a Quick Look preview for a file URL. * @tier extension
-    /** Presents a Quick Look preview for a file URL. * @platform ios
-    /** Presents a Quick Look preview for a file URL. * @kind modifier
-    /** Presents a Quick Look preview for a file URL. * @since 1.0
-    /** Presents a Quick Look preview for a file URL. */
+    /**
+     * Presents a Quick Look preview for a file URL.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     quickLookPreview(props: { url?: string; setURL?: (url: string | null) => void; urls?: string[]; onLoadingChanged?: (isLoading: boolean) => void }): Component;
 
     // -- Lists & Scroll Views --
 
-    /** Controls the visibility of the scroll content background (e.g. list background). *
-    /** Controls the visibility of the scroll content background (e.g. list background). * @tier extension
-    /** Controls the visibility of the scroll content background (e.g. list background). * @platform ios
-    /** Controls the visibility of the scroll content background (e.g. list background). * @kind modifier
-    /** Controls the visibility of the scroll content background (e.g. list background). * @since 1.0
-    /** Controls the visibility of the scroll content background (e.g. list background). */
+    /**
+     * Controls the visibility of the scroll content background (e.g. list background).
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     scrollContentBackground(_: 'hidden' | 'visible'): Component;
 
-    /** Sets the list style. *
-    /** Sets the list style. * @tier extension
-    /** Sets the list style. * @platform ios
-    /** Sets the list style. * @kind modifier
-    /** Sets the list style. * @since 1.0
-    /** Sets the list style. */
+    /**
+     * Sets the list style.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     listStyle(_: 'automatic' | 'plain' | 'insetGrouped' | 'grouped' | 'inset' | 'sidebar'): Component;
 
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. *
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. * @tier extension
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. * @platform ios
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. * @kind modifier
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. * @since 1.0
-    /** Sets the background view for a list row. Apply to content inside a List's ForEach. */
+    /**
+     * Sets the background view for a list row. Apply to content inside a List's ForEach.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     listRowBackground(content: Component): Component;
 
-    /** Controls list row separator visibility. *
-    /** Controls list row separator visibility. * @tier extension
-    /** Controls list row separator visibility. * @platform ios
-    /** Controls list row separator visibility. * @kind modifier
-    /** Controls list row separator visibility. * @since 1.0
-    /** Controls list row separator visibility. */
+    /**
+     * Controls list row separator visibility.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     listRowSeparator(_: 'hidden' | 'visible'): Component;
 
     /**
@@ -2084,12 +2278,14 @@ interface Component {
      */
     scrollPosition(props: { id: string | null, setId: (value: string | null) => void }): Component;
 
-    /** Hides the scroll edge bounce/stretch effect. *
-    /** Hides the scroll edge bounce/stretch effect. * @tier extension
-    /** Hides the scroll edge bounce/stretch effect. * @platform ios
-    /** Hides the scroll edge bounce/stretch effect. * @kind modifier
-    /** Hides the scroll edge bounce/stretch effect. * @since 1.0
-    /** Hides the scroll edge bounce/stretch effect. */
+    /**
+     * Hides the scroll edge bounce/stretch effect.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     scrollEdgeEffectHidden(isHidden?: boolean): Component;
 
     /**
@@ -2128,20 +2324,24 @@ interface Component {
 
     // -- Navigation & Toolbars --
 
-    /** Sets the navigation bar title. *
-    /** Sets the navigation bar title. * @tier extension
-    /** Sets the navigation bar title. * @platform ios
-    /** Sets the navigation bar title. * @kind modifier
-    /** Sets the navigation bar title. * @since 1.0
-    /** Sets the navigation bar title. */
+    /**
+     * Sets the navigation bar title.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     navigationTitle(_: string): Component;
 
-    /** Hides the navigation back button. Defaults to true. *
-    /** Hides the navigation back button. Defaults to true. * @tier extension
-    /** Hides the navigation back button. Defaults to true. * @platform ios
-    /** Hides the navigation back button. Defaults to true. * @kind modifier
-    /** Hides the navigation back button. Defaults to true. * @since 1.0
-    /** Hides the navigation back button. Defaults to true. */
+    /**
+     * Hides the navigation back button. Defaults to true.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     navigationBarBackButtonHidden(isHidden?: boolean): Component;
 
     /**
@@ -2157,12 +2357,14 @@ interface Component {
      */
     navigationBarTitleDisplayMode(_: "large" | "inline" | "automatic"): Component;
 
-    /** Populates the toolbar with items. *
-    /** Populates the toolbar with items. * @tier extension
-    /** Populates the toolbar with items. * @platform ios
-    /** Populates the toolbar with items. * @kind modifier
-    /** Populates the toolbar with items. * @since 1.0
-    /** Populates the toolbar with items. */
+    /**
+     * Populates the toolbar with items.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     toolbar(content: ToolbarItem | ToolbarItemGroup | Group | (ToolbarItem | ToolbarItemGroup)[]): Component;
 
     /**
@@ -2178,11 +2380,13 @@ interface Component {
      */
     toolbarVisibility(visibility: "visible" | "hidden" | "automatic", bars?: ToolbarBarPlacement | ToolbarBarPlacement[]): Component;
 
-    /** Adds a context menu shown on long press or right click. *
-    /** Adds a context menu shown on long press or right click. * @tier core
-    /** Adds a context menu shown on long press or right click. * @kind modifier
-    /** Adds a context menu shown on long press or right click. * @since 1.0
-    /** Adds a context menu shown on long press or right click. */
+    /**
+     * Adds a context menu shown on long press or right click.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     contextMenu(content: Component | Component[]): Component;
 
     // -- Safe Area --
@@ -2218,20 +2422,24 @@ interface Component {
      */
     gridCellColumns(count: number): Component;
 
-    /** Sets the anchor position for a grid cell within its allocated space. *
-    /** Sets the anchor position for a grid cell within its allocated space. * @tier extension
-    /** Sets the anchor position for a grid cell within its allocated space. * @platform ios
-    /** Sets the anchor position for a grid cell within its allocated space. * @kind modifier
-    /** Sets the anchor position for a grid cell within its allocated space. * @since 1.0
-    /** Sets the anchor position for a grid cell within its allocated space. */
+    /**
+     * Sets the anchor position for a grid cell within its allocated space.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     gridCellAnchor(anchor: UnitPoint): Component;
 
-    /** Overrides the horizontal alignment for an entire grid column. *
-    /** Overrides the horizontal alignment for an entire grid column. * @tier extension
-    /** Overrides the horizontal alignment for an entire grid column. * @platform ios
-    /** Overrides the horizontal alignment for an entire grid column. * @kind modifier
-    /** Overrides the horizontal alignment for an entire grid column. * @since 1.0
-    /** Overrides the horizontal alignment for an entire grid column. */
+    /**
+     * Overrides the horizontal alignment for an entire grid column.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     gridColumnAlignment(guide: HorizontalAlignment): Component;
 
     /**
@@ -2246,27 +2454,33 @@ interface Component {
 
     // -- Controls --
 
-    /** Sets the size for controls like ProgressView. *
-    /** Sets the size for controls like ProgressView. * @tier core
-    /** Sets the size for controls like ProgressView. * @kind modifier
-    /** Sets the size for controls like ProgressView. * @since 1.0
-    /** Sets the size for controls like ProgressView. */
+    /**
+     * Sets the size for controls like ProgressView.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     controlSize(_: 'mini' | 'small' | 'regular' | 'large' | 'extraLarge'): Component;
 
-    /** Enables or disables user text selection. *
-    /** Enables or disables user text selection. * @tier core
-    /** Enables or disables user text selection. * @kind modifier
-    /** Enables or disables user text selection. * @since 1.0
-    /** Enables or disables user text selection. */
+    /**
+     * Enables or disables user text selection.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     textSelection(_: 'enabled' | 'disabled'): Component;
 
     // -- Text Input --
 
-    /** Sets the keyboard type for text input fields. *
-    /** Sets the keyboard type for text input fields. * @tier core
-    /** Sets the keyboard type for text input fields. * @kind modifier
-    /** Sets the keyboard type for text input fields. * @since 1.0
-    /** Sets the keyboard type for text input fields. */
+    /**
+     * Sets the keyboard type for text input fields.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     keyboardType(type: "default" | "asciiCapable" | "numbersAndPunctuation" | "URL" | "numberPad" | "phonePad" | "namePhonePad" | "emailAddress" | "decimalPad" | "twitter" | "webSearch" | "asciiCapableNumberPad"): Component;
 
     /**
@@ -2283,25 +2497,31 @@ interface Component {
      */
     focused(props: { isFocused: boolean, setIsFocused: (value: boolean) => void }): Component;
 
-    /** Runs an action when the user submits the text field (e.g. presses Return). *
-    /** Runs an action when the user submits the text field (e.g. presses Return). * @tier core
-    /** Runs an action when the user submits the text field (e.g. presses Return). * @kind modifier
-    /** Runs an action when the user submits the text field (e.g. presses Return). * @since 1.0
-    /** Runs an action when the user submits the text field (e.g. presses Return). */
+    /**
+     * Runs an action when the user submits the text field (e.g. presses Return).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     onSubmit(action: () => void): Component;
 
-    /** Sets the text field visual style. *
-    /** Sets the text field visual style. * @tier core
-    /** Sets the text field visual style. * @kind modifier
-    /** Sets the text field visual style. * @since 1.0
-    /** Sets the text field visual style. */
+    /**
+     * Sets the text field visual style.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     textFieldStyle(style: "roundedBorder" | "plain" | "automatic"): Component;
 
-    /** Sets the keyboard return key label. *
-    /** Sets the keyboard return key label. * @tier core
-    /** Sets the keyboard return key label. * @kind modifier
-    /** Sets the keyboard return key label. * @since 1.0
-    /** Sets the keyboard return key label. */
+    /**
+     * Sets the keyboard return key label.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     submitLabel(label: "done" | "go" | "send" | "join" | "route" | "search" | "next" | "continue" | "return"): Component;
 
     /**
@@ -2333,11 +2553,13 @@ interface Component {
      */
     animation(props: { animation: AnimationOption | AnimationComponent | null; value: string | number | boolean }): Component;
 
-    /** Disables autocorrection for text input. *
-    /** Disables autocorrection for text input. * @tier core
-    /** Disables autocorrection for text input. * @kind modifier
-    /** Disables autocorrection for text input. * @since 1.0
-    /** Disables autocorrection for text input. */
+    /**
+     * Disables autocorrection for text input.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     autocorrectionDisabled(isDisabled?: boolean): Component;
 
     // -- Value Observation --
@@ -2359,50 +2581,64 @@ interface Component {
 
     // -- Accessibility --
 
-    /** Sets the VoiceOver label. *
-    /** Sets the VoiceOver label. * @tier core
-    /** Sets the VoiceOver label. * @kind modifier
-    /** Sets the VoiceOver label. * @since 1.0
-    /** Sets the VoiceOver label. */
+    /**
+     * Sets the VoiceOver label.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityLabel(_: string): Component;
-    /** Sets a VoiceOver hint describing the result of interacting. *
-    /** Sets a VoiceOver hint describing the result of interacting. * @tier extension
-    /** Sets a VoiceOver hint describing the result of interacting. * @platform ios
-    /** Sets a VoiceOver hint describing the result of interacting. * @kind modifier
-    /** Sets a VoiceOver hint describing the result of interacting. * @since 1.0
-    /** Sets a VoiceOver hint describing the result of interacting. */
+    /**
+     * Sets a VoiceOver hint describing the result of interacting.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityHint(_: string): Component;
-    /** Sets the current accessibility value (e.g. "50%" for a slider). *
-    /** Sets the current accessibility value (e.g. "50%" for a slider). * @tier core
-    /** Sets the current accessibility value (e.g. "50%" for a slider). * @kind modifier
-    /** Sets the current accessibility value (e.g. "50%" for a slider). * @since 1.0
-    /** Sets the current accessibility value (e.g. "50%" for a slider). */
+    /**
+     * Sets the current accessibility value (e.g. "50%" for a slider).
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityValue(_: string): Component;
-    /** Provides an alternative accessibility representation of this component. *
-    /** Provides an alternative accessibility representation of this component. * @tier extension
-    /** Provides an alternative accessibility representation of this component. * @platform ios
-    /** Provides an alternative accessibility representation of this component. * @kind modifier
-    /** Provides an alternative accessibility representation of this component. * @since 1.0
-    /** Provides an alternative accessibility representation of this component. */
+    /**
+     * Provides an alternative accessibility representation of this component.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityRepresentation(content: Component): Component;
-    /** Hides the component from assistive technologies. *
-    /** Hides the component from assistive technologies. * @tier core
-    /** Hides the component from assistive technologies. * @kind modifier
-    /** Hides the component from assistive technologies. * @since 1.0
-    /** Hides the component from assistive technologies. */
+    /**
+     * Hides the component from assistive technologies.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityHidden(isHidden?: boolean): Component;
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). *
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). * @tier extension
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). * @platform ios
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). * @kind modifier
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). * @since 1.0
-    /** Adds accessibility traits (e.g. "isButton", "isHeader"). */
+    /**
+     * Adds accessibility traits (e.g. "isButton", "isHeader").
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityAddTraits(_: AccessibilityTraits | AccessibilityTraits[]): Component;
-    /** Removes default accessibility traits. *
-    /** Removes default accessibility traits. * @tier core
-    /** Removes default accessibility traits. * @kind modifier
-    /** Removes default accessibility traits. * @since 1.0
-    /** Removes default accessibility traits. */
+    /**
+     * Removes default accessibility traits.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     accessibilityRemoveTraits(_: AccessibilityTraits | AccessibilityTraits[]): Component;
 
     // -- Transitions & Feedback --
@@ -2431,12 +2667,14 @@ interface Component {
         | { combined: SimpleTransition[] }
     ): Component;
 
-    /** Triggers haptic feedback when the trigger value changes. *
-    /** Triggers haptic feedback when the trigger value changes. * @tier extension
-    /** Triggers haptic feedback when the trigger value changes. * @platform ios
-    /** Triggers haptic feedback when the trigger value changes. * @kind modifier
-    /** Triggers haptic feedback when the trigger value changes. * @since 1.0
-    /** Triggers haptic feedback when the trigger value changes. */
+    /**
+     * Triggers haptic feedback when the trigger value changes.
+     *
+     * @tier extension
+     * @platform ios
+     * @kind modifier
+     * @since 1.0
+     */
     sensoryFeedback(props: { feedback: "impact" | "selection" | "success" | "warning" | "error" | "light" | "medium" | "heavy" | "increase" | "decrease"; trigger: any }): Component;
 }
 
@@ -2521,20 +2759,24 @@ declare function HStack(children: Component): Component;
 declare function HStack(children: Component[]): Component;
 declare function HStack(props: { spacing?: number, alignment?: VerticalAlignment }, children: Component[]): Component;
 
-/** Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists. *
-/** Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists. * @tier core
-/** Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists. * @kind component
-/** Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists. * @since 1.0
-/** Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists. */
+/**
+ * Lazy vertical stack — only renders visible children. Use inside ScrollView for large lists.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function LazyVStack(children: Component): Component;
 declare function LazyVStack(children: Component[]): Component;
 declare function LazyVStack(props: { spacing?: number, alignment?: HorizontalAlignment, pinnedViews?: PinnedScrollableViews }, children: Component[]): Component;
 
-/** Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists. *
-/** Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists. * @tier core
-/** Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists. * @kind component
-/** Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists. * @since 1.0
-/** Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists. */
+/**
+ * Lazy horizontal stack — only renders visible children. Use inside ScrollView for large lists.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function LazyHStack(children: Component): Component;
 declare function LazyHStack(children: Component[]): Component;
 declare function LazyHStack(props: { spacing?: number, alignment?: VerticalAlignment, pinnedViews?: PinnedScrollableViews }, children: Component[]): Component;
@@ -2711,32 +2953,40 @@ declare function Text(_: string | { markdown: string }): Component;
  */
 declare function Markdown(_: string): Component;
 
-/** A multi-line text editing area. *
-/** A multi-line text editing area. * @tier core
-/** A multi-line text editing area. * @kind component
-/** A multi-line text editing area. * @since 1.0
-/** A multi-line text editing area. */
+/**
+ * A multi-line text editing area.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function TextEditor(props: { text: string; setText: (text: string) => void }): Component;
 
-/** A single-line text input field. *
-/** A single-line text input field. * @tier core
-/** A single-line text input field. * @kind component
-/** A single-line text input field. * @since 1.0
-/** A single-line text input field. */
+/**
+ * A single-line text input field.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function TextField(props: { placeholder?: string; text: string; setText: (text: string) => void }): Component;
 
-/** A text input that obscures its contents (for passwords). *
-/** A text input that obscures its contents (for passwords). * @tier core
-/** A text input that obscures its contents (for passwords). * @kind component
-/** A text input that obscures its contents (for passwords). * @since 1.0
-/** A text input that obscures its contents (for passwords). */
+/**
+ * A text input that obscures its contents (for passwords).
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function SecureField(props: { placeholder?: string; text: string; setText: (text: string) => void }): Component;
 
-/** A switch control for boolean values. *
-/** A switch control for boolean values. * @tier core
-/** A switch control for boolean values. * @kind component
-/** A switch control for boolean values. * @since 1.0
-/** A switch control for boolean values. */
+/**
+ * A switch control for boolean values.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Toggle(props: { label?: string; isOn: boolean; setIsOn: (value: boolean) => void }): Component;
 
 /**
@@ -2836,11 +3086,13 @@ declare function Video(_: VideoProps): Component;
  */
 declare function AudioPlayer(_: AudioPlayerProps): Component;
 
-/** Displays a 3D model from a URL. *
-/** Displays a 3D model from a URL. * @tier core
-/** Displays a 3D model from a URL. * @kind component
-/** Displays a 3D model from a URL. * @since 1.0
-/** Displays a 3D model from a URL. */
+/**
+ * Displays a 3D model from a URL.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Model3D(_: Model3DProps): Component;
 
 /**
@@ -2860,62 +3112,78 @@ declare function Model3D(_: Model3DProps): Component;
  */
 declare function Chart(props?: ChartProps, children?: Component[]): Component;
 declare function Chart(children: Component[]): Component;
-/** Renders a portable pie or donut chart from PieSliceMark children. *
-/** Renders a portable pie or donut chart from PieSliceMark children. * @tier core
-/** Renders a portable pie or donut chart from PieSliceMark children. * @module charts
-/** Renders a portable pie or donut chart from PieSliceMark children. * @kind component
-/** Renders a portable pie or donut chart from PieSliceMark children. * @since 1.0
-/** Renders a portable pie or donut chart from PieSliceMark children. */
+/**
+ * Renders a portable pie or donut chart from PieSliceMark children.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function PieChart(props?: PieChartProps, children?: Component[]): Component;
 declare function PieChart(children: Component[]): Component;
-/** Bar chart mark. Valid only as a child of Chart. *
-/** Bar chart mark. Valid only as a child of Chart. * @tier core
-/** Bar chart mark. Valid only as a child of Chart. * @module charts
-/** Bar chart mark. Valid only as a child of Chart. * @kind component
-/** Bar chart mark. Valid only as a child of Chart. * @since 1.0
-/** Bar chart mark. Valid only as a child of Chart. */
+/**
+ * Bar chart mark. Valid only as a child of Chart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function BarMark(_: ChartMarkProps): Component;
-/** Line chart mark. Valid only as a child of Chart. *
-/** Line chart mark. Valid only as a child of Chart. * @tier core
-/** Line chart mark. Valid only as a child of Chart. * @module charts
-/** Line chart mark. Valid only as a child of Chart. * @kind component
-/** Line chart mark. Valid only as a child of Chart. * @since 1.0
-/** Line chart mark. Valid only as a child of Chart. */
+/**
+ * Line chart mark. Valid only as a child of Chart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function LineMark(_: ChartMarkProps): Component;
-/** Area chart mark. Valid only as a child of Chart. *
-/** Area chart mark. Valid only as a child of Chart. * @tier core
-/** Area chart mark. Valid only as a child of Chart. * @module charts
-/** Area chart mark. Valid only as a child of Chart. * @kind component
-/** Area chart mark. Valid only as a child of Chart. * @since 1.0
-/** Area chart mark. Valid only as a child of Chart. */
+/**
+ * Area chart mark. Valid only as a child of Chart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function AreaMark(_: ChartMarkProps): Component;
-/** Point chart mark. Valid only as a child of Chart. *
-/** Point chart mark. Valid only as a child of Chart. * @tier core
-/** Point chart mark. Valid only as a child of Chart. * @module charts
-/** Point chart mark. Valid only as a child of Chart. * @kind component
-/** Point chart mark. Valid only as a child of Chart. * @since 1.0
-/** Point chart mark. Valid only as a child of Chart. */
+/**
+ * Point chart mark. Valid only as a child of Chart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function PointMark(_: ChartMarkProps): Component;
-/** Reference rule mark. Provide exactly one of x or y. *
-/** Reference rule mark. Provide exactly one of x or y. * @tier core
-/** Reference rule mark. Provide exactly one of x or y. * @module charts
-/** Reference rule mark. Provide exactly one of x or y. * @kind component
-/** Reference rule mark. Provide exactly one of x or y. * @since 1.0
-/** Reference rule mark. Provide exactly one of x or y. */
+/**
+ * Reference rule mark. Provide exactly one of x or y.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function RuleMark(_: ChartRuleMarkProps): Component;
-/** Rectangle/cell chart mark. Valid only as a child of Chart. *
-/** Rectangle/cell chart mark. Valid only as a child of Chart. * @tier core
-/** Rectangle/cell chart mark. Valid only as a child of Chart. * @module charts
-/** Rectangle/cell chart mark. Valid only as a child of Chart. * @kind component
-/** Rectangle/cell chart mark. Valid only as a child of Chart. * @since 1.0
-/** Rectangle/cell chart mark. Valid only as a child of Chart. */
+/**
+ * Rectangle/cell chart mark. Valid only as a child of Chart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function RectangleMark(_: ChartRectangleMarkProps): Component;
-/** Pie slice mark. Valid only as a child of PieChart. *
-/** Pie slice mark. Valid only as a child of PieChart. * @tier core
-/** Pie slice mark. Valid only as a child of PieChart. * @module charts
-/** Pie slice mark. Valid only as a child of PieChart. * @kind component
-/** Pie slice mark. Valid only as a child of PieChart. * @since 1.0
-/** Pie slice mark. Valid only as a child of PieChart. */
+/**
+ * Pie slice mark. Valid only as a child of PieChart.
+ *
+ * @tier core
+ * @module charts
+ * @kind component
+ * @since 1.0
+ */
 declare function PieSliceMark(_: PieSliceMarkProps): Component;
 
 /**
@@ -2949,18 +3217,22 @@ declare function Button(label: Component, action: () => void): Component;
  */
 declare function ProgressView(props?: { value: number, total?: number }): Component;
 
-/** A flexible space that expands along the major axis of its parent stack. *
-/** A flexible space that expands along the major axis of its parent stack. * @tier core
-/** A flexible space that expands along the major axis of its parent stack. * @kind component
-/** A flexible space that expands along the major axis of its parent stack. * @since 1.0
-/** A flexible space that expands along the major axis of its parent stack. */
+/**
+ * A flexible space that expands along the major axis of its parent stack.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Spacer(props?: { minLength: number }): Component;
 
-/** A thin line separator. Horizontal in VStack, vertical in HStack. *
-/** A thin line separator. Horizontal in VStack, vertical in HStack. * @tier core
-/** A thin line separator. Horizontal in VStack, vertical in HStack. * @kind component
-/** A thin line separator. Horizontal in VStack, vertical in HStack. * @since 1.0
-/** A thin line separator. Horizontal in VStack, vertical in HStack. */
+/**
+ * A thin line separator. Horizontal in VStack, vertical in HStack.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Divider(): Component;
 
 /**
@@ -3187,12 +3459,14 @@ interface MarkerProps {
     tag?: string;
 }
 
-/** A map pin marker at a specific coordinate. *
-/** A map pin marker at a specific coordinate. * @tier extension
-/** A map pin marker at a specific coordinate. * @platform ios
-/** A map pin marker at a specific coordinate. * @kind component
-/** A map pin marker at a specific coordinate. * @since 1.0
-/** A map pin marker at a specific coordinate. */
+/**
+ * A map pin marker at a specific coordinate.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function Marker(props: MarkerProps): Component;
 
 interface AnnotationProps {
@@ -3205,12 +3479,14 @@ interface AnnotationProps {
     tag?: string;
 }
 
-/** A custom view annotation on the map. Children define the annotation's content. *
-/** A custom view annotation on the map. Children define the annotation's content. * @tier extension
-/** A custom view annotation on the map. Children define the annotation's content. * @platform ios
-/** A custom view annotation on the map. Children define the annotation's content. * @kind component
-/** A custom view annotation on the map. Children define the annotation's content. * @since 1.0
-/** A custom view annotation on the map. Children define the annotation's content. */
+/**
+ * A custom view annotation on the map. Children define the annotation's content.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function Annotation(props: AnnotationProps, children?: Component[]): Component;
 
 interface MapCircleProps {
@@ -3224,12 +3500,14 @@ interface MapCircleProps {
     lineWidth?: number;
 }
 
-/** A circle overlay on the map. *
-/** A circle overlay on the map. * @tier extension
-/** A circle overlay on the map. * @platform ios
-/** A circle overlay on the map. * @kind component
-/** A circle overlay on the map. * @since 1.0
-/** A circle overlay on the map. */
+/**
+ * A circle overlay on the map.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function MapCircle(props: MapCircleProps): Component;
 
 interface MapPolylineProps {
@@ -3238,12 +3516,14 @@ interface MapPolylineProps {
     lineWidth?: number;
 }
 
-/** A polyline overlay on the map connecting a series of coordinates. *
-/** A polyline overlay on the map connecting a series of coordinates. * @tier extension
-/** A polyline overlay on the map connecting a series of coordinates. * @platform ios
-/** A polyline overlay on the map connecting a series of coordinates. * @kind component
-/** A polyline overlay on the map connecting a series of coordinates. * @since 1.0
-/** A polyline overlay on the map connecting a series of coordinates. */
+/**
+ * A polyline overlay on the map connecting a series of coordinates.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function MapPolyline(props: MapPolylineProps): Component;
 
 interface MapPolygonProps {
@@ -3254,12 +3534,14 @@ interface MapPolygonProps {
     lineWidth?: number;
 }
 
-/** A filled polygon overlay on the map. *
-/** A filled polygon overlay on the map. * @tier extension
-/** A filled polygon overlay on the map. * @platform ios
-/** A filled polygon overlay on the map. * @kind component
-/** A filled polygon overlay on the map. * @since 1.0
-/** A filled polygon overlay on the map. */
+/**
+ * A filled polygon overlay on the map.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function MapPolygon(props: MapPolygonProps): Component;
 
 // =============================================================================
@@ -3269,12 +3551,14 @@ declare function MapPolygon(props: MapPolygonProps): Component;
 /** A single toolbar item. */
 interface ToolbarItem extends Component { }
 
-/** Creates a toolbar item with specified placement. *
-/** Creates a toolbar item with specified placement. * @tier extension
-/** Creates a toolbar item with specified placement. * @platform ios
-/** Creates a toolbar item with specified placement. * @kind component
-/** Creates a toolbar item with specified placement. * @since 1.0
-/** Creates a toolbar item with specified placement. */
+/**
+ * Creates a toolbar item with specified placement.
+ *
+ * @tier extension
+ * @platform ios
+ * @kind component
+ * @since 1.0
+ */
 declare function ToolbarItem(props: { placement?: ToolbarItemPlacement }, content: Component[]): ToolbarItem;
 
 /**
@@ -3305,41 +3589,53 @@ declare function ToolbarItemGroup(props: { placement?: ToolbarItemPlacement }, c
 
 /** Extended Image component with image-specific modifiers. */
 interface Image extends Component {
-    /** Makes the image resizable to fill its frame. Required for `.frame()` to affect image size. *
-    /** Makes the image resizable to fill its frame. Required for `.frame()` to affect image size. * @tier core
-    /** Makes the image resizable to fill its frame. Required for `.frame()` to affect image size. * @kind modifier
-    /** Makes the image resizable to fill its frame. Required for `.frame()` to affect image size. * @since 1.0
-    /** Makes the image resizable to fill its frame. Required for `.frame()` to affect image size. */
+    /**
+     * Makes the image resizable to fill its frame. Required for `.frame()` to affect image size.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     resizable(): Image;
-    /** Controls how the image is rendered: "original" preserves colors, "template" uses foreground style. *
-    /** Controls how the image is rendered: "original" preserves colors, "template" uses foreground style. * @tier core
-    /** Controls how the image is rendered: "original" preserves colors, "template" uses foreground style. * @kind modifier
-    /** Controls how the image is rendered: "original" preserves colors, "template" uses foreground style. * @since 1.0
-    /** Controls how the image is rendered: "original" preserves colors, "template" uses foreground style. */
+    /**
+     * Controls how the image is rendered: "original" preserves colors, "template" uses foreground style.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     renderingMode(_: "original" | "template"): Image;
-    /** Sets the interpolation quality for scaled images. *
-    /** Sets the interpolation quality for scaled images. * @tier core
-    /** Sets the interpolation quality for scaled images. * @kind modifier
-    /** Sets the interpolation quality for scaled images. * @since 1.0
-    /** Sets the interpolation quality for scaled images. */
+    /**
+     * Sets the interpolation quality for scaled images.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     interpolation(_: "none" | "low" | "medium" | "high"): Image;
-    /** Enables or disables antialiasing on image edges. *
-    /** Enables or disables antialiasing on image edges. * @tier core
-    /** Enables or disables antialiasing on image edges. * @kind modifier
-    /** Enables or disables antialiasing on image edges. * @since 1.0
-    /** Enables or disables antialiasing on image edges. */
+    /**
+     * Enables or disables antialiasing on image edges.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     antialiased(isAntialiased?: boolean): Image;
-    /** Sets how multi-layer system symbols are rendered. *
-    /** Sets how multi-layer system symbols are rendered. * @tier core
-    /** Sets how multi-layer system symbols are rendered. * @kind modifier
-    /** Sets how multi-layer system symbols are rendered. * @since 1.0
-    /** Sets how multi-layer system symbols are rendered. */
+    /**
+     * Sets how multi-layer system symbols are rendered.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     symbolRenderingMode(_: "monochrome" | "hierarchical" | "palette" | "multicolor"): Image;
-    /** Sets the symbol scale relative to text. *
-    /** Sets the symbol scale relative to text. * @tier core
-    /** Sets the symbol scale relative to text. * @kind modifier
-    /** Sets the symbol scale relative to text. * @since 1.0
-    /** Sets the symbol scale relative to text. */
+    /**
+     * Sets the symbol scale relative to text.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     imageScale(_: "small" | "medium" | "large"): Image;
 }
 
@@ -3422,11 +3718,13 @@ type MaterialProps = MaterialType | {
     blurRadius?: number;
 };
 
-/** Creates a material blur effect. *
-/** Creates a material blur effect. * @tier core
-/** Creates a material blur effect. * @kind component
-/** Creates a material blur effect. * @since 1.0
-/** Creates a material blur effect. */
+/**
+ * Creates a material blur effect.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Material(_?: MaterialProps): Material;
 
 // =============================================================================
@@ -3453,25 +3751,31 @@ interface Gradient extends Component { }
  */
 declare function LinearGradient(props?: { colors?: Color[]; startPoint?: UnitPoint; endPoint?: UnitPoint }): Gradient;
 
-/** A gradient that sweeps around a center point. *
-/** A gradient that sweeps around a center point. * @tier core
-/** A gradient that sweeps around a center point. * @kind component
-/** A gradient that sweeps around a center point. * @since 1.0
-/** A gradient that sweeps around a center point. */
+/**
+ * A gradient that sweeps around a center point.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function AngularGradient(props?: { colors: Color[]; center?: UnitPoint; startAngle?: number; endAngle?: number }): Gradient;
 
-/** A circular gradient radiating from a center point. *
-/** A circular gradient radiating from a center point. * @tier core
-/** A circular gradient radiating from a center point. * @kind component
-/** A circular gradient radiating from a center point. * @since 1.0
-/** A circular gradient radiating from a center point. */
+/**
+ * A circular gradient radiating from a center point.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function RadialGradient(props?: { colors: Color[]; center?: UnitPoint; startRadius?: number; endRadius?: number }): Gradient;
 
-/** An elliptical gradient radiating from a center point. *
-/** An elliptical gradient radiating from a center point. * @tier core
-/** An elliptical gradient radiating from a center point. * @kind component
-/** An elliptical gradient radiating from a center point. * @since 1.0
-/** An elliptical gradient radiating from a center point. */
+/**
+ * An elliptical gradient radiating from a center point.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function EllipticalGradient(props?: { colors: Color[]; center?: UnitPoint; startRadius?: number; endRadius?: number }): Gradient;
 
 // =============================================================================
@@ -3514,35 +3818,45 @@ interface Shape extends Component {
     stroke(_: Style | StrokeOptions): Shape;
 }
 
-/** A circle shape centered in its frame. *
-/** A circle shape centered in its frame. * @tier core
-/** A circle shape centered in its frame. * @kind component
-/** A circle shape centered in its frame. * @since 1.0
-/** A circle shape centered in its frame. */
+/**
+ * A circle shape centered in its frame.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Circle(): Shape;
-/** An ellipse shape that fills its frame. *
-/** An ellipse shape that fills its frame. * @tier core
-/** An ellipse shape that fills its frame. * @kind component
-/** An ellipse shape that fills its frame. * @since 1.0
-/** An ellipse shape that fills its frame. */
+/**
+ * An ellipse shape that fills its frame.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Ellipse(): Shape;
-/** A capsule shape (rounded rectangle with maximum corner radius). *
-/** A capsule shape (rounded rectangle with maximum corner radius). * @tier core
-/** A capsule shape (rounded rectangle with maximum corner radius). * @kind component
-/** A capsule shape (rounded rectangle with maximum corner radius). * @since 1.0
-/** A capsule shape (rounded rectangle with maximum corner radius). */
+/**
+ * A capsule shape (rounded rectangle with maximum corner radius).
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Capsule(): Shape;
-/** A rectangle shape. *
-/** A rectangle shape. * @tier core
-/** A rectangle shape. * @kind component
-/** A rectangle shape. * @since 1.0
-/** A rectangle shape. */
+/**
+ * A rectangle shape.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function Rectangle(): Shape;
-/** A rectangle with rounded corners. *
-/** A rectangle with rounded corners. * @tier core
-/** A rectangle with rounded corners. * @kind component
-/** A rectangle with rounded corners. * @since 1.0
-/** A rectangle with rounded corners. */
+/**
+ * A rectangle with rounded corners.
+ *
+ * @tier core
+ * @kind component
+ * @since 1.0
+ */
 declare function RoundedRectangle(props?: { cornerRadius?: number }): Shape;
 
 // =============================================================================
@@ -3879,12 +4193,6 @@ declare function OpenURLAction(callback: (url: string) => OpenURLActionResult | 
 // =============================================================================
 // MARK: - Style & Color Types
 // =============================================================================
-
-/**
- * Tracking value in milli-em units. 1000 milli-em = 1em.
- * Example: 500 = 0.5em letter spacing.
- */
-type MilliEm = number;
 
 type BlendMode = "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "colorDodge" | "colorBurn" | "softLight" | "hardLight" | "difference" | "exclusion" | "hue" | "saturation" | "color" | "luminosity" | "sourceAtop" | "destinationOver" | "destinationOut" | "plusDarker" | "plusLighter";
 type ContentTransitionType = "numericText" | "interpolate" | "opacity" | "identity";

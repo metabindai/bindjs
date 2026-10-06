@@ -11,14 +11,16 @@
 | Status | Items | Behavior today |
 |---|---|---|
 | Unsupported | `Markdown`, `Slider` | Name is accepted by the runtime; the renderer treats the node as unresolved and renders its children only. |
-| Supported | the remaining 43 | `Map` and its sub-directives are iOS and visionOS only (platform extension). |
+| Supported after fix | `AudioPlayer` | [metabindai/bindjs-apple#82](https://github.com/metabindai/bindjs-apple/pull/82). Until it ships, unresolved like the two above, so nothing is drawn. |
+| Supported | the remaining 42 | `Map` and its sub-directives are iOS and visionOS only (platform extension). |
 
 ## Core modifiers
 
 | Status | Items | Behavior today |
 |---|---|---|
 | Unsupported (ignored) | `onHover` | Not registered; ignored. |
-| Supported | the remaining 84 | `frame` is one modifier with two argument shapes (fixed and flexible). `fill`, `stroke`, `resizable`, `buttonStyle` are folded into the component's props by the runtime and read as props. `glassEffect`, `scrollEdgeEffectHidden`, `scrollEdgeEffectStyle` (extensions) are no-ops below OS 26. |
+| Partial | `aspectRatio`, `frame` | `aspectRatio`: the bundled runtime sends the ratio as `rawValue` and no content mode, so every call draws as `.aspectRatio(nil, contentMode: .fill)`, until the runtime from [metabindai/bindjs-runtime#14](https://github.com/metabindai/bindjs-runtime/pull/14) is bundled. `frame`: a fixed `width` or `height` in a frame that also has a minimum or maximum is dropped, until [metabindai/bindjs-apple#83](https://github.com/metabindai/bindjs-apple/pull/83). |
+| Supported | the remaining 83 | `frame` is one modifier with two argument shapes (fixed and flexible). `fill`, `stroke`, `resizable`, `buttonStyle` are folded into the component's props by the runtime and read as props. `glassEffect`, `scrollEdgeEffectHidden`, `scrollEdgeEffectStyle` (extensions) are no-ops below OS 26. |
 
 ## Runtime
 
@@ -26,6 +28,7 @@
 - JavaScript context: plain `JSContext`, no DOM, no `fetch`, no storage, no `require`; timers and `console` only. No explicit memory or time limits (the MCP Apps binding recommends them).
 - Host bridge: `MCPHostBridge` implements the full 1.0 bridge surface plus `elicit` (platform extension, not part of 1.0).
 - Unknown component: renders children only, silently. 1.0 requires a log line.
+- The content of `overlay`, `background` and the other content modifiers shares hook state with the view it modifies when both are the same component (`Leaf().overlay(Leaf())`), and a modifier's handler in a `ForEach` row (`.onTapGesture`) has one id for every row, so a tap on any row runs the last row's handler. Fixed by [metabindai/bindjs-runtime#15](https://github.com/metabindai/bindjs-runtime/pull/15) once its runtime is bundled.
 
 ## Platform extensions provided
 

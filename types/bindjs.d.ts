@@ -454,12 +454,14 @@ declare function PropertyEnum(options: PropertyEnumOptions): PropertyEnum;
  * @since 1.0
  */
 declare function PropertyNumber(options: PropertyNumberOptions): PropertyNumber;
-/** Creates an integer property definition. Same shape as number but emits
- *  `{type: "integer"}` in JSON Schema. *
- *  `{type: "integer"}` in JSON Schema. * @tier core
- *  `{type: "integer"}` in JSON Schema. * @kind property
- *  `{type: "integer"}` in JSON Schema. * @since 1.0
- *  `{type: "integer"}` in JSON Schema. */
+/**
+ * Creates an integer property definition. Same shape as number but emits
+ * `{type: "integer"}` in JSON Schema.
+ *
+ * @tier core
+ * @kind property
+ * @since 1.0
+ */
 declare function PropertyInteger(options: PropertyIntegerOptions): PropertyInteger;
 /**
  * Creates an array property definition.
@@ -1799,7 +1801,7 @@ interface Component {
     monospaced(isActive?: boolean): Component;
     /**
      * Adds space after each character, in points. Negative values tighten.
-     * The same value draws the same on the web, iOS and Android.
+     * The spacing does not scale with the user's text size setting.
      *
      * ```js
      * Text("SPACED").tracking(2) // 2pt between characters

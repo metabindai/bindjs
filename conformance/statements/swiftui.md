@@ -18,7 +18,8 @@
 | Status | Items | Behavior today |
 |---|---|---|
 | Unsupported (ignored) | `onHover` | Not registered; ignored. |
-| Supported | the remaining 84 | `frame` is one modifier with two argument shapes (fixed and flexible). `fill`, `stroke`, `resizable`, `buttonStyle` are folded into the component's props by the runtime and read as props. `glassEffect`, `scrollEdgeEffectHidden`, `scrollEdgeEffectStyle` (extensions) are no-ops below OS 26. |
+| Partial | `aspectRatio`, `frame` | `aspectRatio`: the bundled runtime sends the ratio as `rawValue` and no content mode, so every call draws as `.aspectRatio(nil, contentMode: .fill)`, until the runtime from metabindai/bindjs-runtime#14 is bundled. `frame`: a fixed `width` or `height` in a frame that also has a minimum or maximum is dropped, until metabindai/bindjs-apple#83. |
+| Supported | the remaining 82 | `frame` is one modifier with two argument shapes (fixed and flexible). `fill`, `stroke`, `resizable`, `buttonStyle` are folded into the component's props by the runtime and read as props. `glassEffect`, `scrollEdgeEffectHidden`, `scrollEdgeEffectStyle` (extensions) are no-ops below OS 26. |
 
 ## Runtime
 

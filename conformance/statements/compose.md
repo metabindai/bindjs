@@ -24,7 +24,8 @@
 | Unsupported (ignored) | `containerRelativeFrame`, `onHover`, `transition`, `keyboardType`, `focused`, `onSubmit`, `submitLabel`, `textFieldStyle`, `controlSize`, `dynamicTypeSize`, and the `Image` modifiers `renderingMode`, `interpolation`, `antialiased`, `symbolRenderingMode`, `imageScale` | Not registered; ignored. |
 | No-op (registered, no effect) | `colorScheme`, `coordinateSpace`, `environment`, `layoutPriority`, `resizable`, `tint`, `visualEffect`, `ignoresSafeArea` (deliberate on Android) | Accepted and dropped. |
 | Partial | `blur` (API 31 and later only), `transformEffect` (no shear), `foregroundStyle` (Material via blur only in the chain; color resolved at the leaf), `disabled` (Button, TextEditor, Video only), `allowsHitTesting` (strips tap only), `accessibilityRemoveTraits` (clears all semantics), `border` (no Material) | |
-| Supported | the remaining 46 | |
+| Partial | `aspectRatio` (the content mode is ignored and a `null` ratio draws as 1), `scaledToFill` (stretches the image to its frame, `ContentScale.FillBounds`, instead of covering it), `tracking` (applied in sp, so it scales with the user's font size) | |
+| Supported | the remaining 43 | |
 
 ## Runtime
 

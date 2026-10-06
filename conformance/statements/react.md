@@ -20,9 +20,9 @@
 
 | Status | Items |
 |---|---|
-| Supported after fix | `clipped` (metabindai/bindjs-runtime#14; ignored until it ships) |
+| Supported after fix | `clipped` (ignored until it ships); `aspectRatio`, `scaledToFit`, `scaledToFill` (until it ships they size no view, and only set how a child `Image` draws). metabindai/bindjs-runtime#14 |
 | Unsupported (ignored) | `tint`, `coordinateSpace`, `contextMenu`, `pickerStyle`, `layoutPriority`, `transition`, `autocorrectionDisabled`, `keyboardType`, `focused`, `onSubmit`, `textFieldStyle`, `submitLabel`, `accessibilityHidden`, `accessibilityRemoveTraits`, and the `Image` modifiers `renderingMode`, `interpolation`, `antialiased`, `symbolRenderingMode`, `imageScale` |
-| Supported | the remaining 65, including `onHover`, `visualEffect`, `containerRelativeFrame`, `controlSize`, `onChange`, `dynamicTypeSize`, `accessibilityLabel`, `accessibilityValue` |
+| Supported | the remaining 62, including `onHover`, `visualEffect`, `containerRelativeFrame`, `controlSize`, `onChange`, `dynamicTypeSize`, `accessibilityLabel`, `accessibilityValue` |
 
 ## Runtime
 

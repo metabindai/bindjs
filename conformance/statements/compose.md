@@ -10,7 +10,7 @@
 
 | Status | Items | Behavior today |
 |---|---|---|
-| Unsupported | `LazyVStack`, `LazyHStack`, `List`, `Markdown`, `SecureField`, `Slider`, `Path`, `CustomFont`, `Placeholder` | Deserialized as an empty component; nothing rendered. `Text` renders Markdown inline, but the `Markdown` component is not registered. |
+| Unsupported | `LazyVStack`, `LazyHStack`, `List`, `Markdown`, `SecureField`, `Slider`, `Path`, `CustomFont`, `Placeholder`, `AudioPlayer` | Deserialized as an empty component; nothing rendered. `Text` renders Markdown inline, but the `Markdown` component is not registered. |
 | Partial | `ForEach` | Expanded form only (the 1.0 baseline). Lazy form is refused with a log line. |
 | Partial | `Picker` | Options are discovered only from `Text(...).tag(...)` children; `segmented` and menu styles. |
 | Partial | `Spacer` | Honored inside `VStack`, `HStack`, `Section`; elsewhere not rendered. |

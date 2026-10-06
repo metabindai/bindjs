@@ -2,7 +2,7 @@
 
 This directory freezes what an implementation must provide to call itself BindJS 1.0, and records what each shipping implementation provides today. The lists below are normative; they were cut from the reference chapters ([07 Components](../spec/08-components-reference.md), [08 Modifiers](../spec/09-modifiers-reference.md), [05 Hooks](../spec/06-hooks.md), [06 Runtime](../spec/07-runtime.md)) and checked against the three renderers' registries on 2026-09-06.
 
-## 1. Core component set (44)
+## 1. Core component set (45)
 
 - Layout: `VStack`, `HStack`, `ZStack`, `LazyVStack`, `LazyHStack`, `Group`, `Section`, `GeometryReader`
 - Scrolling and lists: `ScrollView`, `List`, `ForEach`
@@ -10,7 +10,7 @@ This directory freezes what an implementation must provide to call itself BindJS
 - Text input: `TextField`, `SecureField`, `TextEditor`
 - Controls: `Button`, `Toggle`, `Slider`, `Picker`, `Menu`, `Label`, `ProgressView`
 - Empty states and spacers: `Empty`, `Spacer`, `Divider`
-- Media: `Image`, `Video`, `Model3D`
+- Media: `Image`, `Video`, `AudioPlayer`, `Model3D`
 - Shapes: `Circle`, `Ellipse`, `Capsule`, `Rectangle`, `RoundedRectangle`, `Path`
 - Color, material, gradients: `Color`, `Material`, `LinearGradient`, `AngularGradient`, `RadialGradient`, `EllipticalGradient`
 - Fonts: `CustomFont`

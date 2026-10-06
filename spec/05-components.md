@@ -176,7 +176,7 @@ export default defineComponent({
 
 ### Asset props
 
-A `PropertyAsset` resolves to an object containing exactly one of `image`, `video`, or `model`. Each variant carries `url`, `dimensions`, `mimeType`, and a host-supplied `id`:
+A `PropertyAsset` resolves to an object containing exactly one of `image`, `video`, `audio`, or `model`. Each variant carries `url`, `dimensions`, `mimeType`, and a host-supplied `id`:
 
 ```javascript
 export default defineComponent({

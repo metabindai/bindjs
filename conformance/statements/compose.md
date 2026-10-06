@@ -4,7 +4,7 @@
 - Specification: BindJS 1.0
 - Level: Partial (nine Core components and 15 Core modifiers unsupported). Target: Core with declared gaps by the BindJS 1.0 release, owned by the Android maintainer; progress is tracked in the repository's conformance-gap issues.
 - Charts module: provided
-- Checked: 2026-09-06 against `GsonProvider.kt` (47 registered types, 87 modifiers) and `BindJSView.kt`; layout checked 2026-10-05 against SwiftUI on the 77 parity cases of metabindai/bindjs-runtime#14
+- Checked: 2026-09-06 against `GsonProvider.kt` (47 registered types, 87 modifiers) and `BindJSView.kt`; layout checked 2026-10-06 against SwiftUI on the 85 parity cases of metabindai/bindjs-runtime#14
 
 ## Core components
 

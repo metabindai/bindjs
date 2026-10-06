@@ -291,6 +291,48 @@ Video({
 }).frame({ height: 300 })
 ```
 
+#### `AudioPlayer`
+
+Plays audio from `url` or the asset named by `audio`. With `controls: true` it draws the platform's standard audio controls:
+
+```javascript
+AudioPlayer({ url: 'https://example.com/episode.mp3', controls: true })
+```
+
+Without `controls` it draws nothing and takes no space, and the author builds the controls from other components:
+
+```javascript
+const [isPlaying, setIsPlaying] = useState(false)
+const [time, setTime] = useState(0)
+const [info, setInfo] = useState({ status: 'loading', duration: null })
+
+VStack([
+  AudioPlayer({
+    url: 'https://example.com/episode.mp3',
+    isPlaying, setIsPlaying,
+    currentTime: time, setCurrentTime: setTime,
+    onStatusChange: setInfo,
+  }),
+  Slider({ value: time, setValue: setTime, range: [0, info.duration ?? 1] }),
+  Button(isPlaying ? 'Pause' : 'Play', () => setIsPlaying(!isPlaying)),
+])
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `url` / `audio` | string | | Source URL, or asset name. Changing it loads the new source from 0. |
+| `isPlaying` / `setIsPlaying` | boolean | `false` | Plays when it becomes `true`, pauses when it becomes `false`. The renderer calls `setIsPlaying` when playback starts or stops without the author asking: the drawn controls, a media key, end of media, an interruption, or the platform refusing to start without a user gesture. |
+| `currentTime` / `setCurrentTime` | number (seconds) | | The renderer reports the position every 0.25 to 0.5 seconds while playing, after a seek, and at the end. Changing `currentTime` to anything other than the last value the renderer reported seeks; that last value coming back is the report echoing through the author's state and MUST NOT seek. |
+| `rate` | number | 1 | Playback rate. |
+| `volume` | number | 1 | 0 to 1. |
+| `isMuted` | boolean | `false` | |
+| `loop` | boolean | `false` | Restart at the end; `onEnded` does not fire. |
+| `controls` | boolean | `false` | Draw the platform's standard controls (play/pause, position, seeking). Full proposed width, fixed height of 44 to 56 points. They report through the same setters, so they combine with the author's own controls. |
+| `onStatusChange` | `({ status, duration, bufferedTime, error? }) => void` | | Called with `'loading'` first, then whenever `status` (`'loading'`, `'ready'`, `'buffering'`, `'ended'`, `'failed'`) or `duration` changes, and when `bufferedTime` advances by a second or more. `duration` is `null` until known and `Infinity` for a live stream; `error` is present when `status` is `'failed'`. |
+| `onEnded` | `() => void` | | Called after status `'ended'` and `setIsPlaying(false)`. Setting `isPlaying` again plays from the start. |
+
+Playback stops when the component leaves the tree. Background playback and lock-screen controls are not part of 1.0.
+
 #### `Model3D`
 
 Displays a 3D model from a URL. iOS uses `iOSURL` for a USDZ override.

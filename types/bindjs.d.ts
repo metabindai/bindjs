@@ -1662,17 +1662,19 @@ interface Component {
     /** Uses a monospaced font variant. */
     monospaced(isActive?: boolean): Component;
     /**
-     * Adjusts letter spacing in milli-em units (1000 = 1em).
+     * Adds space after each character, in points. Negative values tighten.
+     * The same value draws the same on the web, iOS and Android.
      *
      * ```js
-     * Text("SPACED").tracking(500) // 0.5em letter spacing
+     * Text("SPACED").tracking(2) // 2pt between characters
+     * Text("EYEBROW").font(12).tracking(1.5)
      * ```
      *
      * @tier core
      * @kind modifier
      * @since 1.0
      */
-    tracking(_: MilliEm): Component;
+    tracking(_: number): Component;
     /** Adjusts spacing between lines of text (in points). *
     /** Adjusts spacing between lines of text (in points). * @tier core
     /** Adjusts spacing between lines of text (in points). * @kind modifier
@@ -1702,33 +1704,42 @@ interface Component {
     fixedSize(_: { horizontal?: boolean; vertical?: boolean }): Component;
 
     /**
-     * Sets the aspect ratio for the component's content.
+     * Sizes the content to a width-to-height ratio within the space its parent
+     * offers: "fit" takes the largest size of that ratio inside the space,
+     * "fill" the smallest size that covers it (and can overflow; add
+     * `.clipped()` to crop). Content with a fixed or intrinsic size keeps it.
      *
      * ```js
-     * Image({ url: "photo.jpg" }).resizable().aspectRatio(16/9, "fit")
+     * Image({ url: "photo.jpg" }).resizable().aspectRatio(16 / 9, "fit")
+     * Color("#eee").aspectRatio(1, "fit")                    // a square as wide as its parent
+     * Image({ url: "photo.jpg" }).resizable().aspectRatio(null, "fill").frame({ height: 120 }).clipped()
      * ```
      *
-     * @param aspectRatio The width-to-height ratio (e.g. 1.0 for square). Omit to use the content's intrinsic ratio.
-     * @param contentMode How content fills the frame: "fit" (letterbox) or "fill" (crop).
+     * @param aspectRatio The width-to-height ratio (e.g. 1 for square). Pass `null` or omit to use the content's own: a resizable image's pixel ratio, otherwise 1.
+     * @param contentMode "fit" (default) or "fill".
      *
      * @tier core
      * @kind modifier
      * @since 1.0
      */
-    aspectRatio(aspectRatio?: number, contentMode?: "fit" | "fill"): Component;
+    aspectRatio(aspectRatio?: number | null, contentMode?: "fit" | "fill"): Component;
 
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. *
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @tier core
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @kind modifier
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. * @since 1.0
-    /** Scales the content to fit within the frame, preserving aspect ratio. May letterbox. */
+    /**
+     * Same as `.aspectRatio(null, "fit")`: scales a resizable image to fit the space, preserving its ratio.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     scaledToFit(): Component;
 
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. *
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @tier core
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @kind modifier
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. * @since 1.0
-    /** Scales the content to fill the frame, preserving aspect ratio. May crop. */
+    /**
+     * Same as `.aspectRatio(null, "fill")`: scales a resizable image to cover the space, preserving its ratio. May overflow; add `.clipped()` to crop.
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     scaledToFill(): Component;
 
     /**
@@ -1792,11 +1803,18 @@ interface Component {
 
     // -- Clipping & Masking --
 
-    /** Clips content to the component's bounds. *
-    /** Clips content to the component's bounds. * @tier core
-    /** Clips content to the component's bounds. * @kind modifier
-    /** Clips content to the component's bounds. * @since 1.0
-    /** Clips content to the component's bounds. */
+    /**
+     * Clips the content to this component's frame. Offsets and transforms
+     * inside are cut at the frame edge.
+     *
+     * ```js
+     * Image({ url: "photo.jpg" }).resizable().scaledToFill().frame({ width: 80, height: 80 }).clipped()
+     * ```
+     *
+     * @tier core
+     * @kind modifier
+     * @since 1.0
+     */
     clipped(): Component;
     /**
      * Clips to a specific shape.
@@ -3810,12 +3828,6 @@ declare function OpenURLAction(callback: (url: string) => OpenURLActionResult | 
 // =============================================================================
 // MARK: - Style & Color Types
 // =============================================================================
-
-/**
- * Tracking value in milli-em units. 1000 milli-em = 1em.
- * Example: 500 = 0.5em letter spacing.
- */
-type MilliEm = number;
 
 type BlendMode = "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "colorDodge" | "colorBurn" | "softLight" | "hardLight" | "difference" | "exclusion" | "hue" | "saturation" | "color" | "luminosity" | "sourceAtop" | "destinationOver" | "destinationOut" | "plusDarker" | "plusLighter";
 type ContentTransitionType = "numericText" | "interpolate" | "opacity" | "identity";

@@ -172,7 +172,7 @@ Sizes a component relative to its nearest container.
 .strikethrough()
 .underline()
 .monospaced()
-.tracking(500)                                // milli-em (500 = 0.5em)
+.tracking(2)                                  // points; negative tightens
 .lineSpacing(8)
 .textCase('uppercase')                        // or 'lowercase'
 .lineLimit(2)

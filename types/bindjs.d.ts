@@ -38,9 +38,9 @@ type ComponentProps = Record<string, any>;
 /** A record of property field definitions that describe a component's configurable inputs. */
 type Properties = Record<string, PropertyField>;
 
-/** Component metadata displayed in the Composer, galleries, and documentation. */
+/** Component metadata displayed in an authoring editor such as Metabind Studio, in galleries, and in documentation. */
 interface Metadata {
-    /** Display name shown in the Composer and component galleries. */
+    /** Display name shown in the editor and component galleries. */
     title?: string;
     /** Brief description of the component's purpose. */
     description?: string;
@@ -78,7 +78,7 @@ interface Metadata {
 interface ComponentDefinition {
     /** The render function that returns the component's UI tree. */
     body: (props: any, children: Component[]) => Component;
-    /** Optional metadata for the Composer and documentation. */
+    /** Optional metadata for the editor and documentation. */
     metadata?: Record<string, any> | (() => Record<string, any>);
     /** Optional property schema defining the component's configurable inputs. */
     properties?: Record<string, any> | (() => Record<string, any>);
@@ -178,10 +178,10 @@ declare function defineButtonStyle(definition: ButtonStyleDefinition): ButtonSty
 // =============================================================================
 //
 // Property fields define the configurable inputs for a component. They appear
-// as form controls in the Composer and drive typed prop resolution at runtime.
+// as form controls in the editor and drive typed prop resolution at runtime.
 //
 
-/** Inspector options shared by all property types. Controls how the field appears in the Composer. */
+/** Inspector options shared by all property types. Controls how the field appears in the editor. */
 interface BaseInspector {
     /** Whether to show the field label. Default: true. */
     showLabel?: boolean;
@@ -189,19 +189,19 @@ interface BaseInspector {
     showDivider?: boolean;
     /** Dynamic visibility callback — return false to hide this field based on other prop values. */
     visible?: (props: Record<string, any>) => boolean;
-    /** Help text shown as a tooltip or info icon in the Composer. */
+    /** Help text shown as a tooltip or info icon in the editor. */
     helpDescription?: string;
 }
 
 /** Base options shared by all property field types. */
 interface BaseField {
-    /** Display label for the field in the Composer. */
+    /** Display label for the field in the editor. */
     title?: string;
     /** Brief description shown below the field label. */
     description?: string;
     /** Whether the field must have a value. */
     required?: boolean;
-    /** Composer inspector configuration. */
+    /** Editor inspector configuration. */
     inspector?: BaseInspector;
 }
 
@@ -221,7 +221,7 @@ interface StringInspector extends BaseInspector {
 /** Options for a string property field. */
 interface PropertyStringOptions extends BaseField {
     defaultValue?: string;
-    /** Example values shown as suggestions in the Composer. */
+    /** Example values shown as suggestions in the editor. */
     examples?: string[];
     inspector?: StringInspector;
     validation?: {
@@ -237,7 +237,7 @@ interface PropertyString extends PropertyStringOptions { type: "string" }
 
 // -- Boolean --
 
-/** Options for a boolean property field. Renders as a toggle in the Composer. */
+/** Options for a boolean property field. Renders as a toggle in the editor. */
 interface PropertyBooleanOptions extends BaseField {
     defaultValue?: boolean;
 }
@@ -339,7 +339,7 @@ interface PropertyDate extends PropertyDateOptions {
 /** Property types that can be used as the item type of an array property. */
 type ArrayPropertyFieldOptions = PropertyString | PropertyBoolean | PropertyEnum | PropertyNumber | PropertyInteger | PropertyDate | PropertyAsset | PropertyComponent | PropertyGroup | PropertyContent;
 
-/** Options for an array property field. Renders as a repeatable list in the Composer. */
+/** Options for an array property field. Renders as a repeatable list in the editor. */
 interface PropertyArrayOptions extends BaseField {
     /** The property type definition for each item in the array. */
     valueType: ArrayPropertyFieldOptions;
@@ -373,7 +373,7 @@ interface PropertyComponent extends PropertyComponentOptions {
 /** Supported asset media types. */
 type AssetType = "image" | "video" | "audio" | "model" | "model/usdz" | "model/glb";
 
-/** Options for an asset property field. Opens the asset picker in the Composer. */
+/** Options for an asset property field. Opens the asset picker in the editor. */
 interface PropertyAssetOptions extends BaseField {
     /** Restrict which asset types can be selected. Default: all types. */
     assetTypes?: AssetType[];
